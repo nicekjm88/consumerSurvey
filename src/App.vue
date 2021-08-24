@@ -15,6 +15,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -53,6 +55,8 @@ body {
 }
 ol, ul {
 	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 blockquote, q {
 	quotes: none;
@@ -76,9 +80,23 @@ a:active {
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	overflow: hidden
+	overflow: hidden;
+	max-width: 768px;
+	margin: 0 auto;
 }
+
 button {
   border: none;
+}
+
+.a11y {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
 }
 </style>

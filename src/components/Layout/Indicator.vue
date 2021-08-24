@@ -49,6 +49,8 @@ export default {
   top: 0;
   left: 50%;
   margin-left: -9px;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 .indicator::after {
   content: '';

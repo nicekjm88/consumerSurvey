@@ -3,6 +3,7 @@ import Splash from "../components/Page/Splash.vue";
 import Intro from "../components/Page/Intro/Intro.vue";
 import Terms from "../components/Page/Terms/Terms.vue";
 import Enterance from "../components/Page/Account/PersonalInformation.vue";
+import QuestionPage from "../components/Page/Account/QuestionPage.vue";
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "/enterance",
     component: Enterance,
+  },
+  {
+    path: "/step1",
+    component: QuestionPage,
   },
 ];
 
