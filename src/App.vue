@@ -1,15 +1,8 @@
 <template>
-  <!-- <Header /> -->
-  <main class="layout-overlap">
-    <Terms />
-  </main>  
-  <FixedBtn msg="확인" />   
+  <router-view></router-view>
 </template>
 
 <script>
-// import Header from './components/Layout/Header/Header.vue'
-import Terms from './components/Page/Terms/Terms.vue'
-import FixedBtn from './components/Layout/FixedBtn.vue'
 
 export default {
   name: 'App',
@@ -18,39 +11,74 @@ export default {
       
     }
   },
-  components: {
-    // Header,
-    Terms,
-    FixedBtn
-  }
 }
 </script>
 
 <style>
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+caption {
+	display: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
 #app {
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	overflow: hidden
 }
 button {
   border: none;
-}
-.layout-overlap {
-  margin-top: 54px;
-  position: relative;
-  padding: 50px 20px;
-  background-color: #fff;
-  border-radius: 30px 30px 0 0;
-
-}
-.layout-overlap::before {
-  position: absolute;
-  top: -54px;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  content: '';
-  background: rgba(0, 0, 0, .3);
-  z-index: -1;
 }
 </style>

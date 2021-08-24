@@ -1,14 +1,22 @@
 <template>
+  <main>
   <section>
     <strong>나의 생활을 알아보자<br>나의 상품을 찾아보자</strong>
     <p>본 조사는 소비자가 일상에서 쓰는<br>상품을 파악하여 받을 수 있는 혜택에<br>대해 알아보고자 합니다.</p>
   </section>
+  </main>
+  <router-link to="/terms">
+    <FixedBtn msg="설문조사 시작하기" />
+  </router-link>
 </template>
 
 <script>
-
+import FixedBtn from '../../Layout/FixedBtn.vue'
 export default {
   name: 'Terms',
+  components: {
+    FixedBtn
+  }
 }
 </script>
 
