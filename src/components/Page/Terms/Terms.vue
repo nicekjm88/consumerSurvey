@@ -1,5 +1,5 @@
 <template>
-  <main class="layout-overlap">
+  <main class="layout-overlap start">
     <section>
       <h1>개인정보<br>수집 동의서</h1>
       <ol>
@@ -74,18 +74,31 @@ export default {
   name: 'Terms',
   components: {
     FixedBtn
+  },
+  mounted() {
+    var layoutOverlap = document.querySelector('.layout-overlap');
+    setTimeout(function() {      
+      layoutOverlap.classList.add('end');
+    }, 100);
   }
 }
 </script>
 
 <style scoped>
-.layout-overlap {
+.start {
+  margin-top: 0;
+  transition: all 1s;
+}
+
+.end {
   margin-top: 54px;
+}
+
+.layout-overlap {
   position: relative;
   padding: 50px 20px;
   background-color: #fff;
-  border-radius: 30px 30px 0 0;
-
+  border-radius: 30px 30px 0 0;  
 }
 .layout-overlap::before {
   position: absolute;

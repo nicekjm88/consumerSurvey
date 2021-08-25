@@ -4,6 +4,8 @@ import Intro from "../components/Page/Intro/Intro.vue";
 import Terms from "../components/Page/Terms/Terms.vue";
 import Enterance from "../components/Page/Account/PersonalInformation.vue";
 import QuestionPage from "../components/Page/Account/QuestionPage.vue";
+import QuestionPage2 from "../components/Page/Account/QuestionPage2.vue";
+import QuestionPage3 from "../components/Page/Account/QuestionPage3.vue";
 
 const routes = [
   {
@@ -25,6 +27,14 @@ const routes = [
   {
     path: "/step1",
     component: QuestionPage,
+  },
+  {
+    path: "/step2",
+    component: QuestionPage2,
+  },
+  {
+    path: "/step3",
+    component: QuestionPage3,
   },
 ];
 
