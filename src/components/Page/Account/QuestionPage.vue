@@ -2,65 +2,21 @@
   <Navigation />
   <main>
     <Indicator status="신상 정보 입력 페이지" step="1" />
-    <section>
-
+    <section> 
       <p class="notify" id="qestion">
-        <strong>{{questions[0].title}}</strong>
-        <span><em>{{questions[0].desc}}</em></span>
+        <strong>{{qnaData[$route.params.id].title}}</strong>
+        <span><em>{{qnaData[$route.params.id].desc}}</em></span>
       </p>
 
       <div id="answer">
-        <div class="form-check" v-for="(item, index) in person" :key="index">
+        <div class="form-check" v-for="(item, index) in qnaData[$route.params.id].answer" :key="index">
           <input class="form-check-input" type="radio" :id="(index)" name="family" checked>
           <label class="form-check-label" :for="(index)">{{item}}</label>
         </div>
       </div>
-
-      <!-- <ul class="select-list" id="answer">
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="family" id="memeber1" checked>
-            <label class="form-check-label" for="memeber1">
-              1명
-            </label>
-          </div>
-        </li>
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="family" id="memeber2">
-            <label class="form-check-label" for="memeber2">
-              2명
-            </label>
-          </div>
-        </li>
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="family" id="memeber3" >
-            <label class="form-check-label" for="memeber3">
-              3명
-            </label>
-          </div>          
-        </li>
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="family" id="memeber4">
-            <label class="form-check-label" for="memeber4">
-              4명
-            </label>
-          </div>          
-        </li>
-        <li>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="family" id="memeber5" >
-            <label class="form-check-label" for="memeber5">
-              5명 이상
-            </label>
-          </div>          
-        </li>        
-      </ul> -->
     </section>
   </main>
-  <router-link to="/step2">
+  <router-link to="/step/1">
     <FixedBtn msg="다음" />
   </router-link>
 </template>
@@ -73,18 +29,7 @@ export default {
   name: 'QuestionPage',
   data() {
     return {
-      questions : [
-        {
-          "title" : "가족 수는 몇 명인가요?",
-          "desc" : "본인을 포함하여 함께 생활하는 가족 수를 선택해주세요."
-        },
-        {
-          "title" : "어떤 리빙 제품을 사용하시나요?",
-          "desc" : "복수 선택이 가능하세요."
-        }
-      ],
-      person : ['1명', '2명', '3명', '4명', '5명 이상'],
-      sum : 0
+      
     }
   },
   methods : {
@@ -104,7 +49,9 @@ export default {
     Navigation,
     Indicator
   },
-
+  props : {
+    qnaData : Array
+  }
 }
 </script>
 

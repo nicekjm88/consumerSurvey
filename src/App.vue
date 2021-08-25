@@ -1,15 +1,18 @@
 <template>
-  <router-view></router-view>
+  <router-view :qnaData="qnaData"></router-view>
 </template>
 
 <script>
+import qna from './assets/qna.js';
+
 
 export default {
   name: 'App',
   data() {
     return {
+      qnaData : qna
     }
-  },
+  }  
 }
 </script>
 
