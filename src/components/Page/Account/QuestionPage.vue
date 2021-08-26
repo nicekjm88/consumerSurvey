@@ -9,32 +9,59 @@
       </p>
 
       <div id="answer">
-        <div class="form-check" v-for="(item, index) in qnaData[$route.params.id].answer" :key="index">
-          <input class="form-check-input" type="radio" :id="(index)" name="family" checked>
-          <label class="form-check-label" :for="(index)">{{item}}</label>
+        <div v-if="a">
+          <div class="form-check" v-for="(item, index) in qnaData[0].answer" :key="index">
+            <input class="form-check-input" type="radio" :id="'person' + (index)" name="person">
+            <label class="form-check-label" :for="'person' + (index)">{{item}}</label>
+          </div>
         </div>
+
+        <div v-else-if="b">
+          <div class="form-check" v-for="(item, index) in qnaData[1].answer" :key="index">
+            <input class="form-check-input" type="checkbox" :id="'product' + (index)" name="product" >
+            <label class="form-check-label" :for="'product' + (index)">{{item}}</label>
+          </div>
+        </div>
+        
+        <div v-else-if="c">
+          <div class="form-check" v-for="(item, index) in qnaData[2].answer" :key="index">
+            <input class="form-check-input" type="radio" :id="'body' + (index)" name="body">
+            <label class="form-check-label" :for="'body' + (index)">{{item}}</label>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
-  <router-link to="/step/1">
-    <FixedBtn msg="다음" />
-  </router-link>
+  <!-- <router-link to="/step/1"> -->
+    <FixedBtn @click="insertData" msg="다음" />
+  <!-- </router-link> -->
 </template>
 
 <script>
 import Navigation from '../../Layout/Navigation.vue'
 import FixedBtn from '../../Layout/FixedBtn.vue'
 import Indicator from '../../Layout/Indicator.vue'
+
 export default {
   name: 'QuestionPage',
   data() {
     return {
-      
+      a : true,
+      b : false,
+      c : false
     }
   },
   methods : {
     insertData() {
-      //this.personData.push()
+
+      if ( this.a === true ) {
+        this.a = false,
+        this.b = true
+      } else if ( this.b === true ) {
+        this.b = false,
+        this.c = true
+      }      
     },
     moveIndicator() {
       // var indicator = document.querySelector('.indicator');
@@ -51,7 +78,11 @@ export default {
   },
   props : {
     qnaData : Array
+  },
+  mounted () {
+    
   }
+
 }
 </script>
 
@@ -65,7 +96,6 @@ section {
   text-align: center;
   padding-bottom: 20px;
   border-bottom: 1px solid #d5d5d5;
-  
 }
 
 .notify strong {
