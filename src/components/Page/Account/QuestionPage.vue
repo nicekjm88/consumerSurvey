@@ -2,35 +2,8 @@
   <Navigation />
   <main>
     <Indicator status="신상 정보 입력 페이지" step="1" />
-    <section> 
-      <p class="notify" id="qestion">
-        <strong>{{qnaData[$route.params.id].title}}</strong>
-        <span><em>{{qnaData[$route.params.id].desc}}</em></span>
-      </p>
-
-      <div id="answer">
-        <div v-if="a">
-          <div class="form-check" v-for="(item, index) in qnaData[0].answer" :key="index">
-            <input class="form-check-input" type="radio" :id="'person' + (index)" name="person">
-            <label class="form-check-label" :for="'person' + (index)">{{item}}</label>
-          </div>
-        </div>
-
-        <div v-else-if="b">
-          <div class="form-check" v-for="(item, index) in qnaData[1].answer" :key="index">
-            <input class="form-check-input" type="checkbox" :id="'product' + (index)" name="product" >
-            <label class="form-check-label" :for="'product' + (index)">{{item}}</label>
-          </div>
-        </div>
-        
-        <div v-else-if="c">
-          <div class="form-check" v-for="(item, index) in qnaData[2].answer" :key="index">
-            <input class="form-check-input" type="radio" :id="'body' + (index)" name="body">
-            <label class="form-check-label" :for="'body' + (index)">{{item}}</label>
-          </div>
-        </div>
-
-      </div>
+    <section>
+      <router-view :qnaData="qnaData"></router-view> 
     </section>
   </main>
   <!-- <router-link to="/step/1"> -->
@@ -87,54 +60,7 @@ export default {
 </script>
 
 <style scoped>
-
 section {
   padding: 0 20px;
-}
-
-.notify {
-  text-align: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #d5d5d5;
-}
-
-.notify strong {
-  font-size: 18px;
-  font-weight: 700;
-  font-style: normal;
-  line-height: 1.94;
-  letter-spacing: 1.8px;
-  color: #000;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.notify span {
-  font-size: 11px;
-  letter-spacing: 1.1px;
-  color: #959595;
-  width: 204px;
-  display: block;
-  margin: 0 auto;
-  word-break: keep-all;
-}
-
-.notify em {
-  font-size: 13px;
-  display: block;
-}
-
-.select-list {
-  padding-left: 0;
-  padding-top: 20px;
-}
-
-.select-list > li {
-  margin-top: 20px;
-}
-
-.form-check + .form-check {
-  margin-top: 20px;
-}
- 
+} 
 </style>

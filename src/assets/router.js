@@ -4,6 +4,8 @@ import Intro from "../components/Page/Intro/Intro.vue";
 import Terms from "../components/Page/Terms/Terms.vue";
 import Enterance from "../components/Page/Account/PersonalInformation.vue";
 import QuestionPage from "../components/Page/Account/QuestionPage.vue";
+import Qna1 from "../components/Page/Qna/Qna1.vue";
+import Qna2 from "../components/Page/Qna/Qna2.vue";
 
 const routes = [
   {
@@ -23,9 +25,19 @@ const routes = [
     component: Enterance,
   },
   {
-    path: "/step/:id*",
+    path: "/step/:id",
     component: QuestionPage,
-  }
+    children: [
+      {
+        path: "qna1",
+        component: Qna1,
+      },
+      {
+        path: "qna2",
+        component: Qna2,
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

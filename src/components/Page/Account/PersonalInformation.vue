@@ -59,7 +59,7 @@
     </section>
   </main>
 
-  <router-link to="/step/0">
+  <router-link to="/step/0/qna1">
   <FixedBtn msg="다음" />
   </router-link>
 </template>
