@@ -3,6 +3,9 @@
   <main>
     <Indicator status="신상 정보 입력 페이지" />
     <section>
+      <div class="img-wrap">
+        <img :src="require('../../../assets/image/img-form-01.png')" />
+      </div>
       <p class="notify">
         <strong>당신의 정보를 알려주세요.</strong>
         <span><em>소중한 정보를 입력해주세요.</em> (보다 더 나은 서비스를 제공 드리기위해 데이터 수집을 목적으로 사용됩니다)</span>
@@ -79,9 +82,15 @@ export default {
 </script>
 
 <style scoped>
-
+.img-wrap {
+  width: 215px;
+  margin: 2rem auto 0;  
+}
+.img-wrap img {
+  width: 100%;
+}
 section {
-  padding: 0 20px;
+  padding: 0 20px 80px;
 }
 
 .table {

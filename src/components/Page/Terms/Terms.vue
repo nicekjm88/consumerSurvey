@@ -96,7 +96,7 @@ export default {
 
 .layout-overlap {
   position: relative;
-  padding: 50px 20px;
+  padding: 50px 20px 80px;
   background-color: #fff;
   border-radius: 30px 30px 0 0;  
 }

@@ -3,6 +3,9 @@
   <main>
     <Indicator status="신상 정보 입력 페이지" step="1" />
     <section>
+      <div class="img-wrap">
+        <img :src="require('../../../assets/image/img-form-02.png')" />
+      </div>
       <router-view :qnaData="qnaData"></router-view> 
     </section>
   </main>
@@ -60,7 +63,14 @@ export default {
 </script>
 
 <style scoped>
+.img-wrap {
+  width: 215px;
+  margin: 2rem auto 0;  
+}
+.img-wrap img {
+  width: 100%;
+}
 section {
-  padding: 0 20px;
+  padding: 0 20px 80px;
 } 
 </style>
