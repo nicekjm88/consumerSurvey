@@ -102,5 +102,7 @@ section {
   padding-top: 10px;
   width: 50px;
 }
-
+section p {
+  margin-bottom: 1rem;
+}
 </style>

@@ -91,4 +91,7 @@ ul {
 section {
   padding: 0 20px 50px;
 }
+section p {
+  margin-bottom: 1rem;
+}
 </style>

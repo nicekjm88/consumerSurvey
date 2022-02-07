@@ -54,7 +54,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../assets/css/layout.css";
 
 .img-wrap {
   width: 215px;

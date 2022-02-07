@@ -63,7 +63,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../assets/css/layout.css";
 
 .bg-gray {
   background: #f5f5f5;

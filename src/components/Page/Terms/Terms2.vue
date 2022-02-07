@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../assets/css/layout.css";
 
 section {
   margin: 0 20px;

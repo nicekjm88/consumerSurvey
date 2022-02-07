@@ -8818,6 +8818,11 @@
   dependencies:
     "async-limiter" "~1.0.0"
 
+"xeicon@^2.3.3":
+  "integrity" "sha512-mCIcl32K4DF/mGKm+NX39fzGVAyUzxIc6vqb9DnG/iViaRgS15+tvSwKdiK82A3nVzv8rSajeI0lC/R6LyTi2w=="
+  "resolved" "https://registry.npmjs.org/xeicon/-/xeicon-2.3.3.tgz"
+  "version" "2.3.3"
+
 "xtend@^4.0.0", "xtend@~4.0.1":
   "integrity" "sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ=="
   "resolved" "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz"
