@@ -24,6 +24,18 @@
     </router-link>
   </nav>
 
+  <nav v-else-if="$route.name === 'SaveDataView'">
+    <button type="button" @click="historyBack">
+      <i class="xi-angle-left"></i>
+      <span class="a11y">뒤로</span>
+    </button>
+
+    <button type="button">
+      <i class="xi-trash-o"></i>
+      <span class="a11y">닫기</span>
+    </button>    
+  </nav>
+
   <nav v-else>
     <button type="button" @click="historyBack">
       <i class="xi-angle-left"></i>

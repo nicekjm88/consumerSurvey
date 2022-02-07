@@ -1,10 +1,8 @@
 import { createStore } from 'vuex';
-import Qna from './assets/qna.js';
 
 const store = createStore({
   state() {
     return {
-      qnaData: Qna,
       familyNumber: ['1인 가구', '2명', '3명', '4명', '5명 이상'],
       selectedItem: '1인 가구',
       livingProduct: ['칫솔', '치약', '세탁용', '비누', '샴푸류', '바디 워시류'],
@@ -12,7 +10,6 @@ const store = createStore({
       selectedLivingItem: [],
       selectedfoodItem: [],
       SubcontractorCount: 0,
-      saveData: [],
       nowDate: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
       testerSaveData: {},
     }
