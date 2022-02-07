@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Splash from "../components/Page/Splash.vue";
 import Intro from "../components/Page/Intro/Intro.vue";
 import Terms from "../components/Page/Terms/Terms.vue";
+import Terms2 from "../components/Page/Terms/Terms2.vue";
 import Enterance from "../components/Page/Account/PersonalInformation.vue";
 import QuestionPage from "../components/Page/Account/QuestionPage.vue";
 import QuestionPage2 from "../components/Page/Account/QuestionPage2.vue";
@@ -28,6 +29,11 @@ const routes = [
     path: "/terms",
     name: "terms",
     component: Terms,
+  },
+  {
+    path: "/terms2",
+    name: "terms2",
+    component: Terms2,
   },
   {
     path: "/enterance",

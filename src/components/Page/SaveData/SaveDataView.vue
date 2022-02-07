@@ -3,7 +3,7 @@
     <Navigation />
     <main>
       <section>
-        <h1 class="title">김터미의 자료</h1>
+        <h1 class="title">{{ testerSaveData.name }}의 자료</h1>
 
         <table class="table">
           <caption>최종 자료</caption>
@@ -13,11 +13,11 @@
           <tbody>
             <tr>
               <th>작성일</th>
-              <td>{{ date }}</td>
+              <td>{{ nowDate }}</td>
             </tr>
             <tr>
               <th>생년월일</th>
-              <td>1992-10-02</td>
+              <td>{{ testerSaveData.birtDay }}</td>
             </tr>
             <tr>
               <th>성별</th>
@@ -25,11 +25,11 @@
             </tr>
             <tr>
               <th>가족 수</th>
-              <td>2인</td>
+              <td>{{selectedItem}}</td>
             </tr>
             <tr>
               <th>전화번호</th>
-              <td>010-1234-1234</td>
+              <td>{{ testerSaveData.tellNumber }}</td>
             </tr>
             <tr>
               <th>월 평균 생활소비 금액</th>
@@ -61,14 +61,12 @@
 
 <script>
 import Navigation from '@/components/Layout/Navigation.vue';
-import FixedBtn from '@/components/Layout/FixedBtn.vue'
-
+import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import { mapState } from 'vuex';
 export default {
   name: 'SaveDataList',
-  data() {
-    return {
-      date: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
-    }
+  computed: {
+    ...mapState(['nowDate', 'testerSaveData', 'selectedItem'])
   },
   methods: {
     //https://developer.mozilla.org/ko/docs/Web/API/Navigator/share

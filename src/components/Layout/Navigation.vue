@@ -9,7 +9,7 @@
     </router-link>
     <router-link to="/SaveDataList">
     <button type="button">
-      <i class="xi-save"></i>
+      <i class="xi-list-square"></i>
       <span class="a11y">저장 리스트</span>
     </button>    
     </router-link>

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <button>{{ msg }}</button>
-  </div>
+  <button>{{ msg }}</button>  
 </template>
 
 <script>
@@ -23,5 +21,8 @@ button {
   height: 50px;
   background-color: #00b5ef;
   color: #fff;
+}
+button:disabled {
+  background-color: #999;
 }
 </style>

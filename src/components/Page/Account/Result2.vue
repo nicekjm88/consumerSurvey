@@ -21,9 +21,9 @@
 
       <div class="calculation">
         <p>&lt;나의 하위 사업자 수 계산하기&gt;</p>
-        <button @click="$store.dispatch('minus')">-</button>
-        <span style="margin: 0 10px;">{{SubcontractorCount}}</span>
-        <button @click="$store.dispatch('add')">+</button>
+        <button @click="$store.dispatch('minus')"><i class="xi-minus"></i></button>
+        <span class="count">{{ SubcontractorCount }}</span>
+        <button @click="$store.dispatch('add')"><i class="xi-plus"></i></button>
       </div>
 
       <p>
@@ -86,5 +86,21 @@ section {
   line-height: 1;
   margin: 0 20px;
   font-size: 20px;
+  position: relative;
 }
+.calculation button i {
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.calculation .count {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+  width: 50px;
+}
+
 </style>

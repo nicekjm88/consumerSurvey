@@ -22,30 +22,26 @@
               <tr>
                 <th scope="row">이름</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="김터미" v-model="$store.state.testerName" /> -->
-                  
-                    <Field type="text" name="testerName" class="form-control" placeholder="김터미" v-model="$store.state.testerName" :rules="isRequiredName" />
-                    <span class="error-message">{{ errors.testerName }}</span>
-                  
+                  <!-- <input type="text" class="form-control" placeholder="김터미" v-model="$store.state.testerName" /> -->                  
+                    <Field type="text" name="testerName" class="form-control" placeholder="김터미" :rules="isRequiredName" />
+                    <span class="error-message">{{ errors.testerName }}</span>                  
                 </td>
               </tr>
               <tr>
                 <th scope="row">생년월일</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" /> -->
-                  
-                    <Field type="text" name="testerBirthDay" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" :rules="isRequiredBirthDay" />
-                    <span class="error-message">{{ errors.testerBirthDay }}</span>
-                  
+                  <!-- <input type="text" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" /> -->                  
+                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="ex) 19880808" :rules="isRequiredBirthDay" />
+                    <span class="error-message">{{ errors.testerBirthDay }}</span>                  
                 </td>
               </tr>
               <tr>
                 <th scope="row">성별</th>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="gender" id="gender1" autocomplete="off" value="남성" v-model="$store.state.testerGender" checked>
+                    <input type="radio" class="btn-check" name="testerGender" id="gender1" autocomplete="off" value="남성" checked>
                     <label class="btn btn-outline-primary" for="gender1">남성</label>
-                    <input type="radio" class="btn-check" name="gender" id="gender2" autocomplete="off" value="여성" v-model="$store.state.testerGender">
+                    <input type="radio" class="btn-check" name="testerGender" id="gender2" autocomplete="off" value="여성">
                     <label class="btn btn-outline-primary" for="gender2">여성</label>
                   </div>
                 </td>
@@ -53,11 +49,9 @@
               <tr>
                 <th scope="row">전화번호</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" /> -->
-                  
-                    <Field type="text" name="testerTellNumber" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" :rules="isRequiredTellNumber" />
-                    <span class="error-message">{{ errors.testerTellNumber }}</span>
-                  
+                  <!-- <input type="text" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" /> -->                  
+                    <Field type="text" name="testerTellNumber" class="form-control" placeholder="ex) 01012345678" :rules="isRequiredTellNumber" />
+                    <span class="error-message">{{ errors.testerTellNumber }}</span>                  
                 </td>
               </tr>
             </tbody>
@@ -76,11 +70,6 @@ import { mapState } from 'vuex';
 import { Field, Form } from 'vee-validate';
 export default {
   name: 'SaveData',
-  data() {
-    return {
-      
-    }
-  },
   computed: {
     ...mapState(['nowDate'])
   },
@@ -95,9 +84,11 @@ export default {
       return value ? true : '전화번호 입력해주세요.';
     },
     onSubmit(values) {
-      // console.log(values.testerName);
+      console.log(values);
       this.$store.dispatch('setDate');  
       this.$store.dispatch('setName', values.testerName);  
+      this.$store.dispatch('setBirthDay', values.testerBirthDay);  
+      this.$store.dispatch('setTellNumber', values.testerTellNumber);  
 
       this.$router.push('/SaveDataList');
     }
@@ -162,5 +153,8 @@ section {
 .error-message i {
   font-size: 18px;
   vertical-align: middle;
+}
+input::placeholder {
+  color: #ccc;
 }
 </style>

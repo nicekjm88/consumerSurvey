@@ -9,17 +9,15 @@
         <button>검색</button> -->
         <ul class="board-list">
           <li>
-            <strong>김터미</strong>
+            <strong>{{ $store.state.testerSaveData.name }}</strong>
             <router-link to="/SaveDataView">더보기</router-link>
           </li>
           <li>
-            <strong>이터미</strong>
-            <a href="#">더보기</a>
+            <strong>김터미</strong>
+            <router-link to="/SaveDataView">더보기</router-link>
           </li>
         </ul> 
       </section>
-
-      <p>testerSaveData : {{ $store.state.testerSaveData }}</p>
     </main>
   </div>
 </template>

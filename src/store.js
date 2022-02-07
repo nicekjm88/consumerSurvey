@@ -34,6 +34,12 @@ const store = createStore({
     },
     getName(state, payload) {
       state.testerSaveData.name = payload;
+    },
+    getBirthDay(state, payload) {
+      state.testerSaveData.birtDay = payload;
+    },
+    getTellNumber(state, payload) {
+      state.testerSaveData.tellNumber = payload;
     }
   },
   actions: {
@@ -48,6 +54,12 @@ const store = createStore({
     },
     setName(context, payload) {
       context.commit('getName', payload);
+    },
+    setBirthDay(context, payload) {
+      context.commit('getBirthDay', payload);
+    },
+    setTellNumber(context, payload) {
+      context.commit('getTellNumber', payload);
     }
   }
 })

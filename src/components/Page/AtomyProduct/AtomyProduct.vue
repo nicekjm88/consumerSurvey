@@ -4,32 +4,33 @@
   <main>
     <section>
       <article>
-      <strong>애터미 제품</strong>
-      <table class="table text-center">
-        <caption>애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보</caption>
-        <colgroup>
-          <col style="width: 30%;">
-          <col>
-          <col style="width: 30%;">
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">카테고리</th>
-            <th scope="col">이름</th>
-            <th scope="col">금액 / PV</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(product, i) in atomyProducts" :key="i">
-            <td>{{ product.category }}</td>
-            <td>{{ product.name }}</td>
-            <td>
-              <div class="price">{{ product.price }}원</div>
-              <div class="point-value">{{ product.pointValue }} PV</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <strong>애터미 제품</strong>
+        <table class="table text-center">
+          <caption>애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보</caption>
+          <colgroup>
+            <col style="width: 30%;">
+            <col>
+            <col style="width: 30%;">
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">카테고리</th>
+              <th scope="col">이름</th>
+              <th scope="col">금액 / PV</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(product, i) in atomyProducts" :key="i">
+              <td>{{ product.category }}</td>
+              <td>{{ product.name }}</td>
+              <td>
+                <div class="price">{{ product.price }}원</div>
+                <div class="point-value">{{ product.pointValue }} PV</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn-more" type="button"> <i class="xi-angle-down"></i> 더보기</button>
       </article>
     </section>
   </main>
@@ -96,10 +97,17 @@ p {
   letter-spacing: 1.3px;
   color: #000;
 }
+.table {
+  margin-bottom: 0;
+}
 .table td {
   vertical-align: middle;
 }
 .table.text-center {
   text-align: center
+}
+.btn-more {
+  width: 100%;
+  padding: 10px;
 }
 </style>
