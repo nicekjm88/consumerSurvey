@@ -67,6 +67,7 @@ ol, ul {
 }
 section {
   padding: 0 20px 80px;
+  line-height: 1.4;
 } 
 .btn {
   width: 100%;

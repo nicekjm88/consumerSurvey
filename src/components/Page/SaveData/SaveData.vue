@@ -50,7 +50,7 @@
                 <th scope="row">전화번호</th>
                 <td>
                   <!-- <input type="text" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" /> -->                  
-                    <Field type="text" name="testerTellNumber" class="form-control" placeholder="ex) 01012345678" :rules="isRequiredTellNumber" />
+                    <Field type="number" name="testerTellNumber" class="form-control" placeholder="ex) 01012345678" :rules="isRequiredTellNumber" />
                     <span class="error-message">{{ errors.testerTellNumber }}</span>                  
                 </td>
               </tr>

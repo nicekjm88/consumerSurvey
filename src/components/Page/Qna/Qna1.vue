@@ -27,6 +27,7 @@ export default {
   text-align: center;
   padding-bottom: 20px;
   border-bottom: 1px solid #d5d5d5;
+  margin-bottom: 1rem;
 }
 
 .notify strong {

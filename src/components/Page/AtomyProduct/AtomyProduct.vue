@@ -100,8 +100,13 @@ p {
 .table {
   margin-bottom: 0;
 }
+.table > thead {
+  border-bottom: 1px solid #333;
+}
+.table th,
 .table td {
   vertical-align: middle;
+  padding: 0.5rem 0.5rem;
 }
 .table.text-center {
   text-align: center

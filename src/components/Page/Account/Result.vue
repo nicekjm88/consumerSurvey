@@ -60,6 +60,7 @@ export default {
 ol,
 ul {
   padding-left: 0;
+  margin-bottom: 1rem;
 }
 .bg-sky {
   padding-top: 70px;
@@ -87,6 +88,7 @@ ul {
   border-radius: 30px 30px 0 0;
   margin: 0 -20px;
   box-shadow: 1px 5px 10px rgb(0 0 0 / 20%);
+  line-height: 1.4;
 }
 section {
   padding: 0 20px 50px;
