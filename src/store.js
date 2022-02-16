@@ -15,11 +15,10 @@ const store = createStore({
     }
   },
   mutations: {
-    getSum() {
-      console.log('합산');
-    },
     increase(state, payload) {
-      state.SubcontractorCount += payload;
+      state.SubcontractorCount >= 100
+        ? 100
+        : state.SubcontractorCount += payload;
     },
     decrease(state, payload) {
       state.SubcontractorCount === 0
