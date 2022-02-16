@@ -1,5 +1,4 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Splash from "../components/Page/Splash.vue";
 import Intro from "../components/Page/Intro/Intro.vue";
 import Login from "../components/Page/Login/Login.vue";
 import Terms from "../components/Page/Terms/Terms.vue";
@@ -16,7 +15,7 @@ import SaveDataView from "../components/Page/SaveData/SaveDataView.vue";
 const routes = [
   {
     path: "/",
-    component: Splash,
+    redirect: 'login',
   },
   {
     path: "/intro",

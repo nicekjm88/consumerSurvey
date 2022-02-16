@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import Splash from "vue-splash";
 import App from "./App.vue";
 import router from "./assets/router.js";
 import store from '@/store.js'
@@ -10,4 +11,5 @@ let app = createApp(App)
 app
   .use(router)
   .use(store)
+  .use(Splash)
   .mount("#app");

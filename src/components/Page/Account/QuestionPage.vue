@@ -1,28 +1,29 @@
 <template>
   <div class="wrap">
   <Navigation />
-  <main>
-    <section>
-      <div class="img-wrap">
-        <img :src="require('@/assets/image/img-form-02.png')" />
-      </div>
-      <p class="notify">
-        <strong>가족 수는 몇 명인가요?</strong>
-        <span><em>본인을 포함하여 함께 생활하는 가족 수를 선택해주세요.</em></span>
-      </p>
-      <ul class="select-list">
-        <li v-for="(filter, i) in familyNumber" :key="i">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" :value="filter" v-model="$store.state.selectedItem" name="question" :id="`question${i}`" checked>
-            <label class="form-check-label" :for="`question${i}`">{{ filter }}</label>
-          </div>          
-        </li>
-      </ul>
-    </section>
-  </main>
-  <router-link to="/qna2">
-    <FixedBtn msg="다음" />
-  </router-link>
+    <main>
+      <section v-for="(qestion, i) in qestions" :key="i">
+        <div class="img-wrap">
+          <img :src="require(`@/assets/image/bg-img${i}.svg`)" />
+        </div>
+        <p class="notify">
+          <strong>{{ qestion.title }}</strong>
+          <span><em>{{ qestion.desc }}</em></span>
+        </p>
+        <Form @submit="onSubmit">
+        <ul class="select-list">
+          <li v-for="(filter, idx) in qestion.list" :key="idx">
+            <div class="form-check">
+              <input class="form-check-input" type="radio"  :value="filter" :name="`qestion${qestion.id}`" :id="`question${i}-${idx}`">
+              <label class="form-check-label" :for="`question${i}-${idx}`">{{ filter }}</label>
+            </div>          
+          </li>
+        </ul>
+        <FixedBtn type="submit" msg="다음" />      
+        </Form>
+      </section>
+    </main>
+    
   </div>
 </template>
 
@@ -39,9 +40,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(['familyNumber'])
+    ...mapState(['familyNumber', 'qestions'])
   },
   methods : {
+    onSubmit(e) {
+      console.log(e);
+      this.$router.push('/qna2');
+    }
   },
   components: {
     FixedBtn,
@@ -104,6 +109,7 @@ section {
   padding-bottom: 20px;
   border-bottom: 1px solid #d5d5d5;
   margin-bottom: 1rem;  
+  margin-top: 1rem;
 }
 
 .notify strong {

@@ -12,7 +12,7 @@
     </article>
   </section>
   </main>
-  <router-link to="/Login">
+  <router-link to="/Terms2">
     <FixedBtn msg="설문 시작" />
   </router-link>
 </div>

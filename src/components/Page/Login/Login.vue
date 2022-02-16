@@ -1,9 +1,8 @@
 <template>
   <div class="wrap">
-    <Navigation />
     <main>
       <section>
-        <router-link to="/Terms2">
+        <router-link to="/intro">
         <img class="logo" :src="require('@/assets/image/logo.png')" />
         </router-link>
         <Form @submit="onSubmit" v-slot="{ errors }">
@@ -12,42 +11,47 @@
 
           <Field type="password" name="atomyPw" class="form-control" placeholder="비밀번호(Password)" :rules="isRequiredBirthDay" />
           <span class="error-message">{{ errors.atomyPw }}</span>
+
+          <div class="rounded-box save-id">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="saveId">
+              <label class="form-check-label" for="saveId">아이디 저장</label>
+            </div>
+          </div>
+
           <div class="d-grid gap-2">
-            <button type="submit" class="btn-login btn btn-primary btn-lg">로그인</button>      
+            <button type="submit" class="btn-login btn btn-primary">로그인</button>      
           </div>
         </Form>
-        <hr />
-        <article class="help">
-          <p class="infoTxt">
-            <strong>아직 애터미㈜ 회원이 아니신가요?</strong>
-            최상의 서비스와 혜택을 마음껏 누려보세요.
-          </p>
-          <div class="d-grid gap-2">
-            <a href="https://m.atomy.com:543/kr/m/signin/account/popup" class="btn btn-secondary btn-lg" target="_blank">회원가입</a>
-            <a href="http://m.atomy.com/kr/m/account/check/popup" class="btn btn-link btn-lg" target="_blank">회원가입확인</a>
-          </div>
-        </article>
+
+        <div class="area-find">
+            <span class="col">
+              <a href="http://m.atomy.com/kr/m/account/find/id/popup" class="btn btn-sm">아이디 찾기</a>
+            </span> |
+            <span class="col">
+              <a href="http://m.atomy.com/kr/m/account/find/password/popup" class="btn btn-sm">비밀번호 찾기</a>
+            </span>
+        </div>       
+        
       </section>
     </main>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Layout/Navigation.vue';
 import { Field, Form } from 'vee-validate';
 export default {
   name: 'Login',
   components: {
     Field,
     Form,
-    Navigation
   },
   methods: {
     isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
     },
     isRequiredBirthDay(value) {
-      return value ? true : '생년월일을 입력해주세요.';
+      return value ? true : '비밀번호를 입력해주세요.';
     },
     onSubmit(values) {
       console.log(values);
@@ -57,6 +61,10 @@ export default {
 </script>
 
 <style scoped>
+  .save-id {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   .logo {
     margin-bottom: 50px;    
     position: relative;
@@ -103,5 +111,9 @@ export default {
   }
   .btn-link:hover {
     color: #212529;
+  }
+  .area-find {
+    text-align: center;
+    margin-top: 10px;
   }
 </style>
