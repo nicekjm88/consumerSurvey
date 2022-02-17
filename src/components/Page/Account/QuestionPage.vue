@@ -3,15 +3,20 @@
   <Navigation />
     <main>
       <section v-for="(qestion, i) in qestions" :key="i">
-        <div class="img-wrap">
-          <img :src="require(`@/assets/image/bg-img${i}.svg`)" />
+        <transition name="slide-fade">
+        <div v-if="step == i">
+          <div class="img-wrap">
+            <img :src="require(`@/assets/image/bg-img${i}.svg`)" />
+          </div>
+          <p class="notify">
+            <strong>{{ qestion.title }}</strong>
+            <span><em>{{ qestion.desc }}</em></span>
+          </p>
         </div>
-        <p class="notify">
-          <strong>{{ qestion.title }}</strong>
-          <span><em>{{ qestion.desc }}</em></span>
-        </p>
+        </transition>
         <Form @submit="onSubmit">
-        <ul class="select-list">
+        <transition name="slide-fade">          
+        <ul class="select-list" v-if="step == i">
           <li v-for="(filter, idx) in qestion.list" :key="idx">
             <div class="form-check">
               <input class="form-check-input" type="radio"  :value="filter" :name="`qestion${qestion.id}`" :id="`question${i}-${idx}`">
@@ -19,7 +24,8 @@
             </div>          
           </li>
         </ul>
-        <FixedBtn type="submit" msg="다음" />      
+        </transition>
+        <FixedBtn type="submit" msg="다음" />     
         </Form>
       </section>
     </main>
@@ -36,7 +42,7 @@ export default {
   name: 'QuestionPage',
   data() {
     return {
-      
+      step: 0,
     }
   },
   computed: {
@@ -44,16 +50,18 @@ export default {
   },
   methods : {
     onSubmit(e) {
-      console.log(e);
-      this.$router.push('/qna2');
+      e.preventDefault();
+      
+      if (this.step === 2) {
+        this.$router.push('/qna2');        
+      } else {
+        this.step++
+      }
     }
   },
   components: {
     FixedBtn,
     Navigation,
-  },
-  props : {
-    qnaData : Array
   },
 }
 </script>
@@ -67,7 +75,7 @@ export default {
 .img-wrap img {
   width: 100%;
 }
-section {
+main {
   padding: 0 20px 80px;
 }
 
@@ -141,5 +149,22 @@ section {
 } 
 .select-list > li {
   margin-bottom: 10px;
+}
+
+.step1,
+.step2 {
+  display: none;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

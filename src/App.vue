@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  
   <div v-if="!isLoaded">
     <splash-component></splash-component>
   </div>
@@ -7,7 +7,7 @@
   <div v-else>
     <router-view></router-view>
   </div>
-  </transition>  
+  
 </template>
 
 <script>

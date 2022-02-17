@@ -32,7 +32,7 @@
     </section>
   </main>
   <router-link to="/result">
-    <FixedBtn @click="$store.commit('getSum')" msg="작성완료" />
+    <FixedBtn msg="작성완료" />
   </router-link>
 </div>
 </template>
