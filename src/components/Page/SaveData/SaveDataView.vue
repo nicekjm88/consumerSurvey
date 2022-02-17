@@ -3,7 +3,7 @@
     <Navigation />
     <main>
       <section>
-        <h1 class="title">{{ testerSaveData.name }}의 자료</h1>
+        <h1 class="title">{{ userInfo.name }}님의 자료</h1>
 
         <table class="table">
           <caption>최종 자료</caption>
@@ -17,27 +17,27 @@
             </tr>
             <tr>
               <th scope="row">생년월일</th>
-              <td>{{ testerSaveData.birtDay }}</td>
+              <td>{{ userInfo.birtDay }}</td>
             </tr>
             <tr>
               <th scope="row">성별</th>
-              <td>{{ testerSaveData.gender }}</td>
+              <td>{{ userInfo.gender }}</td>
             </tr>
             <tr>
               <th scope="row">연령대</th>
-              <td>{{ testerSaveData.age }}</td>
+              <td>{{ userInfo.age }}</td>
             </tr>
             <tr>
               <th scope="row">가족 수</th>
-              <td>{{ testerSaveData.familyNumber }}</td>
+              <td>{{ userInfo.familyNumber }}</td>
             </tr>
             <tr>
               <th scope="row">애터미 제품 사용 유무</th>
-              <td>{{ testerSaveData.UseProduct }}</td>
+              <td>{{ userInfo.UseProduct }}</td>
             </tr>            
             <tr>
               <th scope="row">전화번호</th>
-              <td>{{ testerSaveData.tellNumber }}</td>
+              <td>{{ userInfo.tellNumber }}</td>
             </tr>
             <tr>
               <th scope="row">월 평균 생활소비 금액</th>
@@ -61,7 +61,7 @@
             </tr>
           </tbody>
         </table>
-        <FixedBtn @click="snsShare('title', 'url')" type="button" msg="공유하기" />
+        <FixedBtn @click="snsShare('나의 소비생활 알아보기', 'SaveDataView')" type="button" msg="공유하기" />
       </section>
     </main>
   </div>
@@ -74,13 +74,13 @@ import { mapState } from 'vuex';
 export default {
   name: 'SaveDataList',
   computed: {
-    ...mapState(['nowDate', 'testerSaveData', 'selectedItem'])
+    ...mapState(['nowDate', 'userInfo', 'selectedItem'])
   },
   methods: {
     //https://developer.mozilla.org/ko/docs/Web/API/Navigator/share
-    snsShare(title, SaveDataView) {
+    snsShare(title, url) {
       if ( navigator.share ) {
-        navigator.share({ title: title, url: SaveDataView });
+        navigator.share({ title: title, url: url });
       } else {
         alert('지원하지 않는 브라우저입니다.');
       }

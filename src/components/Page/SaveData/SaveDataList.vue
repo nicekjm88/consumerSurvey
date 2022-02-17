@@ -29,10 +29,10 @@
             <div class="form-check" v-if="isEdit">
               <input class="form-check-input" type="checkbox" id="bind1" />
               <label class="form-check-label" for="bind1">
-                <strong>{{ $store.state.testerSaveData.name }}</strong>
+                <strong>{{ $store.state.userInfo.name }}</strong>
               </label>
             </div>
-            <strong v-else>{{ $store.state.testerSaveData.name }}</strong>
+            <strong v-else>{{ $store.state.userInfo.name }}</strong>
             <router-link to="/SaveDataView">더보기</router-link>
           </li>
         </ul> 

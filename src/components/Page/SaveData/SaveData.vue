@@ -89,7 +89,7 @@ export default {
       return value ? true : '전화번호 입력해주세요.';
     },
     onSubmit(values) {
-      console.log(values);
+      // console.log(values);
       this.$store.dispatch('setDate');  
       this.$store.dispatch('setName', values.testerName);  
       this.$store.dispatch('setGender', this.gender);

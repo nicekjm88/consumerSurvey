@@ -1,6 +1,6 @@
 <template>  
   <main>
-    <h1>나의 자가진단<br>설문 조사</h1>
+    <h1>나의 소비생활<br> 알아보기</h1>
     <img :src="require('@/assets/image/logo.svg')" />
   </main>  
 </template>
@@ -24,7 +24,7 @@ main {
   flex-direction: column;
 }
 h1 {
-  font-family: Atomy;
+  font-family: "Atomy";
   font-size: 43px;
   font-weight: 700;
   font-style: normal;

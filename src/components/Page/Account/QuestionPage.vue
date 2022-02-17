@@ -112,7 +112,6 @@ main {
 .table tbody td .form-select {
   font-size: 13px;
 }
-
 .table tbody td .form-check {
   display: inline-block;
 }
@@ -158,22 +157,5 @@ main {
 } 
 .select-list > li {
   margin-bottom: 10px;
-}
-
-.step1,
-.step2 {
-  display: none;
-}
-
-.fade-enter-active {
-  transition: all .3s ease;
-}
-.fade-leave-active {
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.fade-enter, .fade-leave-to
-/* .fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
 }
 </style>

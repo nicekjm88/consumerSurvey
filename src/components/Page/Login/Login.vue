@@ -2,9 +2,7 @@
   <div class="wrap">
     <main>
       <section>
-        <router-link to="/intro">
         <img class="logo" :src="require('@/assets/image/logo2.svg')" />
-        </router-link>
         <Form @submit="onSubmit" v-slot="{ errors }">
           <Field type="text" name="atomyId" class="form-control" placeholder="아이디(ID) / 닉네임" :rules="isRequiredName" />
           <span class="error-message">{{ errors.atomyId }}</span>
@@ -53,7 +51,11 @@ export default {
       return value ? true : '비밀번호를 입력해주세요.';
     },
     onSubmit(values) {
-      console.log(values);
+      
+      values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
+        ? this.$router.push('intro')
+        : alert('올바른 아이디/비밀번호가 아닙니다.')
+        
     }
   }
 }
