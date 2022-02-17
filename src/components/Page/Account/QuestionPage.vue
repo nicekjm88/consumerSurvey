@@ -3,7 +3,7 @@
   <Navigation />
     <main>
       <section v-for="(qestion, i) in qestions" :key="i">
-        <transition name="slide-fade">
+        
         <div v-if="step == i">
           <div class="img-wrap">
             <img :src="require(`@/assets/image/bg-img${i}.svg`)" />
@@ -13,20 +13,21 @@
             <span><em>{{ qestion.desc }}</em></span>
           </p>
         </div>
-        </transition>
+        
         <Form @submit="onSubmit">
-        <transition name="slide-fade">          
+        
         <ul class="select-list" v-if="step == i">
           <li v-for="(filter, idx) in qestion.list" :key="idx">
             <div class="form-check">
-              <input class="form-check-input" type="radio"  :value="filter" :name="`qestion${qestion.id}`" :id="`question${i}-${idx}`">
+              <input class="form-check-input" type="radio" v-model="value" :value="filter" :name="`qestion${qestion.id}`" :id="`question${i}-${idx}`">
               <label class="form-check-label" :for="`question${i}-${idx}`">{{ filter }}</label>
             </div>          
           </li>
         </ul>
-        </transition>
+        
         <FixedBtn type="submit" msg="다음" />     
         </Form>
+
       </section>
     </main>
     
@@ -43,6 +44,7 @@ export default {
   data() {
     return {
       step: 0,
+      value: ''
     }
   },
   computed: {
@@ -51,11 +53,18 @@ export default {
   methods : {
     onSubmit(e) {
       e.preventDefault();
-      
-      if (this.step === 2) {
-        this.$router.push('/qna2');        
-      } else {
+
+      if ( this.step === 0 ) {
+        this.$store.dispatch('setAge', this.value);
         this.step++
+
+      } else if ( this.step === 1 ) {
+        this.$store.dispatch('setFamilyNumber', this.value);
+        this.step++
+
+      } else {
+        this.$store.dispatch('setUseProduct', this.value);
+        this.$router.push('/qna2');
       }
     }
   },
@@ -156,14 +165,14 @@ main {
   display: none;
 }
 
-.slide-fade-enter-active {
+.fade-enter-active {
   transition: all .3s ease;
 }
-.slide-fade-leave-active {
+.fade-leave-active {
   transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to
+/* .fade-leave-active below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
 }

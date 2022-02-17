@@ -23,8 +23,6 @@ const store = createStore({
           'list': ['예', '아니오']
         }
       ],
-      familyNumber: ['1인 가구', '2명', '3명', '4명', '5명 이상'],
-      selectedItem: '1인 가구',
       livingProduct: ['칫솔', '치약', '세탁용', '비누', '샴푸류', '바디 워시류'],
       food: ['생수', '쌀, 즉석밥', '김치', '음료', '라면, 컵라면'],
       selectedLivingItem: [],
@@ -45,11 +43,23 @@ const store = createStore({
         ? 0
         : state.SubcontractorCount -= payload;
     },
+    getAge(state, payload) {
+      state.testerSaveData.age = payload;
+    },
+    getFamilyNumber(state, payload) {
+      state.testerSaveData.familyNumber = payload;
+    },
+    getUseProduct(state, payload) {
+      state.testerSaveData.UseProduct = payload;
+    },
     getDate(state) {
       state.testerSaveData.date = state.nowDate;
     },
     getName(state, payload) {
       state.testerSaveData.name = payload;
+    },
+    getGender(state, payload) {
+      state.testerSaveData.gender = payload;
     },
     getBirthDay(state, payload) {
       state.testerSaveData.birtDay = payload;
@@ -65,11 +75,23 @@ const store = createStore({
     minus(context) {
       context.commit('decrease', 1);
     },
+    setAge(context, payload) {
+      context.commit('getAge', payload);
+    },
+    setFamilyNumber(context, payload) {
+      context.commit('getFamilyNumber', payload);
+    },
+    setUseProduct(context, payload) {
+      context.commit('getUseProduct', payload);
+    },
     setDate(context) {
       context.commit('getDate');
     },
     setName(context, payload) {
       context.commit('getName', payload);
+    },
+    setGender(context, payload) {
+      context.commit('getGender', payload);
     },
     setBirthDay(context, payload) {
       context.commit('getBirthDay', payload);

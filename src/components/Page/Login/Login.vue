@@ -3,7 +3,7 @@
     <main>
       <section>
         <router-link to="/intro">
-        <img class="logo" :src="require('@/assets/image/logo.png')" />
+        <img class="logo" :src="require('@/assets/image/logo2.svg')" />
         </router-link>
         <Form @submit="onSubmit" v-slot="{ errors }">
           <Field type="text" name="atomyId" class="form-control" placeholder="아이디(ID) / 닉네임" :rules="isRequiredName" />
@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style scoped>
+  .wrap {
+    padding-top: 140px;
+  }
   .save-id {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -69,7 +72,7 @@ export default {
     margin-bottom: 50px;    
     position: relative;
     left: 50%;
-    margin-left: -58px;
+    margin-left: -63.5px;
   }
   section {
     width: 80%;

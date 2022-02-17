@@ -25,15 +25,23 @@
   </nav>
 
   <nav v-else-if="$route.name === 'SaveDataView'">
+    
     <button type="button" @click="historyBack">
       <i class="xi-angle-left"></i>
       <span class="a11y">뒤로</span>
     </button>
+    
+    <div>
+    <button type="button">
+      <img :src="require('@/assets/image/i-modify.svg')" />
+      <span class="a11y">수정하기</span>
+    </button>
 
     <button type="button">
-      <i class="xi-trash-o"></i>
-      <span class="a11y">닫기</span>
+      <img :src="require('@/assets/image/i-delete.svg')" />
+      <span class="a11y">삭제</span>
     </button>    
+    </div>
   </nav>
 
   <nav v-else>

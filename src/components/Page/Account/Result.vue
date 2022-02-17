@@ -19,7 +19,7 @@
 
         <p>정말 많은 제품등을 소비하고 계시네요.</p>
         <p>
-          가족 {{selectedItem}}인 기준에서<br>
+          가족 {{testerSaveData.familyNumber}}인 기준에서<br>
           위 제품을 소비하는 총 금액은 매월 평균 소비 기준 0,000,000원입니다.<br>
           1년간 꾸준히 사용하신다면 약 00,000,000원입니다.
         </p>
@@ -47,7 +47,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Result',
   computed: {
-    ...mapState(['selectedLivingItem', 'selectedfoodItem', 'selectedItem'])
+    ...mapState(['selectedLivingItem', 'selectedfoodItem', 'selectedItem', 'testerSaveData'])
   },
   components: {
     Navigation,

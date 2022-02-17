@@ -12,43 +12,51 @@
           </colgroup>
           <tbody>
             <tr>
-              <th>작성일</th>
+              <th scope="row">작성일</th>
               <td>{{ nowDate }}</td>
             </tr>
             <tr>
-              <th>생년월일</th>
+              <th scope="row">생년월일</th>
               <td>{{ testerSaveData.birtDay }}</td>
             </tr>
             <tr>
-              <th>성별</th>
-              <td>남성</td>
+              <th scope="row">성별</th>
+              <td>{{ testerSaveData.gender }}</td>
             </tr>
             <tr>
-              <th>가족 수</th>
-              <td>{{selectedItem}}</td>
+              <th scope="row">연령대</th>
+              <td>{{ testerSaveData.age }}</td>
             </tr>
             <tr>
-              <th>전화번호</th>
+              <th scope="row">가족 수</th>
+              <td>{{ testerSaveData.familyNumber }}</td>
+            </tr>
+            <tr>
+              <th scope="row">애터미 제품 사용 유무</th>
+              <td>{{ testerSaveData.UseProduct }}</td>
+            </tr>            
+            <tr>
+              <th scope="row">전화번호</th>
               <td>{{ testerSaveData.tellNumber }}</td>
             </tr>
             <tr>
-              <th>월 평균 생활소비 금액</th>
+              <th scope="row">월 평균 생활소비 금액</th>
               <td>10,000,000원</td>
             </tr>
             <tr>
-              <th>연 평균 애터미 제품 소비 금액</th>
+              <th scope="row">연 평균 애터미 제품 소비 금액</th>
               <td>117,000,000원</td>
             </tr>
             <tr>
-              <th>PV 횟수</th>
+              <th scope="row">PV 횟수</th>
               <td>4~7회</td>
             </tr>
             <tr>
-              <th>PV 금액</th>
+              <th scope="row">PV 금액</th>
               <td>120,000,000원</td>
             </tr>
             <tr>
-              <th>선택상품</th>
+              <th scope="row">선택상품</th>
               <td>생활용품, 식품, 식...</td>
             </tr>
           </tbody>
@@ -70,9 +78,9 @@ export default {
   },
   methods: {
     //https://developer.mozilla.org/ko/docs/Web/API/Navigator/share
-    snsShare(title, url) {
+    snsShare(title, SaveDataView) {
       if ( navigator.share ) {
-        navigator.share({ title: title, url: url });
+        navigator.share({ title: title, url: SaveDataView });
       } else {
         alert('지원하지 않는 브라우저입니다.');
       }
