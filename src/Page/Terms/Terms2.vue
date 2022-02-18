@@ -34,22 +34,24 @@
 
 <script>
 import Navigation from '@/components/Layout/Navigation.vue';
-import FixedBtn from '@/components/Layout/FixedBtn.vue'
+import FixedBtn from '@/components/Layout/FixedBtn.vue';
+
 export default {
   name: 'Terms2',
-  data() {
-    return {
-      checked: false,
-    }
-  },
-  methods: {
-    onMove() {
-      this.$router.push('/qna');
-    }
-  },
   components: {
     Navigation,
     FixedBtn
+  },
+  setup () {
+
+    function onMove() {
+      this.$router.push('/qna');
+    }
+
+    return {
+      checked: false,
+      onMove
+    }
   }
 }
 </script>

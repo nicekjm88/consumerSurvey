@@ -20,7 +20,7 @@
           </div>
 
           <div class="d-grid gap-2">
-            <button type="submit" class="btn-login btn btn-primary">로그인</button>      
+            <button type="submit" class="btn-login btn btn-primary">로그인</button>
           </div>
         </Form>
 
@@ -45,15 +45,23 @@ export default {
     Field,
     Form,
   },
-  methods: {
-    isRequiredName(value) {
+  setup () {
+    function isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
-    },
-    isRequiredBirthDay(value) {
+    }
+
+    function isRequiredBirthDay(value) {
       return value ? true : '비밀번호를 입력해주세요.';
-    },
-    onSubmit(values) {
+    }
+
+    function onSubmit(values) {
       console.log(values);
+    }
+
+    return {
+      isRequiredName,
+      isRequiredBirthDay,
+      onSubmit
     }
   }
 }
@@ -65,7 +73,7 @@ export default {
     margin-bottom: 10px;
   }
   .logo {
-    margin-bottom: 50px;    
+    margin-bottom: 50px;
     position: relative;
     left: 50%;
     margin-left: -58px;
@@ -80,7 +88,7 @@ export default {
   .error-message {
     text-align: left;
     color: coral;
-    font-size: 12px;  
+    font-size: 12px;
   }
   .btn-login {
     margin-top: 10px;
@@ -98,7 +106,7 @@ export default {
     background-color: #00b6f0;
     border-color: #00b6f0;
   }
-  .btn-check:focus+.btn-primary, 
+  .btn-check:focus+.btn-primary,
   .btn-primary:focus {
     background-color: #00b6f0;
     border-color: #00b6f0;
