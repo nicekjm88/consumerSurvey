@@ -14,7 +14,7 @@
       </p>
       <p>
         현재 1년간 꾸준히 사용하신다면, 앞서 소비 금액
-        약 00,000,000원 소비하시고 PV는 약 000,000가 
+        약 00,000,000원 소비하시고 PV는 약 000,000가
         쌓입니다.
       </p>
       <p>만약 내 하위에 나랑 비슷한 사람들이 있다면,</p>
@@ -31,7 +31,7 @@
         소득이 발생될 것이라고 예상됩니다.
       </p>
       <p>
-        애터미 사업자가 되시면 원하는 물건도 구매하면서 
+        애터미 사업자가 되시면 원하는 물건도 구매하면서
         동시에 수익도 낼 수 있는 효과를 보시게 됩니다.
       </p>
       <router-link to="/SaveData">
@@ -46,13 +46,14 @@
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue'
 import { mapState } from 'vuex'
+
 export default {
   name: 'Result',
   computed: {
     ...mapState(['SubcontractorCount'])
   },
   methods: {
-    
+
   },
   components: {
     Navigation,
@@ -68,7 +69,7 @@ ol, ul {
 section {
   padding: 0 20px 80px;
   line-height: 1.4;
-} 
+}
 .btn {
   width: 100%;
   border: 2px solid #00b5ef;

@@ -18,7 +18,7 @@ export const defaultRoutes = [
     {
         path: "/terms",
         name: "terms",
-        component: () => import('@/Page/Terms/Terms'),
+        component: () => import('@/Page/Terms'),
     },
     {
         path: "/terms2",
@@ -65,11 +65,11 @@ export const defaultRoutes = [
         name: "SaveDataView",
         component: () => import('@/Page/SaveData/SaveDataView'),
     },
-]
+];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: defaultRoutes,
+    routes: defaultRoutes
 });
 
 export default router;

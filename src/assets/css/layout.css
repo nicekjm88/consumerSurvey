@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Atomy";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/ATOMY-BOLD.woff");
+}
+
 html,
 body,
 div,
@@ -165,6 +172,7 @@ ul {
   padding-left: 0 !important;
 }
 h1.title {
+  font-family: "Atomy";
   font-size: 28px;
   font-weight: bold;
   font-style: normal;
@@ -172,4 +180,7 @@ h1.title {
   color: #333;
   display: block;
   margin-bottom: 20px;
+}
+strong {
+  font-family: "Atomy";
 }
