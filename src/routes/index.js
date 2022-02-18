@@ -12,8 +12,6 @@ import SaveData from "@/components/Page/SaveData/SaveData.vue";
 import SaveDataList from "@/components/Page/SaveData/SaveDataList.vue";
 import SaveDataView from "@/components/Page/SaveData/SaveDataView.vue";
 
-const sample = [1,2,3,4,5];
-
 const routes = [
   {
     path: "/",
