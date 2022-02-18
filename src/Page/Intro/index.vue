@@ -22,7 +22,6 @@
 
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
 import Navigation from '@/components/Layout/Navigation.vue';
-
 export default {
   name: 'IntroPage',
   components: {

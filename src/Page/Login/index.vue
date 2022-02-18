@@ -50,20 +50,10 @@ export default {
 
     function isRequiredBirthDay(value) {
       return value ? true : '비밀번호를 입력해주세요.';
-<<<<<<< HEAD:src/Page/Login/index.vue
     }
 
     function onSubmit(values) {
       console.log(values);
-=======
-    },
-    onSubmit(values) {
-      
-      values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
-        ? this.$router.push('intro')
-        : alert('올바른 아이디/비밀번호가 아닙니다.')
-        
->>>>>>> dc6f44feb20ef888bf8f4fa48a201631e9f9fe30:src/components/Page/Login/Login.vue
     }
 
     return {
