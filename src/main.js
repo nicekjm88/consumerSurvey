@@ -1,11 +1,14 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./assets/router.js";
-import store from '@/store.js'
+import store from '@/store.js';
+import router from './router';
+
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-let app = createApp(App)
+import './permission';
+
+const app = createApp(App)
 
 app
   .use(router)
