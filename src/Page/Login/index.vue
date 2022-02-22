@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 import { Field, Form } from 'vee-validate';
 export default {
   name: 'Login',
@@ -44,6 +45,8 @@ export default {
     Form,
   },
   setup () {
+    const router = useRouter();
+
     function isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
     }
@@ -54,6 +57,11 @@ export default {
 
     function onSubmit(values) {
       console.log(values);
+
+      values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
+        ? router.push('/intro')
+        : alert('올바른 아이디/비밀번호가 아닙니다.');
+      
     }
 
     return {

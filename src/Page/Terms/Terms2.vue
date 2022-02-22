@@ -25,14 +25,14 @@
       </div>
 
     </section>
-  </main>
-  <!-- <router-link to="/qna"> -->
-    <FixedBtn type="submit" @click="onMove" msg="확인" ref="btn" :disabled="!checked" />
-  <!-- </router-link> -->
+  </main>  
+  <FixedBtn type="submit" @click="onMove" msg="확인" ref="btn" :disabled="!checked" />  
 </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
 
@@ -43,13 +43,15 @@ export default {
     FixedBtn
   },
   setup () {
+    const router = useRouter();
+    let checked = ref(false);
 
     function onMove() {
-      this.$router.push('/qna');
+      router.push('/qna');
     }
 
     return {
-      checked: false,
+      checked,
       onMove
     }
   }
