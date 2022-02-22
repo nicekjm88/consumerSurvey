@@ -39,9 +39,9 @@
                 <th scope="row">성별</th>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="testerGender" id="gender1" autocomplete="off" value="남성" checked>
+                    <input type="radio" class="btn-check" v-model="gender" name="testerGender" id="gender1" autocomplete="off" value="남성" checked>
                     <label class="btn btn-outline-primary" for="gender1">남성</label>
-                    <input type="radio" class="btn-check" name="testerGender" id="gender2" autocomplete="off" value="여성">
+                    <input type="radio" class="btn-check" v-model="gender" name="testerGender" id="gender2" autocomplete="off" value="여성">
                     <label class="btn btn-outline-primary" for="gender2">여성</label>
                   </div>
                 </td>
@@ -70,6 +70,11 @@ import { mapState } from 'vuex';
 import { Field, Form } from 'vee-validate';
 export default {
   name: 'SaveData',
+  data() {
+    return {
+      gender: '',
+    }
+  },
   computed: {
     ...mapState(['nowDate'])
   },
@@ -87,6 +92,7 @@ export default {
       console.log(values);
       this.$store.dispatch('setDate');
       this.$store.dispatch('setName', values.testerName);
+      this.$store.dispatch('setGender', this.gender);
       this.$store.dispatch('setBirthDay', values.testerBirthDay);
       this.$store.dispatch('setTellNumber', values.testerTellNumber);
 
