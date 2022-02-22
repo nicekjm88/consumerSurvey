@@ -1,5 +1,5 @@
 <template>
-  <button>{{ msg }}</button>  
+  <button class="fixed-btn">{{ msg }}</button>  
 </template>
 
 <script>
@@ -12,17 +12,18 @@ export default {
 }
 </script>
 
-<style scoped>
-button {
+<style lang="scss">
+.fixed-btn {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #00b5ef;
+  background-color: $mainColor;
   color: #fff;
-}
-button:disabled {
-  background-color: #999;
+
+  &:disabled {
+    background-color: #999;
+  }
 }
 </style>

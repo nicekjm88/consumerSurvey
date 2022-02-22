@@ -31,7 +31,7 @@
                 <th scope="row">생년월일</th>
                 <td>
                   <!-- <input type="text" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" /> -->
-                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="ex) 19880808" :rules="isRequiredBirthDay" />
+                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="[-]를 제외하고 입력해주세요." :rules="isRequiredBirthDay" />
                     <span class="error-message">{{ errors.testerBirthDay }}</span>
                 </td>
               </tr>

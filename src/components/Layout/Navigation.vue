@@ -1,6 +1,6 @@
 <template>
 <div>
-  <nav v-if="$route.name === 'intro'" class="intro">
+  <nav v-if="$route.name === 'intro'" class="navigation intro">
     <router-link to="/Terms">
     <button type="button">
       <i class="xi-help"></i>
@@ -15,7 +15,7 @@
     </router-link>
   </nav>
 
-  <nav v-else-if="$route.name === 'SaveDataList'" class="icon-alone">
+  <nav v-else-if="$route.name === 'SaveDataList'" class="navigation icon-alone">
     <router-link to="/intro">    
       <button v-if="$route.name !== 'SaveDataView'" type="button">
         <i class="xi-home"></i>
@@ -24,7 +24,7 @@
     </router-link>
   </nav>
 
-  <nav v-else-if="$route.name === 'SaveDataView'">
+  <nav v-else-if="$route.name === 'SaveDataView'" class="navigation">
     
     <button type="button" @click="historyBack">
       <i class="xi-angle-left"></i>
@@ -44,7 +44,7 @@
     </div>
   </nav>
 
-  <nav v-else>
+  <nav v-else class="navigation">
     <button type="button" @click="historyBack">
       <i class="xi-angle-left"></i>
       <span class="a11y">뒤로</span>
@@ -57,8 +57,6 @@
       </button>
     </router-link>
   </nav>
-
-
 </div>
 </template>
 
@@ -73,8 +71,8 @@ export default {
 }
 </script>
 
-<style scoped>
-nav {
+<style lang="scss">
+.navigation {
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -83,22 +81,26 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+
+  & button {
+    background: transparent;
+    color: #414141;
+    font-size: 26px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+  }
+
+  &.intro button {
+    font-size: 30px;  
+  }
+
+  &.icon-alone {
+    flex-direction: row-reverse;
+  }
 }
-nav button {
-  background: transparent;
-  color: #414141;
-  font-size: 26px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  margin: 0;
-}
-nav.intro button {
-  font-size: 30px;  
-}
-nav.icon-alone {
-  flex-direction: row-reverse;
-}
+
 .bg-sky nav button {
   color: #fff;
 }

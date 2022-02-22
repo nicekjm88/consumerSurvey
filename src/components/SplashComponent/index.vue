@@ -1,6 +1,6 @@
 <template>  
-  <main>
-    <h1>나의 소비생활<br> 알아보기</h1>
+  <main class="splash-screen">
+    <h1 class="splash-screen__title">나의 소비생활<br> 알아보기</h1>
     <img :src="require('@/assets/image/logo.svg')" />
   </main>  
 </template>
@@ -12,9 +12,9 @@ export default {
 }
 </script>
 
-<style scoped>
-main {
-  background-color: #00b5ef;
+<style lang="scss">
+.splash-screen {
+  background-color: $mainColor;
   color: #fff;
   display: flex;
   height: 100vh;
@@ -22,14 +22,15 @@ main {
   align-items: center;
   text-align: center;
   flex-direction: column;
-}
-h1 {
-  font-family: "Atomy";
-  font-size: 43px;
-  font-weight: 700;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: 4.3px;
-  color: #fff;
+
+  &__title {
+    font-family: "Atomy";
+    font-size: 43px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: 4.3px;
+    color: #fff;
+  }
 }
 </style>

@@ -57,11 +57,10 @@ export default {
 
     function onSubmit(values) {
       console.log(values);
-
+      //테스트 용
       values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
         ? router.push('/intro')
-        : alert('올바른 아이디/비밀번호가 아닙니다.');
-      
+        : alert('올바른 아이디/비밀번호가 아닙니다.');      
     }
 
     return {

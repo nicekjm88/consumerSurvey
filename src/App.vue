@@ -41,14 +41,6 @@ export default {
 </script>
 
 <style>
-@import "./assets/css/layout.css";
-@import "./assets/css/xeicon.css";
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
+@import "./assets/styles/layout.css";
+@import "./assets/styles/xeicon.css";
 </style>

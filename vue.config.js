@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
@@ -13,4 +13,11 @@ module.exports = {
             }
         },
     },
+    css: {
+        loaderOptions: {
+            sass: {
+                additionalData: `@import "@/assets/styles/_variables.scss";`
+            }
+        }
+    }
 }
