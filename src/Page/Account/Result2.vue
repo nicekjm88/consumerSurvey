@@ -50,7 +50,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Result',
   computed: {
-    ...mapState(['SubcontractorCount'])
+    ...mapState('etc', ['SubcontractorCount'])
   },
   methods: {
 

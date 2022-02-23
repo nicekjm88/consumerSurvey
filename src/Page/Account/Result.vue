@@ -8,7 +8,7 @@
       <div class="rounded-box rounded-box__wrapper">
         <h2 class="title">결과 확인 및 설명</h2>
         <hr />
-        <p>총 {{selectedLivingItem.length + selectedfoodItem.length}}개를 선택하였습니다.</p>     
+        <p>총 {{selectedLivingItem.length + selectedfoodItem.length}}개를 선택하였습니다.</p>
         <p>&lt;선택리스트&gt;</p>
         <ul>
           <li>- 생활용품 {{selectedLivingItem.length}}개</li>
@@ -32,7 +32,7 @@
           </div>
         </router-link>
 
-        <p>현재 애터미 제품으로 이 물품 등을 구매하신다면<br>매월 소비 금액이 0,000,000원입니다.</p>    
+        <p>현재 애터미 제품으로 이 물품 등을 구매하신다면<br>매월 소비 금액이 0,000,000원입니다.</p>
       </div>
     </section>
   </main>
@@ -49,7 +49,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Result',
   computed: {
-    ...mapState(['selectedLivingItem', 'selectedfoodItem', 'selectedItem', 'userInfo'])
+    ...mapState('etc', ['selectedLivingItem', 'selectedfoodItem', 'selectedItem', 'userInfo'])
   },
   components: {
     Navigation,
@@ -62,7 +62,7 @@ export default {
 .bg-sky {
   padding-top: 70px;
   background-color: #5ed8ff;
-  color: #fff;  
+  color: #fff;
 }
 
 .result-area {
@@ -82,7 +82,7 @@ export default {
     margin-bottom: 1rem;
   }
 
-  
+
   .btn {
     border: 2px solid #00b5ef;
     color: #00b5ef;

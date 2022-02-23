@@ -19,5 +19,13 @@ module.exports = {
                 additionalData: `@import "@/assets/styles/_variables.scss";`
             }
         }
-    }
+    },
+    devServer: {
+        proxy: {
+            '/atomy': {
+                target: 'https://test-dev.atomy.com/apiglobal/',
+                pathRewrite: {'^/atomy' : ''}
+            },
+        }
+    },
 }

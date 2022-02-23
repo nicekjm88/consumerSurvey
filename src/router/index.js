@@ -9,6 +9,7 @@ export const defaultRoutes = [
         path: "/login",
         name: "Login",
         component: () => import('@/Page/Login'),
+        meta: { unauthorized:true }
     },
     {
         path: "/intro",

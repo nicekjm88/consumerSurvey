@@ -1,14 +1,48 @@
-import axios from "axios"
+import {Capacitor} from "@capacitor/core";
+import {Http} from '@capacitor-community/http'
+import axios from "axios";
 
-const _API_TOKEN_HEADER_NAME = 'Atomy-Api-Tokne'
-const _USER_TOKEN_HEADER_NAME = 'Atomy-User-Token'
+export default function useHttp(){
+    const _ATOMY_API_TOKEN = 'LX8WRJSS0FET8GQQG4YWNYKQ8RDPEME7'
 
-const atomyApi = axios.create({
-    baseURL: 'https://test-dev.atomy.com/apiglobal',
-    headers: {
-        _API_TOKEN_HEADER_NAME: '4bb8a5af2fe14870bfd362b60483ec6a'
+    const defaultHeaders = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Atomy-Api-Token': _ATOMY_API_TOKEN,
+        'Atomy-User-Token': ''
     }
-})
 
-export default atomyApi
+    function combineHeader(header){
+        return Object.assign({}, defaultHeaders, header);
+    }
 
+    return {
+        get : async function(url, header){
+            const headers = combineHeader(header);
+
+            if(Capacitor.getPlatform() === 'web') {
+
+            }else{
+
+            }
+        },
+
+        post : async function(url, data, header){
+            const headers = combineHeader(header);
+            if(Capacitor.getPlatform() === 'web') {
+                return axios({
+                    method:'post',
+                    url: url,
+                    data: data,
+                    headers: headers
+                });
+            }else{
+                return Http.post({
+                    url: url,
+                    headers: headers,
+                    data: data,
+                });
+            }
+        }
+    }
+}

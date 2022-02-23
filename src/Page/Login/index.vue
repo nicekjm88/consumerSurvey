@@ -18,7 +18,7 @@
           </div>
 
           <div class="d-grid gap-2">
-            <button type="submit" class="btn-login btn btn-primary">로그인</button>
+            <button type="submit" class="btn-login btn btn-primary" :disabled="isTryLogin">로그인</button>
           </div>
         </Form>
 
@@ -36,8 +36,12 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
 import { Field, Form } from 'vee-validate';
+import useAuth from "@/composables/api/auth";
+import useUserManager from "@/store/user-manager";
+import router from "@/router";
+import {ref} from 'vue';
+
 export default {
   name: 'Login',
   components: {
@@ -45,7 +49,9 @@ export default {
     Form,
   },
   setup () {
-    const router = useRouter();
+    const auth = useAuth();
+
+    const isTryLogin = ref(false);
 
     function isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
@@ -58,15 +64,27 @@ export default {
     function onSubmit(values) {
       console.log(values);
       //테스트 용
-      values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
-        ? router.push('/intro')
-        : alert('올바른 아이디/비밀번호가 아닙니다.');      
+      // values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
+      //   ? router.push('/intro')
+      //   : alert('올바른 아이디/비밀번호가 아닙니다.');
+
+      isTryLogin.value = true;
+      auth.login(values.atomyId, values.atomyPw).finally(() => {
+        isTryLogin.value = false;
+        const user = useUserManager();
+        if(user.identity.token){
+          router.push('/intro');
+        } else {
+          alert('아이디 비밀번호를 확인해주세요.')
+        }
+      })
     }
 
     return {
       isRequiredName,
       isRequiredBirthDay,
-      onSubmit
+      onSubmit,
+      isTryLogin,
     }
   }
 }
@@ -131,5 +149,5 @@ export default {
       text-align: center;
       margin-top: 10px;
     }
-  }  
+  }
 </style>

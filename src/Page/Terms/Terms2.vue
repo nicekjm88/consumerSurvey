@@ -32,9 +32,9 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import router from "@/router";
 
 export default {
   name: 'Terms2',
@@ -43,8 +43,7 @@ export default {
     FixedBtn
   },
   setup () {
-    const router = useRouter();
-    let checked = ref(false);
+    const checked = ref(false)
 
     function onMove() {
       router.push('/qna');

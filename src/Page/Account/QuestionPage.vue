@@ -46,7 +46,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['familyNumber', 'qestions'])
+    ...mapState('etc', ['familyNumber', 'qestions'])
   },
   methods : {
     onSubmit(e) {

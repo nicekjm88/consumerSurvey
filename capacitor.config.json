@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.acs",
+  "appName": "Atomy Consumer Survey",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
