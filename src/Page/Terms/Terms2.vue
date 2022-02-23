@@ -33,8 +33,10 @@
 </template>
 
 <script>
+import {ref} from 'vue';
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import router from "@/router";
 
 export default {
   name: 'Terms2',
@@ -43,13 +45,14 @@ export default {
     FixedBtn
   },
   setup () {
+    const checked = ref(false)
 
     function onMove() {
-      this.$router.push('/qna');
+      router.push('/qna');
     }
 
     return {
-      checked: false,
+      checked,
       onMove
     }
   }

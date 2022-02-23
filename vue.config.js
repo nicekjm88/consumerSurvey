@@ -13,4 +13,13 @@ module.exports = {
             }
         },
     },
+
+    devServer: {
+        proxy: {
+            '/atomy': {
+                target: 'https://test-dev.atomy.com/apiglobal/',
+                pathRewrite: {'^/atomy' : ''}
+            },
+        }
+    },
 }
