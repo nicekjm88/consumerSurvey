@@ -1,6 +1,11 @@
 <template>  
   <main class="splash-screen">
     <h1 class="splash-screen__title">나의 소비생활<br> 알아보기</h1>
+
+    <p class="loading-spinner">
+      <i class="xi-spinner-5 xi-spin"></i>
+    </p>
+
     <img :src="require('@/assets/image/logo.svg')" />
   </main>  
 </template>
@@ -32,5 +37,9 @@ export default {
     letter-spacing: 4.3px;
     color: #fff;
   }
+}
+
+.loading-spinner {
+  font-size: 20px;
 }
 </style>
