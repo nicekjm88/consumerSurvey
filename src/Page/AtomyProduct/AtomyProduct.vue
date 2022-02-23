@@ -4,8 +4,8 @@
   <main>
     <section>
       <article>
-        <strong>애터미 제품</strong>
-        <table class="table text-center">
+        <h1 class="title">애터미 제품</h1>
+        <table class="product-table text-center">
           <caption>애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보</caption>
           <colgroup>
             <col style="width: 30%;">
@@ -74,45 +74,27 @@ export default {
 }
 </script>
 
-<style scoped>
-section article {
-  margin: 0 20px;
-}
-strong {
-  font-size: 18px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 1.94;
-  letter-spacing: 1.8px;
-  color: #000;
-  display: block;
-  margin-bottom: 20px;
-}
-p {
-  margin-top: 22px;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1.69;
-  letter-spacing: 1.3px;
-  color: #000;
-}
-.table {
+<style lang="scss">
+.product-table {
   margin-bottom: 0;
-}
-.table > thead {
-  border-bottom: 1px solid #333;
-}
-.table th,
-.table td {
-  vertical-align: middle;
-  padding: 0.5rem 0.5rem;
-}
-.table.text-center {
-  text-align: center
+
+  thead {
+    border-bottom: 1px solid #333;
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+    padding: 0.5rem 0.5rem;
+  }
+
+  &.text-center {
+    text-align: center
+  }
 }
 .btn-more {
   width: 100%;
   padding: 10px;
+  color: #333;
 }
 </style>

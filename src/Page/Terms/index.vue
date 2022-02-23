@@ -4,7 +4,7 @@
   <main>
     <section>
       <article>
-      <strong>나의 소비생활 알아보기</strong>
+      <h1 class="title">나의 소비생활 알아보기</h1>
       <p>
         본 앱은 소비자가 일상에서 쓰는
         상품을 파악하여 전체 소비에 대해서 파악하고, 
@@ -49,28 +49,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-section article {
-  margin: 0 20px;
-}
-strong {
-  font-size: 18px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 1.94;
-  letter-spacing: 1.8px;
-  text-align: center;
-  color: #000;
-  display: block;
-}
-p {
-  margin-top: 22px;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1.69;
-  letter-spacing: 1.3px;
-  color: #000;
-}
-</style>

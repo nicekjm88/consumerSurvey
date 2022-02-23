@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <Navigation />
-    <main>
+    <main class="input-area">
       <section>
         <h1 class="title">자료저장</h1>
         <hr />
@@ -31,7 +31,7 @@
                 <th scope="row">생년월일</th>
                 <td>
                   <!-- <input type="text" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" /> -->
-                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="[-]를 제외하고 입력해주세요." :rules="isRequiredBirthDay" />
+                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="8자리로 입력해주세요." :rules="isRequiredBirthDay" />
                     <span class="error-message">{{ errors.testerBirthDay }}</span>
                 </td>
               </tr>
@@ -40,9 +40,9 @@
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" v-model="gender" name="testerGender" id="gender1" autocomplete="off" value="남성" checked>
-                    <label class="btn btn-outline-primary" for="gender1">남성</label>
+                    <label class="btn btn-outline-secondary" for="gender1">남성</label>
                     <input type="radio" class="btn-check" v-model="gender" name="testerGender" id="gender2" autocomplete="off" value="여성">
-                    <label class="btn btn-outline-primary" for="gender2">여성</label>
+                    <label class="btn btn-outline-secondary" for="gender2">여성</label>
                   </div>
                 </td>
             </tr>
@@ -50,7 +50,7 @@
                 <th scope="row">전화번호</th>
                 <td>
                   <!-- <input type="text" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" /> -->
-                    <Field type="number" name="testerTellNumber" class="form-control" placeholder="ex) 01012345678" :rules="isRequiredTellNumber" />
+                    <Field type="number" name="testerTellNumber" class="form-control" placeholder="[-]를 제외하고 입력해주세요." :rules="isRequiredTellNumber" />
                     <span class="error-message">{{ errors.testerTellNumber }}</span>
                 </td>
               </tr>
@@ -108,59 +108,22 @@ export default {
 }
 </script>
 
-<style scoped>
-ol, ul {
-  padding-left: 0;
-}
-section {
-  padding: 0 20px 80px;
-}
-.btn {
-  width: 100%;
-  border: 2px solid #00b5ef;
-  color: #00b5ef;
-  height: 48px;
-  margin-bottom: 1rem;
-}
-.calculation {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.calculation button {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 1;
-  margin: 0 20px;
-  font-size: 20px;
-}
+<style lang="scss">
 .common-table {
   width: 100%;
-}
 
-.common-table th,
-.common-table td {
-  padding: 10px 0;
+  th,
+  td {
+    padding: 10px 0;
+  }
 }
 
 .btn-group {
   width: 100%;
-}
-.btn-group .btn {
-  margin-bottom: 0;
-  line-height: 30px
-}
 
-.error-message {
-  color: coral;
-  font-size: 12px;
-  vertical-align: middle;
-}
-.error-message i {
-  font-size: 18px;
-  vertical-align: middle;
-}
-input::placeholder {
-  color: #ccc;
+  .btn {
+    margin-bottom: 0;
+    line-height: 30px
+  }
 }
 </style>

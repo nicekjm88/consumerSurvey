@@ -167,6 +167,15 @@ ol,
 ul {
   padding-left: 0 !important;
 }
+input::placeholder {
+  color: #ccc;
+}
+
+/* 공통 */
+main {
+  padding: 0 20px 80px;
+}
+
 h1.title {
   font-family: "Atomy";
   font-size: 28px;
@@ -177,6 +186,74 @@ h1.title {
   display: block;
   margin-bottom: 20px;
 }
+
 strong {
   font-family: "Atomy";
+}
+
+.qestion-area {
+  padding: 0 20px 80px;
+}
+
+.notify {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d5d5d5;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.notify strong {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.94;
+  letter-spacing: 1.8px;
+  color: #000;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.notify em {
+  font-size: 13px;
+  display: block;
+}
+
+.notify span {
+  font-size: 11px;
+  letter-spacing: 1.1px;
+  color: #959595;
+  width: 204px;
+  display: block;
+  margin: 0 auto;
+}
+
+.select-list > li {
+  margin-bottom: 10px;
+}
+
+.rounded-box {
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 1px 5px 10px rgb(0 0 0 / 15%);
+}
+
+.rounded-box.rounded-box__wrapper {
+  padding: 40px 20px 20px;
+  border-radius: 30px 30px 0 0;
+  margin: 0 -20px;
+  box-shadow: 1px 5px 10px rgb(0 0 0 / 20%);
+  line-height: 1.4;
+}
+
+.error-message {
+  text-align: left;
+  color: coral;
+  font-size: 12px;
+}
+
+.input-area {
+  padding: 0 20px 80px;
 }

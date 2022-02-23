@@ -1,7 +1,7 @@
 <template>
 <div class="wrap">
   <Navigation />
-  <main>
+  <main class="terms-area">
     <section>
       <h1 class="title">개인정보<br>수집 동의서</h1>
       <article>
@@ -58,39 +58,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.terms-area {
 
-section {
-  margin: 0 20px;
-}
+  article {
+    height: 47vh;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 10px;
 
-article {
-  height: 47vh;
-  overflow: auto;
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin-bottom: 10px;
-}
-strong {
-  font-size: 18px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 1.94;
-  letter-spacing: 1.8px;
-  text-align: center;
-  color: #000;
-  display: block;
-}
-p {
-  margin-top: 22px;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1.69;
-  letter-spacing: 1.3px;
-  color: #000;
-}
-ol > li + li {
-  margin-top: 20px;
+    ol > li + li {
+      margin-top: 20px;
+    }
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 <div class="wrap">
   <Navigation />
-  <main>
+  <main class="result2-area">
     <section>
       <h1 class="title">애터미 PV에 관하여</h1>
       <hr />
@@ -21,9 +21,9 @@
 
       <div class="calculation">
         <p>&lt;나의 하위 사업자 수 계산하기&gt;</p>
-        <button @click="$store.dispatch('minus')"><i class="xi-minus"></i></button>
-        <span class="count">{{ SubcontractorCount }}</span>
-        <button @click="$store.dispatch('add')"><i class="xi-plus"></i></button>
+        <button class="calculation__btn" @click="$store.dispatch('minus')"><i class="xi-minus"></i></button>
+        <span class="calculation__count">{{ SubcontractorCount }}</span>
+        <button class="calculation__btn" @click="$store.dispatch('add')"><i class="xi-plus"></i></button>
       </div>
 
       <p>
@@ -62,49 +62,44 @@ export default {
 }
 </script>
 
-<style scoped>
-ol, ul {
-  padding-left: 0;
-}
-section {
+<style lang="scss">
+.result2-area {
   padding: 0 20px 80px;
   line-height: 1.4;
-}
-.btn {
-  width: 100%;
-  border: 2px solid #00b5ef;
-  color: #00b5ef;
-  height: 48px;
-  margin-bottom: 1rem;
+
+  p {
+    margin-bottom: 1rem;
+  }
 }
 .calculation {
   text-align: center;
   margin-bottom: 2rem;
+
+  &__btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    margin: 0 20px;
+    font-size: 20px;
+    position: relative;
+
+    i {
+      color: #333;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  &__count {
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    width: 50px;
+  }
 }
-.calculation button {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 1;
-  margin: 0 20px;
-  font-size: 20px;
-  position: relative;
-}
-.calculation button i {
-  color: #333;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.calculation .count {
-  font-size: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  padding-top: 10px;
-  width: 50px;
-}
-section p {
-  margin-bottom: 1rem;
-}
+
 </style>

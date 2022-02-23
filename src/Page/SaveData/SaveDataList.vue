@@ -1,15 +1,15 @@
 <template>
   <div class="wrap">
     <Navigation />
-    <main>
+    <main class="input-area">
       <section>
         <h1 class="title">자료리스트</h1>
-        <div class="input-group">
+        <div class="input-group search-area">
           <div class="form-outline">
-            <input type="search" id="form1" class="form-control" />
+            <input type="search" id="form1" class="search-area__input form-control" />
             <label class="form-label a11y" for="form1">Search</label>
           </div>
-          <button type="button" class="btn btn-search">
+          <button type="button" class="btn search-area__btn">
             <i class="xi-search"></i>
           </button>
         </div>
@@ -32,8 +32,11 @@
                 <strong>{{ $store.state.userInfo.name }}</strong>
               </label>
             </div>
-            <strong v-else>{{ $store.state.userInfo.name }}</strong>
-            <router-link to="/SaveDataView">더보기</router-link>
+            
+            <strong v-else>
+              <router-link to="/SaveDataView">{{ $store.state.userInfo.name }}</router-link>
+            </strong>
+              <router-link to="/SaveDataView">더보기</router-link>
           </li>
         </ul>
       </section>
@@ -65,67 +68,74 @@ export default {
 }
 </script>
 
-<style scoped>
-ol, ul {
-  padding-left: 0;
-}
-section {
-  padding: 0 20px 80px;
-}
+<style lang="scss">
 .board-list {
   margin: 0 -20px;
   border-top: 1px solid #ddd;
+
+  & > li {
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    & > a {
+      color: #d2d2d2;
+      font-size: 14px;
+    }
+  }
 }
-.board-list > li {
-  border-bottom: 1px solid #ddd;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-.board-list > li > a {
-  color: #d2d2d2;
-  font-size: 14px;
-}
-.form-check {
-  margin-bottom: 0;
-}
-.input-group {
-  margin-bottom: 10px;
-}
-.form-outline {
+
+.input-area {
+  .form-check {
+    margin-bottom: 0;
+  }
+  .input-group {
+    margin-bottom: 10px;
+  }
+  .form-outline {
   width: calc(100% - 42px);
+  }
+  .pull-left,
+  .pull-right {
+    margin: 0;
+  }
 }
-.pull-left,
-.pull-right {
-  margin: 0;
-}
+
 .edit-group {
   padding-bottom: 10px;
+
+  button {
+    background-color: transparent;
+    font-weight: 700;
+    color: #333;
+  }
 }
-.edit-group button {
-  background-color: transparent;
-  font-weight: 700;
-  color: #333;
-}
-.form-control {
-  background-color: #f6f6f6;
-  border-color: #f6f6f6;
-}
-.form-control:focus {
-  background-color: #f6f6f6;
-  border-color: #f6f6f6;
-  color: #212529;
-  outline: 0;
-  box-shadow: none;
-}
-.btn-search {
-  color: #999;
-  background-color: #f6f6f6;
-  border-color: #f6f6f6;
-}
-.btn-search:focus {
-  color: #999;
-  outline: 0;
-  box-shadow: none;
+
+.search-area {
+  &__input {
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+
+    &:focus {
+      background-color: #f6f6f6;
+      border-color: #f6f6f6;
+      color: #212529;
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  &__btn {
+    color: #999;
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+
+    &:focus {
+      color: #999;
+      outline: 0;
+      box-shadow: none;
+    }
+  }
 }
 </style>

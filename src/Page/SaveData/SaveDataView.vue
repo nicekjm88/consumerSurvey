@@ -5,7 +5,7 @@
       <section>
         <h1 class="title">{{ userInfo.name }}님의 자료</h1>
 
-        <table class="table">
+        <table class="table table-striped">
           <caption>최종 자료</caption>
           <colgroup>
             <col style="width: 50%;" />
@@ -93,32 +93,20 @@ export default {
 }
 </script>
 
-<style scoped>
-ol, ul {
-  padding-left: 0;
-}
-section {
-  padding: 0 20px 80px;
-}
-table {
-  width: 100%;
-  border-top: 2px solid #333;
-  margin-top: 20px;
-}
-table th,
-table td {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
-}
+<style lang="scss">
+.table {  
+  border-top: 2px solid #333;  
 
-table td {
-  border-left: 1px solid #ddd;
-  text-align: right;
-}
+  th,
+  td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+  }
 
-table tr:nth-child(2n) th,
-table tr:nth-child(2n) td {
-  background-color: #f9f9f9;
+  td {
+    border-left: 1px solid #ddd;
+    text-align: right;
+  }
 }
 </style>
