@@ -21,6 +21,7 @@ export default {
   height: 50px;
   background-color: $mainColor;
   color: #fff;
+  font-weight: 700;
 
   &:disabled {
     background-color: #999;
