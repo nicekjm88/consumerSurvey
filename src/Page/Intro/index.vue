@@ -4,8 +4,11 @@
   <main class="intro-page">
   <section>
     <article>
-      <strong class="intro-page__title">100만원 소비해서<br>5천원 적립하기 보단<br>애터미로 6만원 벌자!</strong>
-      <p class="intro-page__desc">노후 준비가 되어있나요?<br>이루고 싶었던 꿈이 있나요?<br>돈 걱정 없이 살고 싶으신가요?<br>나의 소비 생활을 파악하고<br>애터미를 알아가보세요</p>
+      <strong class="intro-page__title">소비가 이익이 된다!</strong>
+      <div class="intro-page__desc">
+        <p>이루고 싶은 꿈이 있나요?<br>노후 준비가 되었나요?</p>
+        <p>나의 소비 생활을 점검하고<br>소비가 이익이 되는<br>애터미를 만나보세요</p>
+      </div>
       <div class="intro-page__imgWrap">
         <svg xmlns="http://www.w3.org/2000/svg" width="215" height="215" viewBox="0 0 215 215">
           <g id="Welcome-amico" transform="translate(-29.66 -30.49)">
@@ -185,14 +188,14 @@ export default {
 
 <style lang="scss">
 .intro-page {
-  padding: 0;
+  padding: 50px 0 0 0;
 
   section {
     text-align: center;
   }
 
   &__title {
-    font-size: 18px;
+    font-size: 21px;
     font-weight: bold;
     font-style: normal;
     line-height: 1.6;
@@ -203,7 +206,7 @@ export default {
 
   &__desc {
     margin-top: 22px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: normal;
     font-style: normal;
     line-height: 1.69;
