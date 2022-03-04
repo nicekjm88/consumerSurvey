@@ -2,30 +2,29 @@
   <div class="wrap">
   <Navigation />
     <main class="qestion-area">
-      <section v-for="(qestion, i) in qestions" :key="i">
-        
-        <div v-if="step === i">
+
+      <section v-for="(item, pidx) in items" :key="pidx">
+        <div v-if="step === pidx">
           <div class="img-wrap">
-            <img :src="require(`@/assets/image/bg-img${i}.svg`)" />
+            <img :src="require(`@/assets/image/bg-img${item.value}.svg`)" />
           </div>
           <p class="notify">
-            <strong>{{ qestion.title }}</strong>
-            <span><em>{{ qestion.desc }}</em></span>
+            <strong>{{ item.name }}</strong>
+            <span><em>{{ item.ch[0].name }}</em></span>
           </p>
         </div>
-        
-        <Form @submit="onSubmit">        
-          <ul class="select-list" v-if="step === i">
-            <li v-for="(filter, idx) in qestion.list" :key="idx">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" v-model="value" :value="filter" :name="`qestion${qestion.id}`" :id="`question${i}-${idx}`">
-                <label class="form-check-label" :for="`question${i}-${idx}`">{{ filter }}</label>
-              </div>
-            </li>
-          </ul>
-          
-          <FixedBtn type="submit" msg="다음" />
-        </Form>
+
+        <ul class="select-list" v-if="step === pidx">
+          <li v-for="(question, idx) in item.ch[0].ch" :key="idx">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" :checked="question.checked" @change="selectChange(pidx, idx)" :id="`questions_${pidx}-${idx}`">
+              <label class="form-check-label" :for="`questions_${pidx}-${idx}`">{{ question.name }}</label>
+            </div>
+          </li>
+        </ul>
+
+        <FixedBtn @click="onSubmit" msg="다음" />
+
       </section>
     </main>
 
@@ -33,46 +32,52 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
-import { mapState } from 'vuex';
+import useQuestionsManager from "@/store/questions-manager";
+import {computed, onBeforeMount, ref} from "vue";
+import router from "@/router";
 
 export default {
   name: 'QuestionPage',
-  data() {
-    return {
-      step: 0,
-      value: ''
-    }
-  },
-  computed: {
-    ...mapState('etc', ['familyNumber', 'qestions'])
-  },
-  methods : {
-    onSubmit(e) {
-      e.preventDefault();
-
-      if ( this.step === 0 ) {
-        this.$store.dispatch('setAge', this.value);
-        this.step++;
-      } else if( this.step === 1 ) {
-        this.$store.dispatch('setFamilyNumber', this.value);
-        this.step++;
-      } else {
-        this.$store.dispatch('setUseProduct', this.value);
-        this.$router.push('/qna2');
-      }
-    }
-  },
   components: {
     FixedBtn,
     Navigation,
   },
+  setup(){
+    const questionsManager = useQuestionsManager();
+    const step = ref(0);
+
+    onBeforeMount(() => {
+      questionsManager.fetch();
+    })
+
+    function onSubmit() {
+      step.value++;
+      if(step.value > 2){
+        router.push('/qna2');
+      }
+    }
+
+    function selectChange(pidx, idx){
+      questionsManager.selectChanged(pidx, idx);
+    }
+
+    const items = computed(() => questionsManager.get());
+
+    return {
+      items,
+      step,
+      selectChange,
+      onSubmit,
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-.qestion-area {  
+.qestion-area {
   .step1,
   .step2 {
     display: none;

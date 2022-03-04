@@ -15,11 +15,11 @@ const getters = {
 
 const actions = {
     [ACTION.USER.LOGIN] ({commit}, user){
-        commit(MUTATION.USER.SET_USER, user)
+        commit(MUTATION.USER.SET, user)
     },
 
     [ACTION.USER.LOGOUT] ({commit}){
-        commit(MUTATION.USER.SET_USER,
+        commit(MUTATION.USER.SET,
             {
                 id: undefined,
                 name: undefined,
@@ -29,7 +29,7 @@ const actions = {
 }
 
 const mutations = {
-    [MUTATION.USER.SET_USER] (state, user){
+    [MUTATION.USER.SET] (state, user){
         state.id = user.id;
         state.name = user.name;
         state.token = user.token;
