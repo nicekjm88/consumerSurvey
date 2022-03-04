@@ -20,14 +20,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(product, i) in atomyProducts" :key="i">
-              <td>{{ product.category }}</td>
-              <td>{{ product.name }}</td>
-              <td>
-                <div class="price">{{ product.price }}원</div>
-                <div class="point-value">{{ product.pointValue }} PV</div>
-              </td>
-            </tr>
+
+          <tr v-for="(product, i) in items" :key="i">
+            <td>{{ product.pname }}</td>
+            <td>{{ product.item.name }}</td>
+            <td>
+              <div class="price">{{ product.item.price }}원</div>
+              <div class="point-value">{{ product.item.pv }} PV</div>
+            </td>
+          </tr>
           </tbody>
         </table>
         <button class="btn-more" type="button"> <i class="xi-angle-down"></i> 더보기</button>
@@ -39,37 +40,31 @@
 
 <script>
 import Navigation from '@/components/Layout/Navigation.vue'
+import useProductsManager from "@/store/products-manager";
+import {computed, onBeforeMount} from "vue";
+import router from "@/router";
+
 export default {
   name: 'Terms',
-  data () {
-    return {
-      //제품별 1:1 매칭이 필요함 
-      // ex) 생활용품 > 칫솔 선택 시 애터미의 제품은 4개 이상 이 중에서 1:1로 매칭을 지어 줘야 함. 
-      // 칫솔을 선택하면 애터미 칫솔*1set(8ea)로 1:1 매칭해야 작업이 가능 함.
-      atomyProducts: [
-        {
-          category: "생활용품",
-          name: "애터미 칫솔*1set(8ea)",
-          price: 7920,
-          pointValue: 3900
-        },
-        {
-          category: "생활용품",
-          name: "애터미 치약 플러스 200g*1set(5ea)",
-          price: 15000,
-          pointValue: 2500
-        },
-        {
-          category: "생활용품",
-          name: "애터미 동구밭 클렌징바",
-          price: 12800,
-          pointValue: 5000
-        }
-      ]
-    }
-  },
   components: {
     Navigation
+  },
+
+  setup(){
+    const productsManager = useProductsManager();
+
+    onBeforeMount(() => {
+      //설문 데이터가 없을때 처음으로 돌아간다.
+      if(!productsManager.hasValue()){
+        router.push('/intro');
+      }
+    })
+
+    const items = computed(() => productsManager.getSelected());
+
+    return {
+      items,
+    }
   }
 }
 </script>

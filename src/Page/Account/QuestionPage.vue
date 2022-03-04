@@ -53,7 +53,6 @@ export default {
     })
 
     function onSubmit() {
-      debugger;
       step.value++;
       if(step.value > 2){
         router.push('/qna2');

@@ -42,11 +42,41 @@ export default function useProductsManager() {
         return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.TOGGLE), {pidx, idx});
     }
 
+    function hasValue() {
+        return store.state.products.data.length > 0;
+    }
+
+    function getSelected(){
+        const items = store.getters["products/data"];
+        if(items.length > 0) {
+            const selected = items.reduce((a, c) => {
+                if (c.ch && c.ch.length > 0) {
+                    const selected = c.ch.filter((x) => x.checked);
+                    if(selected.length > 0) {
+                        selected.forEach((item) => {
+                            a.push({
+                                pname: c.name,
+                                item: item
+                            })
+                        })
+                    }
+                }
+                return a;
+            }, []);
+
+            return selected;
+        }
+
+        return [];
+    }
+
     return {
         fetch,
         clear,
         get: () => store.getters["products/data"],
         toggle,
-        clearChecked
+        clearChecked,
+        hasValue,
+        getSelected,
     }
 }
