@@ -32,7 +32,6 @@
 </template>
 
 <script>
-/* eslint-disable vue/no-unused-components */
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
 import useQuestionsManager from "@/store/questions-manager";
@@ -54,6 +53,7 @@ export default {
     })
 
     function onSubmit() {
+      debugger;
       step.value++;
       if(step.value > 2){
         router.push('/qna2');
