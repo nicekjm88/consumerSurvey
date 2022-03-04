@@ -44,10 +44,10 @@
               <path id="패스_5350" data-name="패스 5350" d="M96.017,157.79l1.589.593a.829.829,0,0,1-1.079.525A.883.883,0,0,1,96.017,157.79Z" transform="translate(-68.251 -102.028)" fill="#9a4a4d"/>
               <path id="패스_5351" data-name="패스 5351" d="M106.233,142.39l-1.353-1.04a.814.814,0,0,1,1.177-.181A.9.9,0,0,1,106.233,142.39Z" transform="translate(-72.794 -93.468)" fill="#263238"/>
               <path id="패스_5352" data-name="패스 5352" d="M105.343,146.856a.7.7,0,1,1-.7-.726A.711.711,0,0,1,105.343,146.856Z" transform="translate(-72.321 -96.086)" fill="#263238"/>
-              <path id="패스_5353" data-name="패스 5353" d="M99.58,146.26l.226,4.178,2.182-.745Z" transform="translate(-70.093 -96.152)" fill="#9a4a4d"/>  
-              
+              <path id="패스_5353" data-name="패스 5353" d="M99.58,146.26l.226,4.178,2.182-.745Z" transform="translate(-70.093 -96.152)" fill="#9a4a4d"/>
+
               <g class="balloon">
-                <path id="패스_5354" data-name="패스 5354" d="M61.635,166.209a.245.245,0,0,1-.245-.245V88.835a.245.245,0,0,1,.49,0v77.128A.245.245,0,0,1,61.635,166.209Z" transform="translate(-50.631 -66.763)" fill="#37474f"/>              
+                <path id="패스_5354" data-name="패스 5354" d="M61.635,166.209a.245.245,0,0,1-.245-.245V88.835a.245.245,0,0,1,.49,0v77.128A.245.245,0,0,1,61.635,166.209Z" transform="translate(-50.631 -66.763)" fill="#37474f"/>
                 <path id="패스_5357" data-name="패스 5357" d="M61.3,55.751c0,6.032-4.737,13.652-10.926,15.094C44.133,69.1,39.45,61.783,39.45,55.751S43.334,44.08,50.376,44.08,61.3,49.715,61.3,55.751Z" transform="translate(-39.45 -44.08)" fill="#4a95df"/>
                   <path id="패스_5358" data-name="패스 5358" d="M39.852,61.13a13.505,13.505,0,0,0-.4,3.31c0,6.032,4.7,13.353,10.926,15.094,5.144-1.2,9.283-6.669,10.534-11.946h0s-1.628,5.791-8.793,6.257S39.17,66.122,39.852,61.13Z" transform="translate(-39.45 -52.769)" opacity="0.05"/>
                 <path id="패스_5355" data-name="패스 5355" d="M61.8,99.722h0a5.937,5.937,0,0,0-1.962-2.942,5.615,5.615,0,0,0-1.785,2.942h0a.932.932,0,0,0,.544.765,2.9,2.9,0,0,0,2.633,0,.932.932,0,0,0,.549-.765Z" transform="translate(-48.929 -70.937)" fill="#4a95df"/>
@@ -85,7 +85,7 @@
                 <path id="패스_5382" data-name="패스 5382" d="M428.525,152.619a.245.245,0,0,1-.245-.245V75.245a.245.245,0,1,1,.49,0v77.128A.245.245,0,0,1,428.525,152.619Z" transform="translate(-389.482 -53.173)" fill="#37474f"/>
                 <path id="패스_5383" data-name="패스 5383" d="M425,86.132h0a5.959,5.959,0,0,1,1.962-2.942,5.615,5.615,0,0,1,1.785,2.942h0a.927.927,0,0,1-.544.765,2.9,2.9,0,0,1-2.633,0A.922.922,0,0,1,425,86.132Z" transform="translate(-387.81 -57.347)" fill="#fea42e"/>
                 <path id="패스_5384" data-name="패스 5384" d="M425,86.132h0a5.959,5.959,0,0,1,1.962-2.942,5.615,5.615,0,0,1,1.785,2.942h0a.927.927,0,0,1-.544.765,2.9,2.9,0,0,1-2.633,0A.922.922,0,0,1,425,86.132Z" transform="translate(-387.81 -57.347)" opacity="0.1"/>
-                
+
                 <path id="패스_5385" data-name="패스 5385" d="M406.66,42.161c0,6.032,4.732,13.652,10.926,15.094,6.228-1.741,10.926-9.062,10.926-15.094S424.628,30.49,417.586,30.49,406.66,36.134,406.66,42.161Z" transform="translate(-378.464 -30.49)" fill="#fea42e"/>
                 <path id="패스_5386" data-name="패스 5386" d="M428.041,54.584s-1.6,5.787-8.793,6.252c-6.9.446-12.52-7.135-12.309-12.157a13.5,13.5,0,0,0-.28,2.751c0,6.032,4.732,13.652,10.926,15.094,5.164-1.442,9.268-6.718,10.529-11.916Z" transform="translate(-378.464 -39.76)" opacity="0.05"/>
               </g>
@@ -160,7 +160,7 @@
               <path id="패스_5443" data-name="패스 5443" d="M340.574,192.21c.3.858.981,1.265,1.471,2.123a6.534,6.534,0,0,1,.147,4.477,5.36,5.36,0,0,1-4.168,2.673,3.158,3.158,0,0,1-3.183-2.06c-.446-1.545.324-2.128,2.177-2.83a10.3,10.3,0,0,0,3.541-2.133Z" transform="translate(-234.687 -142.51)" fill="#b16668"/>
               <path id="패스_5444" data-name="패스 5444" d="M249.015,177.54c2.746.446,3.536,2.069,3.536,2.069H250.3s-.284.755.49,3.585c.265.981-1.2,1.02-1.246.647a2.843,2.843,0,0,1-3.639.49c-1.324-.878-1.913-2.221-1.618-4.737C244.778,176.795,248.525,177.462,249.015,177.54Z" transform="translate(-188.567 -134.97)" fill="#b16668"/>
             </g>
-            
+
           </g>
         </svg>
       </div>
@@ -177,11 +177,25 @@
 
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
 import Navigation from '@/components/Layout/Navigation.vue';
+import {onMounted} from "vue";
+import useProductsManager from "@/store/products-manager";
+import useQuestionsManager from "@/store/questions-manager";
+
 export default {
   name: 'IntroPage',
   components: {
     FixedBtn,
     Navigation
+  },
+
+  setup(){
+    const productsManager = useProductsManager();
+    const questionManager = useQuestionsManager();
+
+    onMounted(async ()=>{
+      await questionManager.fetch(true);
+      await productsManager.fetch(true);
+    })
   }
 }
 </script>
@@ -227,13 +241,13 @@ export default {
 
 .balloon {
   display: inline-block;
-  margin: 0 0.5rem;  
+  margin: 0 0.5rem;
   animation: float 2.5s ease-in-out infinite;
 }
 
 .balloon2 {
   display: inline-block;
-  margin: 0 0.5rem;  
+  margin: 0 0.5rem;
   animation: float 2s ease-in-out infinite .5s;
 }
 

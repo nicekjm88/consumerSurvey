@@ -8,23 +8,13 @@
         <span><em>(매월 기준)</em></span>
       </p>
       <div id="answer">
-        <div class="answer-item">
-          <strong class="answer-item__title">생활용품</strong>
-          <button class="btn-cancel" @click="selectCancel">선택취소</button>
+        <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
+          <strong class="answer-item__title">{{item.name}}</strong>
+          <button class="btn-cancel" @click="selectCancel(pidx)">선택취소</button>
           <div class="rounded-box">
-            <div class="form-check" v-for="(products, idx) in $store.state.livingProduct" :key="idx">
-              <input class="form-check-input" type="checkbox" :value="products" v-model="$store.state.selectedLivingItem" :id="`products${idx}`">
-              <label class="form-check-label" :for="`products${idx}`">{{products}}</label>
-            </div>
-          </div>
-        </div>
-        <div class="answer-item">
-          <strong class="answer-item__title">식품</strong>
-          <button class="btn-cancel" @click="selectCancel2">선택취소</button>
-          <div class="rounded-box">
-            <div class="form-check" v-for="(foods, idx) in $store.state.food" :key="idx">
-              <input class="form-check-input" type="checkbox" :value="foods" v-model="$store.state.selectedfoodItem" :id="`food${idx}`">
-              <label class="form-check-label" :for="`food${idx}`">{{foods}}</label>
+            <div class="form-check" v-for="(product, idx) in item.ch" :key="idx">
+              <input class="form-check-input" type="checkbox" :checked="product.checked" @change="productToggle(pidx, idx)" :id="`products_${pidx}_${idx}`">
+              <label class="form-check-label" :for="`products_${pidx}_${idx}`">{{product.name}}</label>
             </div>
           </div>
         </div>
@@ -38,27 +28,40 @@
 </template>
 
 <script>
+import {computed, onBeforeMount} from "vue";
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import useProductsManager from "@/store/products-manager";
+
 export default {
   name: 'QuestionPage2',
-  data() {
-    return {
-    }
-  },
-  methods : {
-    selectCancel() {
-      this.$store.state.selectedLivingItem = []
-    },
-    selectCancel2() {
-      this.$store.state.selectedfoodItem = []
-    }
-  },
   components: {
     FixedBtn,
     Navigation,
   },
+  setup(){
+    const productsManager = useProductsManager();
 
+    onBeforeMount(() => {
+      productsManager.fetch();
+    })
+
+    function selectCancel(pidx) {
+      productsManager.clearChecked(pidx);
+    }
+
+    function productToggle(pidx, idx){
+      productsManager.toggle(pidx, idx);
+    }
+
+    const items = computed(() => productsManager.get());
+
+    return {
+      items,
+      selectCancel,
+      productToggle,
+    }
+  }
 }
 </script>
 

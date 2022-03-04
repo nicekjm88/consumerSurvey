@@ -7,8 +7,8 @@ export default function useUserManager(){
 
     async function login(id, name, token){
         await store.dispatch(ACTION.USER.makeDispatch(ACTION.USER.LOGIN), {id, name, token}).then(() => {
-            const encoded_user = btoa(encodeURIComponent(JSON.stringify(_user)))
-            Cookies.set('_ust', encoded_user)
+            const encoded_user = btoa(encodeURIComponent(JSON.stringify(_user)));
+            Cookies.set('_ust', encoded_user);
         })
     }
 

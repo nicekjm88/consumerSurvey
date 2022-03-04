@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 
 import user from './modules/user'
+import products from "@/store/modules/products";
+import questions from "@/store/modules/questions";
 
 const store = {
   namespaced: true,
@@ -104,5 +106,5 @@ const store = {
 }
 
 export default createStore({
-  modules: {user, etc : store}
+  modules: {user, products, questions, etc : store}
 })
