@@ -3,6 +3,7 @@
   <Navigation />
   <main class="qestion-area">
     <section>
+      <ProgressBar />
       <p class="notify" id="qestion">
         <strong>현재 마트, 온라인 쇼핑몰에서<br>자주 사용하는 생활용품을<br>선택해주세요.</strong>
         <span><em>(매월 기준)</em></span>
@@ -31,6 +32,7 @@
 import {computed, onBeforeMount} from "vue";
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import ProgressBar from '@/components/Layout/ProgressBar.vue';
 import useProductsManager from "@/store/products-manager";
 
 export default {
@@ -38,6 +40,7 @@ export default {
   components: {
     FixedBtn,
     Navigation,
+    ProgressBar
   },
   setup(){
     const productsManager = useProductsManager();
