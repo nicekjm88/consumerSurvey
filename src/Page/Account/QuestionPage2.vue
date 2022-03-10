@@ -9,12 +9,12 @@
       </p>
       <div id="answer">
         <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
-          <strong class="answer-item__title">{{item.name}}</strong>
+          <strong class="answer-item__title">{{item.Name}}</strong>
           <button class="btn-cancel" @click="selectCancel(pidx)">선택취소</button>
           <div class="rounded-box">
             <div class="form-check" v-for="(product, idx) in item.ch" :key="idx">
               <input class="form-check-input" type="checkbox" :checked="product.checked" @change="productToggle(pidx, idx)" :id="`products_${pidx}_${idx}`">
-              <label class="form-check-label" :for="`products_${pidx}_${idx}`">{{product.name}}</label>
+              <label class="form-check-label" :for="`products_${pidx}_${idx}`">{{product.Name}}</label>
             </div>
           </div>
         </div>

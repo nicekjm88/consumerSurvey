@@ -14,6 +14,10 @@ export const ACTION = {
         SET: 'SET_QUESTIONS',
         SELECT: 'SELECT_QUESTIONS',
         makeDispatch: (action) => 'questions/' + action
+    },
+    SETTINGS:{
+        SET: 'SET_SETTINGS',
+        makeDispatch: (action) => 'settings/' + action
     }
 }
 

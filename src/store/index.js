@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 import user from './modules/user'
 import products from "@/store/modules/products";
 import questions from "@/store/modules/questions";
+import settings from "@/store/modules/settings"
 
 const store = {
   namespaced: true,
@@ -106,5 +107,5 @@ const store = {
 }
 
 export default createStore({
-  modules: {user, products, questions, etc : store}
+  modules: {user, products, questions, settings, etc : store}
 })

@@ -2,5 +2,6 @@
   "appId": "com.example.acs",
   "appName": "Atomy Consumer Survey",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "windowsAndroidStudioPath": "C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe"
 }
