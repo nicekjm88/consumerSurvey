@@ -9,22 +9,40 @@ export default function useSurvey() {
     const url = useUrl();
     const http = useHttp();
 
-    function getProducts() {
+    async function getProducts() {
         return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/products'),
             {
                 [_ATOMY_USER_TOKEN_NAME]: user.identity.token
             });
     }
 
-    function getQuestions(){
+    async function getQuestions(){
         return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/questions'),
             {
                 [_ATOMY_USER_TOKEN_NAME]: user.identity.token
             });
     }
 
+    async function getSettings(){
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/settings'),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            });
+    }
+
+    async function save(data){
+        return http.post(url.getUrl('/atomy/consumersurvey/kr/v1/save'),
+            data,
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            },
+        );
+    }
+
     return {
         getProducts,
         getQuestions,
+        getSettings,
+        save,
     }
 }

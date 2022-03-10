@@ -14,8 +14,7 @@ export default function useProductsManager() {
             const tmp_products = res.data.Data;
             const products = tmp_products.reduce((a, c) => {
                 c.checked = false;
-                //변경된 api로
-                if (!c.m_code) {
+                if (!c.MCode) {
                     c.ch = [];
                     a.push(c);
                 } else {
@@ -46,25 +45,24 @@ export default function useProductsManager() {
         return store.state.products.data.length > 0;
     }
 
-    function getSelected(){
+    function getSelected() {
         const items = store.getters["products/data"];
-        if(items.length > 0) {
-            const selected = items.reduce((a, c) => {
+        if (items.length > 0) {
+            const item = items.reduce((a, c) => {
                 if (c.ch && c.ch.length > 0) {
                     const selected = c.ch.filter((x) => x.checked);
-                    if(selected.length > 0) {
+                    if (selected.length > 0) {
                         selected.forEach((item) => {
-                            a.push({
-                                pname: c.name,
-                                item: item
-                            })
-                        })
+                            a.AmountPerYear += item.Cost * item.StdCount;
+                            a.PVPerYear += item.PV * item.StdCount;
+                            a.Products.push(item);
+                        });
                     }
                 }
                 return a;
-            }, []);
+            }, {AmountPerYear:0,PVPerYear:0, Products:[]});
 
-            return selected;
+            return item;
         }
 
         return [];

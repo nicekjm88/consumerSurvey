@@ -6,11 +6,11 @@
       <section v-for="(item, pidx) in items" :key="pidx">
         <div v-if="step === pidx">
           <div class="img-wrap">
-            <img :src="require(`@/assets/image/bg-img${item.value}.svg`)" />
+            <img :src="require(`@/assets/image/bg-img${item.Value}.svg`)" />
           </div>
           <p class="notify">
-            <strong>{{ item.name }}</strong>
-            <span><em>{{ item.ch[0].name }}</em></span>
+            <strong>{{ item.Name }}</strong>
+            <span><em>{{ item.ch[0].Name }}</em></span>
           </p>
         </div>
 
@@ -18,7 +18,7 @@
           <li v-for="(question, idx) in item.ch[0].ch" :key="idx">
             <div class="form-check">
               <input class="form-check-input" type="radio" :checked="question.checked" @change="selectChange(pidx, idx)" :id="`questions_${pidx}-${idx}`">
-              <label class="form-check-label" :for="`questions_${pidx}-${idx}`">{{ question.name }}</label>
+              <label class="form-check-label" :for="`questions_${pidx}-${idx}`">{{ question.Name }}</label>
             </div>
           </li>
         </ul>

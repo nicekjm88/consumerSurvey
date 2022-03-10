@@ -191,6 +191,7 @@ import Navigation from '@/components/Layout/Navigation.vue';
 import {onMounted} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
+import useSettingsManager from "@/store/settings-manager";
 
 export default {
   name: 'IntroPage',
@@ -202,10 +203,12 @@ export default {
   setup(){
     const productsManager = useProductsManager();
     const questionManager = useQuestionsManager();
+    const settingsManager = useSettingsManager();
 
     onMounted(async ()=>{
       await questionManager.fetch(true);
       await productsManager.fetch(true);
+      await settingsManager.fetch(true);
     })
   }
 }

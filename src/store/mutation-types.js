@@ -11,5 +11,8 @@ export const MUTATION = {
     QUESTIONS:{
         SET: 'SET_QUESTIONS',
         SELECT: 'SELECT_QUESTIONS'
+    },
+    SETTINGS:{
+        SET: 'SET_SETTINGS',
     }
 }
