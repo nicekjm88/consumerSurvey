@@ -913,15 +913,15 @@
     "@capacitor/filesystem" "^1.0.0"
     "@capacitor/ios" "^3.0.0"
 
-"@capacitor/android@^3.0.0", "@capacitor/android@^3.4.1":
-  "integrity" "sha512-4qQGEdZTW8W01PTOzSScmx9NBDcsi1GRl32tyYnpQrjdH2f7hI9OX2MLbNkirtOwKNCDeinQfEqqn0hVCkgHag=="
-  "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.4.1.tgz"
-  "version" "3.4.1"
+"@capacitor/android@^3.0.0", "@capacitor/android@^3.4.3":
+  "integrity" "sha512-G/6+mbOde9LMWl5KvA5rB/xEQF05sKrQFMBwo8y3C8pYF+axtcrS0Dgze9rOB7nCjH4NXv/bLw58E9+q8/sQUA=="
+  "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.4.3.tgz"
+  "version" "3.4.3"
 
-"@capacitor/cli@^3.4.1":
-  "integrity" "sha512-48MA50ExfMJgndunsoh9kI3ItNJDwJrl6+DNocdEZfnIw45IUtmmeu+V3JsoDM2LfwxG9tamJV4zXWM0o4MSOw=="
-  "resolved" "https://registry.npmjs.org/@capacitor/cli/-/cli-3.4.1.tgz"
-  "version" "3.4.1"
+"@capacitor/cli@^3.4.3":
+  "integrity" "sha512-mu2pGoIh/OapMzWwXGXUlOmapXthW9XcHGERpZxNE45aBEYC9eTJWmbcXVlJuyx/9GFnnV+pXjGl3i0grci/Zw=="
+  "resolved" "https://registry.npmjs.org/@capacitor/cli/-/cli-3.4.3.tgz"
+  "version" "3.4.3"
   dependencies:
     "@ionic/cli-framework-output" "^2.2.1"
     "@ionic/utils-fs" "^3.1.5"
@@ -940,10 +940,10 @@
     "tslib" "^2.1.0"
     "xml2js" "^0.4.23"
 
-"@capacitor/core@^3.0.0", "@capacitor/core@^3.4.0", "@capacitor/core@^3.4.1":
-  "integrity" "sha512-BwN925gwXGEVAhnnVAXH57cp+/YW5PhFZloGYaN3Sm8eKcYDNeti38lV9DQ8A/T5PYkJw/+TSu8SsuoEQD0vwQ=="
-  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.4.1.tgz"
-  "version" "3.4.1"
+"@capacitor/core@^3.0.0", "@capacitor/core@^3.4.0", "@capacitor/core@^3.4.3":
+  "integrity" "sha512-drfu0IiDMyeJtL4QALQgNFqdgN19DZJkbKh945eXyK44Sk2YkFXUs7Ewq1ZlVI30QF79mHGuM13oZeki0gv5Tw=="
+  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.4.3.tgz"
+  "version" "3.4.3"
   dependencies:
     "tslib" "^2.1.0"
 
@@ -953,9 +953,9 @@
   "version" "1.1.0"
 
 "@capacitor/ios@^3.0.0":
-  "integrity" "sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w=="
-  "resolved" "https://registry.npmjs.org/@capacitor/ios/-/ios-3.4.1.tgz"
-  "version" "3.4.1"
+  "integrity" "sha512-WG6LHzkclYfiF8yBty31j256SD8XmNN1FlOiJUVeu5wz9gM4vw8FpTYIkj2VJoiBnQiB/OWotfnJp2Mp1Rfbtg=="
+  "resolved" "https://registry.npmjs.org/@capacitor/ios/-/ios-3.4.3.tgz"
+  "version" "3.4.3"
 
 "@gar/promisify@^1.0.1":
   "integrity" "sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw=="
@@ -1004,9 +1004,9 @@
     "postcss" "^7.0.0"
 
 "@ionic/cli-framework-output@^2.2.1":
-  "integrity" "sha512-eQYkqIW1/tCwSC6Bd0gjse96U11lDX/ikf3jvsjX7a8z/zwSmGzCHRizb7xogV65Ey+1/zyAZR71cpDRQuFLBQ=="
-  "resolved" "https://registry.npmjs.org/@ionic/cli-framework-output/-/cli-framework-output-2.2.2.tgz"
-  "version" "2.2.2"
+  "integrity" "sha512-Ok0DuQseeyEQnpq1eIE9Wt2oy80qmsprmQYu4bMeiaggbXTmzdf0wa+2CIRrAy1Mzh7Lnz95AI4KyYl3h+97GQ=="
+  "resolved" "https://registry.npmjs.org/@ionic/cli-framework-output/-/cli-framework-output-2.2.3.tgz"
+  "version" "2.2.3"
   dependencies:
     "@ionic/utils-terminal" "2.3.1"
     "debug" "^4.0.0"
@@ -1058,16 +1058,16 @@
     "tslib" "^2.0.1"
 
 "@ionic/utils-subprocess@^2.1.6":
-  "integrity" "sha512-pkmtf1LtXcEMPn6/cctREL2aZtZoy0+0Sl+nT0NIkOHIoBUcqrcfMWdctCSM4Mp6+2/hLWtgpHE3TOIibkWfIg=="
-  "resolved" "https://registry.npmjs.org/@ionic/utils-subprocess/-/utils-subprocess-2.1.8.tgz"
-  "version" "2.1.8"
+  "integrity" "sha512-OZ4QKyFOoC3+NCcBW8tvDUdLzWqOMKZPpzOQR009xVsfGbT3LwV8h60os7VRAbRV2KrA7t6YMMDrMQYV5DS+DQ=="
+  "resolved" "https://registry.npmjs.org/@ionic/utils-subprocess/-/utils-subprocess-2.1.9.tgz"
+  "version" "2.1.9"
   dependencies:
     "@ionic/utils-array" "2.1.5"
     "@ionic/utils-fs" "3.1.5"
     "@ionic/utils-process" "2.1.8"
     "@ionic/utils-stream" "3.1.5"
     "@ionic/utils-terminal" "2.3.1"
-    "cross-spawn" "^7.0.0"
+    "cross-spawn" "^7.0.3"
     "debug" "^4.0.0"
     "tslib" "^2.0.1"
 
