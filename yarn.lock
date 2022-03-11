@@ -903,6 +903,21 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     "to-fast-properties" "^2.0.0"
 
+"@capacitor-community/http@^1.4.1":
+  "integrity" "sha512-+pCkBXrwfm97UfjOgjV950H/qZ8SE36Mrcb46BlL1ps3VIsGuIO+AulL8GqTC6LewheRVtGJpRspNtneXQotNA=="
+  "resolved" "https://registry.npmjs.org/@capacitor-community/http/-/http-1.4.1.tgz"
+  "version" "1.4.1"
+  dependencies:
+    "@capacitor/android" "^3.0.0"
+    "@capacitor/core" "^3.0.0"
+    "@capacitor/filesystem" "^1.0.0"
+    "@capacitor/ios" "^3.0.0"
+
+"@capacitor/android@^3.0.0":
+  "integrity" "sha512-G/6+mbOde9LMWl5KvA5rB/xEQF05sKrQFMBwo8y3C8pYF+axtcrS0Dgze9rOB7nCjH4NXv/bLw58E9+q8/sQUA=="
+  "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.4.3.tgz"
+  "version" "3.4.3"
+
 "@capacitor/cli@^3.4.1":
   "integrity" "sha512-48MA50ExfMJgndunsoh9kI3ItNJDwJrl6+DNocdEZfnIw45IUtmmeu+V3JsoDM2LfwxG9tamJV4zXWM0o4MSOw=="
   "resolved" "https://registry.npmjs.org/@capacitor/cli/-/cli-3.4.1.tgz"
@@ -925,12 +940,22 @@
     "tslib" "^2.1.0"
     "xml2js" "^0.4.23"
 
-"@capacitor/core@^3.4.1":
+"@capacitor/core@^3.0.0", "@capacitor/core@^3.4.0", "@capacitor/core@^3.4.1":
   "integrity" "sha512-BwN925gwXGEVAhnnVAXH57cp+/YW5PhFZloGYaN3Sm8eKcYDNeti38lV9DQ8A/T5PYkJw/+TSu8SsuoEQD0vwQ=="
   "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.4.1.tgz"
   "version" "3.4.1"
   dependencies:
     "tslib" "^2.1.0"
+
+"@capacitor/filesystem@^1.0.0":
+  "integrity" "sha512-8O3UuvL8HNUEJvZnmn8yUmvgB1evtXfcF0oxIo3YbSlylqywJwS3JTiuhKmsvSxCdpbTy8IaTsutVh3gZgWbKg=="
+  "resolved" "https://registry.npmjs.org/@capacitor/filesystem/-/filesystem-1.1.0.tgz"
+  "version" "1.1.0"
+
+"@capacitor/ios@^3.0.0", "@capacitor/ios@^3.4.1":
+  "integrity" "sha512-ycFCyKI8DsgedVg7PW5MpCVgqFuD0PMHQGVfC5ichXc2C/jAATX32EVdEMCB0N3guKoH2k6T3Efwg59+Fcdx2w=="
+  "resolved" "https://registry.npmjs.org/@capacitor/ios/-/ios-3.4.1.tgz"
+  "version" "3.4.1"
 
 "@gar/promisify@^1.0.1":
   "integrity" "sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw=="
