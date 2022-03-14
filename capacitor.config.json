@@ -1,7 +1,12 @@
 {
-  "appId": "com.example.acs",
+  "appId": "myconsumption.atomy.com",
   "appName": "Atomy Consumer Survey",
   "webDir": "dist",
   "bundledWebRuntime": false,
-  "windowsAndroidStudioPath": "C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe"
+  "windowsAndroidStudioPath": "C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe",
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdateUrl": "https://capgo.app/api/latest?appid=myconsumption.atomy.com&channel=dev"
+    }
+  }
 }

@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import './permission';
 
+import {CapacitorUpdater} from "capacitor-updater";
+CapacitorUpdater.notifyAppReady();
+
 const app = createApp(App)
 
 app

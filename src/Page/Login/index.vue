@@ -30,6 +30,9 @@
               <a href="http://m.atomy.com/kr/m/account/find/password/popup" class="btn btn-sm">비밀번호 찾기</a>
             </span>
         </div>
+        <div>
+          -v 0.2.8
+        </div>
       </section>
     </main>
   </div>
