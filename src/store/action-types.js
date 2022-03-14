@@ -18,6 +18,10 @@ export const ACTION = {
     SETTINGS:{
         SET: 'SET_SETTINGS',
         makeDispatch: (action) => 'settings/' + action
+    },
+    APP:{
+        SET_HTTP: 'SET_HTTP_APP',
+        makeDispatch: (action) => 'app/' + action
     }
 }
 

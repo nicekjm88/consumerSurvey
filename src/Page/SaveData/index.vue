@@ -22,7 +22,6 @@
               <tr>
                 <th scope="row">이름</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="김터미" v-model="$store.state.testerName" /> -->
                     <Field type="text" name="testerName" class="form-control" placeholder="김터미" v-model="data.Name" :rules="isRequiredName" />
                     <span class="error-message">{{ errors.testerName }}</span>
                 </td>
@@ -67,11 +66,13 @@
 import Navigation from '@/components/Layout/Navigation.vue';
 import FixedBtn from '@/components/Layout/FixedBtn.vue';
 import { Field, Form } from 'vee-validate';
-import {reactive, ref} from "vue";
+import {onBeforeMount, reactive, ref} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager"
 import useSurvey from "@/composables/api/survey";
+import router from "@/router";
+import useFormatter from "@/composables/api/utils/formatter";
 
 export default {
   name: 'SaveData',
@@ -86,62 +87,113 @@ export default {
     const questionsManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
 
+    const selectedProducts = productsManager.getSelected();
+    const selectedQuestions = questionsManager.getData();
+    const settings = settingsManager.getData();
+
     const survey = useSurvey();
+    const formatter = useFormatter();
+
+    const isEdit = ref(router.currentRoute.value.query.ResultNo > 0);
+    const resultNo = router.currentRoute.value.query.ResultNo;
     const date = ref(getDateString())
 
     const data = reactive({
-      CreateAt: '',
-      Age : 0,
-      Families: 0,
-      UseAtomyYn: '0',
-      Name : '',
-      BirthDay: '',
-      Gender: '0',
-      Phone: '',
-      StdPV: 0,
-      StdN: 0,
-      StdScore: 0,
-      AmountPerYear: 0,
-      PVPerYear: 0,
-      Products: undefined
-    })
+        CreateAt: '',
+        Age: 0,
+        Families: 0,
+        UseAtomyYn: '0',
+        Name: '',
+        BirthDay: '',
+        Gender: '0',
+        Phone: '',
+        StdPV: 0,
+        StdN: 0,
+        StdScore: 0,
+        AmountPerYear: 0,
+        PVPerYear: 0,
+        Products: undefined
+    });
+
+    onBeforeMount(() => {
+      console.log('selectedProducts', selectedProducts)
+      console.log('selectedQuestions',selectedQuestions)
+      console.log('ssettings', settings)
+
+      //설문 수정
+      if(isEdit.value) {
+        survey.getResult(resultNo).then((r) => {
+          if(r.data.Status === 1 && r.data.Data){
+            const d = r.data.Data;
+            data.ResultNo = d.ResultNo;
+            data.Name = d.Name;
+            data.BirthDay = d.BirthDay;
+            data.Gender = d.Gender;
+            data.Phone = d.Phone;
+            date.value = formatter.toDate(d.CreateAt);
+          }
+        });
+      }
+    });
 
     function isRequiredName(value) {
       return value ? true : '이름을 입력해주세요.';
     }
 
     function isRequiredBirthDay(value) {
-      return value ? true : '생년월일을 입력해주세요.';
+      if (value) {
+        return value.length === 8 ? true : '생년월일 8자리를 입력해주세요.';
+      }
+
+      return '생년월일을 입력해주세요.';
     }
 
     function isRequiredTellNumber(value) {
-      return value ? true : '전화번호 입력해주세요.';
+      if (value) {
+        return value.length === 11 ? true : '전화번호 11자리를 입력해주세요.';
+      }
+
+      return '전화번호 입력해주세요.';
     }
 
-    function onSubmit(values) {
-      const p = productsManager.getSelected();
-      const q = questionsManager.getData();
-      const s = settingsManager.getData();
+    function onSubmit() {
+      if(isEdit.value){
+        //설문 수정
+        if(confirm("수정하시겠습니까?")) {
+          survey.edit(data).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              router.back();
+            } else {
+              alert('잠시후 다시 시도해 주세요.');
+            }
+          });
+        }
+      }else {
+        //설문 저장
+        data.Age = selectedQuestions.Age;
+        data.Families = selectedQuestions.Families;
+        data.UseAtomyYn = selectedQuestions.UseAtomyYn;
+        data.Products = selectedProducts.Products;
 
-      data.Age = q.Age;
-      data.Families = q.Families;
-      data.UseAtomyYn = q.UseAtomyYn;
-      data.Products = p.Products;
+        data.StdPV = settings.StdPV;
+        data.StdN = settings.StdN;
+        data.StdScore = settings.StdScore;
 
-      data.StdPV = s.StdPV;
-      data.StdN = s.StdN;
-      data.StdScore = s.StdScore;
+        data.AmountPerYear = selectedProducts.AmountPerYear;
+        data.PVPerYear = selectedProducts.PVPerYear;
+        data.CreateAt = date.value.replace(/\./gi, '');
 
-      data.AmountPerYear = p.AmountPerYear;
-      data.PVPerYear = p.PVPerYear;
-      data.CreateAt = date.value.replace(/\./gi,'');
-
-      survey.save(data);
+        survey.save(data).then((r) => {
+          console.log(r);
+          router.push('/SaveDataList')
+        });
+      }
     }
 
     function getDateString(){
-      const now = new Date();
-      return `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+      if(!isEdit.value) {
+        return formatter.toDate(new Date());
+      }
     }
 
     return {

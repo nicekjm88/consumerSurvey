@@ -39,10 +39,45 @@ export default function useSurvey() {
         );
     }
 
+    async function edit(data){
+        return http.post(url.getUrl('/atomy/consumersurvey/kr/v1/result/edit'),
+            data,
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            },
+        );
+    }
+
+    async function getResults(PageSize, PageNo, Name = "") {
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/results', {PageSize, PageNo, Name}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            });
+    }
+
+    async function getResult(ResultNo){
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/result', {ResultNo}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            });
+    }
+
+    async function deletes(ResultNos){
+        return http.post(url.getUrl('/atomy/consumersurvey/kr/v1/result/deletes'),
+            ResultNos,
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            });
+    }
+
     return {
         getProducts,
         getQuestions,
         getSettings,
         save,
+        getResults,
+        getResult,
+        deletes,
+        edit,
     }
 }

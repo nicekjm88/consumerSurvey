@@ -4,6 +4,7 @@ import user from './modules/user'
 import products from "@/store/modules/products";
 import questions from "@/store/modules/questions";
 import settings from "@/store/modules/settings"
+import app from "@/store/modules/app"
 
 const store = {
   namespaced: true,
@@ -107,5 +108,5 @@ const store = {
 }
 
 export default createStore({
-  modules: {user, products, questions, settings, etc : store}
+  modules: {user, products, questions, settings, app, etc : store}
 })

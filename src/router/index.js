@@ -55,6 +55,7 @@ export const defaultRoutes = [
         path: "/SaveData",
         name: "SaveData",
         component: () => import('@/Page/SaveData'),
+        props: true,
     },
     {
         path: "/SaveDataList",
@@ -62,9 +63,10 @@ export const defaultRoutes = [
         component: () => import('@/Page/SaveData/SaveDataList'),
     },
     {
-        path: "/SaveDataView",
+        path: "/SaveDataView/:ResultNo",
         name: "SaveDataView",
         component: () => import('@/Page/SaveData/SaveDataView'),
+        props: true
     },
 ];
 
