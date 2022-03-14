@@ -61,11 +61,30 @@ export default function useProductsManager() {
                 }
                 return a;
             }, {AmountPerYear:0,PVPerYear:0, Products:[]});
+            return item;
+        }
+
+        return {};
+    }
+
+    function getSelectedGroupCount(){
+        const items = store.getters["products/data"];
+        if (items.length > 0) {
+            const item = items.reduce((a, c) => {
+                if (c.ch && c.ch.length > 0) {
+                    const selected = c.ch.filter((x) => x.checked);
+                    if (selected.length > 0) {
+                        a.TotalCount += selected.length;
+                        a.Groups.push({Name: c.Name, Count: selected.length});
+                    }
+                }
+                return a;
+            }, {TotalCount:0, Groups: []});
 
             return item;
         }
 
-        return [];
+        return {};
     }
 
     return {
@@ -76,5 +95,6 @@ export default function useProductsManager() {
         clearChecked,
         hasValue,
         getSelected,
+        getSelectedGroupCount,
     }
 }

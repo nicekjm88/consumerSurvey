@@ -10,6 +10,12 @@ import './permission';
 
 const app = createApp(App)
 
+//native back button
+import { App as capApp } from '@capacitor/app';
+capApp.addListener('backButton', function(){
+    router.back()
+});
+
 app
   .use(router)
   .use(store)

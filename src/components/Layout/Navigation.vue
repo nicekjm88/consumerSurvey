@@ -11,12 +11,12 @@
     <button type="button">
       <i class="xi-list-square"></i>
       <span class="a11y">저장 리스트</span>
-    </button>    
+    </button>
     </router-link>
   </nav>
 
   <nav v-else-if="$route.name === 'SaveDataList'" class="navigation icon-alone">
-    <router-link to="/intro">    
+    <router-link to="/intro">
       <button v-if="$route.name !== 'SaveDataView'" type="button">
         <i class="xi-home"></i>
         <span class="a11y">홈으로</span>
@@ -25,22 +25,22 @@
   </nav>
 
   <nav v-else-if="$route.name === 'SaveDataView'" class="navigation">
-    
+
     <button type="button" @click="historyBack">
       <i class="xi-angle-left"></i>
       <span class="a11y">뒤로</span>
     </button>
-    
+
     <div>
-    <button type="button">
+    <button type="button" @click="$emit('buttonEditClick', $event)">
       <img :src="require('@/assets/image/i-modify.svg')" />
       <span class="a11y">수정하기</span>
     </button>
 
-    <button type="button">
+    <button type="button" @click="$emit('buttonDeleteClick', $event)">
       <img :src="require('@/assets/image/i-delete.svg')" />
       <span class="a11y">삭제</span>
-    </button>    
+    </button>
     </div>
   </nav>
 
@@ -50,7 +50,7 @@
       <span class="a11y">뒤로</span>
     </button>
 
-    <router-link to="/intro">    
+    <router-link to="/intro">
       <button v-if="$route.name !== 'SaveDataView'" type="button">
         <i class="xi-close"></i>
         <span class="a11y">닫기</span>
@@ -93,7 +93,7 @@ export default {
   }
 
   &.intro button {
-    font-size: 30px;  
+    font-size: 30px;
   }
 
   &.icon-alone {

@@ -34,7 +34,7 @@
                 <path id="패스_5341" data-name="패스 5341" d="M70.724,198.978s1.962-3.389,2.378-4.208l-2.452,8.337Z" transform="translate(-55.35 -120.874)" opacity="0.1"/>
                 <circle id="타원_51" data-name="타원 51" cx="6.311" cy="6.311" r="6.311" transform="translate(23.043 40.81)" fill="#263238"/>
                 <path id="패스_5342" data-name="패스 5342" d="M77.05,149.32a54.249,54.249,0,0,0,1.437,5.6,2.167,2.167,0,0,0,1.255,1.015l-.069-3.379Z" transform="translate(-58.611 -97.712)" fill="#263238"/>
-                
+
                 <path id="패스_5343" data-name="패스 5343" d="M77.184,135.264a2.378,2.378,0,0,0-1.962.691c-.839.858-.368,3.555.677,6.194l1.927.221Z" transform="translate(-57.46 -90.541)" fill="#263238"/>
                 <path id="패스_5344" data-name="패스 5344" d="M77.547,139.312c-.387.23-.937-.515-1.412-1.01a1.68,1.68,0,0,0-2.81.451c-.775,1.633.687,3.869,1.913,4.257,2.109.662,2.452-.691,2.452-.691l.152,7.846h0c2.624,3.364,9.906,3.08,6.865-.432v-2.32a13.084,13.084,0,0,0,2.844.147c1.555-.24,2.53-1.471,3-3.143.755-2.7,1.045-4.9.4-10.185-.7-5.816-7.469-5.885-11.122-3.575S77.547,139.312,77.547,139.312Z" transform="translate(-56.603 -87.478)" fill="#b16668"/>
                 <path id="패스_5345" data-name="패스 5345" d="M80.429,138.05c-.2,0-.932-1.221-1.412-1.658-.667-.608.191-6.1.191-6.1a2.658,2.658,0,0,1,.461-2.942c.912-1.005,2.187-2.236,6.326-1.746,2.942.353,6.169,1.27,8.768,0a4.413,4.413,0,0,1-1.54,4.7,9,9,0,0,1-3.433.907,36.511,36.511,0,0,1-6.865-.132c-.716-.1-.868.6-1.255,2.5C81.365,135.216,81.081,138.041,80.429,138.05Z" transform="translate(-59.484 -85.569)" fill="#263238"/>
@@ -192,6 +192,8 @@ import {onMounted} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager";
+import useAppManager from "@/store/app-manager";
+
 
 export default {
   name: 'IntroPage',
@@ -199,16 +201,20 @@ export default {
     FixedBtn,
     Navigation
   },
-
   setup(){
     const productsManager = useProductsManager();
     const questionManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
+    const appManager = useAppManager();
 
-    onMounted(async ()=>{
-      await questionManager.fetch(true);
-      await productsManager.fetch(true);
-      await settingsManager.fetch(true);
+    async function loadData() {
+      return questionManager.fetch(true)
+          .then(() => productsManager.fetch(true))
+          .then(() => settingsManager.fetch(true))
+    }
+
+    onMounted(()=>{
+      loadData();
     })
   }
 }

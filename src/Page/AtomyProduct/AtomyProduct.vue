@@ -22,11 +22,11 @@
           <tbody>
 
           <tr v-for="(product, i) in items" :key="i">
-            <td>{{ product.pname }}</td>
-            <td>{{ product.item.name }}</td>
+            <td>{{ product.Name }}</td>
+            <td>{{ product.MName }}</td>
             <td>
-              <div class="price">{{ product.item.price }}원</div>
-              <div class="point-value">{{ product.item.pv }} PV</div>
+              <div class="price">{{ product.Cost }}원</div>
+              <div class="point-value">{{ product.PV }} PV</div>
             </td>
           </tr>
           </tbody>
@@ -60,7 +60,7 @@ export default {
       }
     })
 
-    const items = computed(() => productsManager.getSelected());
+    const items = computed(() => productsManager.getSelected().Products);
 
     return {
       items,

@@ -8,18 +8,15 @@
       <div class="rounded-box rounded-box__wrapper">
         <h2 class="title">결과 확인 및 설명</h2>
         <hr />
-        <p>총 {{selectedLivingItem.length + selectedfoodItem.length}}개를 선택하였습니다.</p>
+        <p>총 {{groupCount.TotalCount}}개를 선택하였습니다.</p>
         <p>&lt;선택리스트&gt;</p>
         <ul>
-          <li>- 생활용품 {{selectedLivingItem.length}}개</li>
-          <li>- 식품 {{selectedfoodItem.length}}개</li>
-          <!-- <li>- 건강식품 0개</li>
-          <li>- 화장품 0개</li> -->
+          <li v-for="(item, idx) in groupCount.Groups" :key="idx"> {{item.Name}} {{item.Count}}개 </li>
         </ul>
 
         <p>정말 많은 제품등을 소비하고 계시네요.</p>
         <p>
-          가족 {{userInfo.familyNumber}}인 기준에서<br>
+          가족 4인 기준에서<br>
           위 제품을 소비하는 총 금액은 매월 평균 소비 기준 0,000,000원입니다.<br>
           1년간 꾸준히 사용하신다면 약 00,000,000원입니다.
         </p>
@@ -45,15 +42,21 @@
 <script>
 import Navigation from '@/components/Layout/Navigation.vue'
 import FixedBtn from '@/components/Layout/FixedBtn.vue'
-import { mapState } from 'vuex'
+import useProductsManager from "@/store/products-manager";
+import {computed} from "vue";
 export default {
   name: 'Result',
-  computed: {
-    ...mapState('etc', ['selectedLivingItem', 'selectedfoodItem', 'selectedItem', 'userInfo'])
-  },
   components: {
     Navigation,
     FixedBtn
+  },
+  setup(){
+    const productsManager = useProductsManager();
+    const groupCount = computed(() => productsManager.getSelectedGroupCount());
+
+    return {
+      groupCount,
+    }
   }
 }
 </script>

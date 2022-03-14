@@ -1,18 +1,21 @@
 <template>
-
+  <div class="app_loading-warp" v-if="isHttpBusy">
+      <p class="app_loading-spinner">
+        <i class="xi-spinner-5 xi-spin"></i>
+      </p>
+  </div>
   <div v-if="!isLoaded">
     <splash-component></splash-component>
   </div>
-
   <div v-else>
     <router-view></router-view>
   </div>
-
 </template>
 
 <script>
 import SplashComponent from '@/components/SplashComponent';
-import {onMounted, ref} from 'vue';
+import {computed, onBeforeMount, onMounted, ref} from 'vue';
+import useAppManager from "@/store/app-manager";
 
 export default {
   name: 'App',
@@ -22,6 +25,8 @@ export default {
 
   setup () {
     const isLoaded = ref(false)
+    const appManager = useAppManager();
+    const isHttpBusy = computed(() => appManager.IsHttpBusy());
 
     const splashing = () => {
       setTimeout(() => {
@@ -30,11 +35,14 @@ export default {
     }
 
     onMounted(() => {
+      console.log('App onMounted');
       splashing();
+
     })
 
     return {
       isLoaded,
+      isHttpBusy,
     }
   }
 }
@@ -43,4 +51,24 @@ export default {
 <style>
 @import "./assets/styles/layout.css";
 @import "./assets/styles/xeicon.css";
+
+.app_loading-warp {
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+  opacity: 10%;
+}
+
+.app_loading-spinner {
+  position: absolute;
+  left: 50%;
+  top:50%;
+  font-size: 50px;
+  color: white;
+  transform:translate(-50%, -50%);
+}
 </style>
