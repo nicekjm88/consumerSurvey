@@ -1,10 +1,10 @@
 <template>
-  <div v-if="scrolled" class="wrap-progressBar">
+  <div class="wrap-progressBar">
     <strong class="title">
-      PV성취율
+      PV 달성률
     </strong>
     <div class="progress">
-      <div 
+      <div
         class="progress-bar progress-bar-striped progress-bar-animated"
         role="progressbar"
         :aria-valuenow="`${progressStatus}`"
@@ -12,7 +12,7 @@
         aria-valuemax="100"
         :style="`width: ${progressStatus}%`"
       >
-        {{progressStatus}}%
+        {{ progressStatus }}%
       </div>
     </div>
     <div class="goal-label">
@@ -20,23 +20,18 @@
       <div>30만 PV</div>
     </div>
   </div>
-
 </template>
 
 <script>
-
 export default {
-  name: 'progressBar',
+  name: "progressBar",
   data() {
     return {
-      scrolled: true,
-      progressStatus: 45
-    }
+      progressStatus: 45,
+    };
   },
-  methods() {
-  }
-  
-}
+  methods() {},
+};
 </script>
 
 <style lang="scss">
@@ -48,7 +43,12 @@ export default {
   width: 100%;
   background-color: #fff;
   padding: 10px 20px;
-  box-shadow: 1px 1px 10px rgba(0,0,0,.1);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+
+  &.is-show {
+    display: block;
+  }
 
   .title {
     display: block;
