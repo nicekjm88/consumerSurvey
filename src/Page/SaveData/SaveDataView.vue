@@ -13,7 +13,7 @@
             최종 자료
           </caption>
           <colgroup>
-            <col style="width: 50%;" />
+            <col style="width: 40%;" />
           </colgroup>
           <tbody>
             <tr>
@@ -54,7 +54,7 @@
             </tr>
             <tr>
               <th scope="row">예상 수당 지급 횟수(최소)</th>
-              <td>약 {{ reactResultFormatted.PayBackCount }}회</td>
+              <td>약 {{ reactResultFormatted.PayBackCount }}</td>
             </tr>
             <tr>
               <th scope="row">선택상품</th>
