@@ -62,11 +62,24 @@
             </tr>
           </tbody>
         </table>
-        <FixedBtn
-          @click="snsShare('나의 소비생활 알아보기', 'SaveDataView')"
-          type="button"
-          msg="공유하기"
-        />
+
+        <div class="shared-area" v-if="isShared">
+          <p>
+            <b>애터미가 궁금하신가요</b>
+            소비가 이익이 되는 애터미를 마음껏 누려보세요.
+          </p>
+          <div class="d-grid">
+            <button type="button" class="btn btn-primary block">사이트 보러가기</button>
+          </div>
+        </div>
+
+        <div v-else>
+          <FixedBtn
+            @click="snsShare('나의 소비생활 알아보기', 'SaveDataView')"
+            type="button"
+            msg="공유하기"
+          />
+        </div>
       </section>
     </main>
   </div>
@@ -82,6 +95,11 @@ import useFormatter from "@/composables/api/utils/formatter";
 
 export default {
   name: "SaveDataList",
+  data() {
+    return {
+      isShared: false
+    }
+  },
   components: {
     Navigation,
     FixedBtn,
@@ -194,6 +212,26 @@ export default {
   td {
     border-left: 1px solid #ddd;
     text-align: right;
+  }
+}
+
+.shared-area {
+  margin-top: 50px;
+  font-size: 13px;
+  color: #666;
+
+  b {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    margin-top: 10px;
+    background: $mainColor;
+    border-color: $mainColor;
+    height: 48px;
   }
 }
 </style>

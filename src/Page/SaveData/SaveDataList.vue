@@ -147,7 +147,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .board-list {
   margin: 0 -20px;
   border-top: 1px solid #ddd;
@@ -166,9 +166,10 @@ export default {
 }
 
 .btn-more {
-  width: 100%;
+  margin: 0 -20px;
   padding: 10px;
   color: #333;
+  width: calc(100% + 40px);
 }
 
 .input-area {

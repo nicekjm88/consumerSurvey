@@ -35,6 +35,22 @@
           <button class="btn-more" type="button">
             <i class="xi-angle-down"></i> 더보기
           </button>
+          <div class="total-product">
+            <div class="total-product__count">
+              총 17개 상품
+            </div>
+            <div class="total-product__price">
+              <ul>
+                <li>
+                  가격 : <strong>156600</strong> 원
+                </li>
+                <li>
+                  PV : <strong class="main-color">151315</strong> PV
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </article>
       </section>
     </main>
@@ -74,6 +90,7 @@ export default {
 
 <style lang="scss">
 .product-table {
+  width: 100%;
   margin-bottom: 0;
 
   thead {
@@ -95,4 +112,25 @@ export default {
   padding: 10px;
   color: #333;
 }
+
+.total-product {
+  border-top: 2px solid #686868;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+
+  &__price {
+    text-align: right;
+
+    ul > li {
+      margin-bottom: 10px;
+
+      .main-color {
+        color: $mainColor;
+      }
+    }
+  }
+}
+
 </style>

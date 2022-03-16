@@ -1,8 +1,9 @@
 <template>
   <div class="app_loading-warp" v-if="isHttpBusy">
-      <p class="app_loading-spinner">
+    <Loading />
+      <!-- <p class="app_loading-spinner">
         <i class="xi-spinner-5 xi-spin"></i>
-      </p>
+      </p> -->
   </div>
   <div v-if="!isLoaded">
     <splash-component></splash-component>
@@ -16,11 +17,14 @@
 import SplashComponent from '@/components/SplashComponent';
 import {computed, onMounted, ref} from 'vue';
 import useAppManager from "@/store/app-manager";
+import Loading from '@/Page/Loading'
+
 
 export default {
   name: 'App',
   components: {
-    SplashComponent
+    SplashComponent,
+    Loading
   },
 
   setup () {
@@ -59,8 +63,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: black;
-  opacity: 10%;
+  background-color: #fff;
 }
 
 .app_loading-spinner {
