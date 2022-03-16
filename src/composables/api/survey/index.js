@@ -70,6 +70,21 @@ export default function useSurvey() {
             });
     }
 
+    async function getResultKey(resultNo){
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/result/key', {resultNo}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: user.identity.token
+            });
+    }
+
+    async function getResultByKey(key){
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/result/share', {key}));
+    }
+
+    async function getResultProductsByKey(key){
+        return http.get(url.getUrl('/atomy/consumersurvey/kr/v1/result/share/products', {key}));
+    }
+
     return {
         getProducts,
         getQuestions,
@@ -79,5 +94,8 @@ export default function useSurvey() {
         getResult,
         deletes,
         edit,
+        getResultKey,
+        getResultByKey,
+        getResultProductsByKey,
     }
 }
