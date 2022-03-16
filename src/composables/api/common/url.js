@@ -6,7 +6,6 @@ export default function useUrl(){
 
     function addParameter(url, parameters) {
         if(typeof parameters === 'object'){
-
             const names = Object.getOwnPropertyNames(parameters);
             const p = names.reduce((a, c, i)=>{
                 if(i > 0) a += '&';

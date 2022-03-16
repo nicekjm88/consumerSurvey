@@ -85,6 +85,13 @@ export const defaultRoutes = [
     component: () => import("@/Page/SaveData/SaveDataView"),
     props: true,
   },
+  {
+    path: "/ShareView",
+    name: "ShareView",
+    component: () => import('@/Page/SaveData/SaveDataView'),
+    meta: { unauthorized:true },
+    props: true
+  },
 ];
 
 const router = createRouter({
