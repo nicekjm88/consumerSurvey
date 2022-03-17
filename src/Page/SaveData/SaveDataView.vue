@@ -13,7 +13,7 @@
             최종 자료
           </caption>
           <colgroup>
-            <col style="width: 40%;" />
+            <col style="width: 55%;" />
           </colgroup>
           <tbody>
             <tr>
@@ -58,7 +58,10 @@
             </tr>
             <tr>
               <th scope="row">선택상품</th>
-              <td>{{ item.ProductNames }}</td>
+              <td>
+                <!-- {{ item.ProductNames }} -->
+                <button type="button" class="btn btn-outline-dark">더보기</button>
+              </td>
             </tr>
           </tbody>
         </table>
