@@ -16,7 +16,8 @@ export default function useAuth() {
         }).then(async (res) => {
             if (res.status === 200 && res.data.Data) {
                 const atomy_user = res.data.Data;
-                await userManager.login(atomy_user.CustNo, atomy_user.CustName, atomy_user.UserToken).then(() => {
+                console.log('@@@',atomy_user);
+                await userManager.login(atomy_user.CustNo, atomy_user.CustName, atomy_user.UserToken, atomy_user.Role).then(() => {
                     return res;
                 })
             }

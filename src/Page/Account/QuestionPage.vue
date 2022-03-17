@@ -49,13 +49,25 @@ export default {
     const step = ref(0);
 
     onBeforeMount(() => {
-      questionsManager.fetch();
-    })
+      //questionsManager.fetch();
+      if(!questionsManager.hasValue()){
+        router.push('/intro');
+      }
+    });
 
     function onSubmit() {
-      step.value++;
-      if(step.value > 2){
-        router.push('/qna2');
+      const si = questionsManager.getSelectedAt(step.value);
+      if(si.length > 0) {
+        step.value++;
+        if (step.value > 2) {
+          if (questionsManager.isDone()) {
+            router.push('/qna2');
+          } else {
+            step.value = 0;
+          }
+        }
+      }else{
+        alert('문항을 선택해 주세요.');
       }
     }
 

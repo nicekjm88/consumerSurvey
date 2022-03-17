@@ -7,7 +7,7 @@
       <span class="a11y">앱정보</span>
     </button>
     </router-link>
-    <router-link to="/SaveDataList">
+    <router-link v-if="!isGuest" to="/SaveDataList">
     <button type="button">
       <i class="xi-list-square"></i>
       <span class="a11y">저장 리스트</span>
@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import useUserManager from "@/store/user-manager";
+import {computed} from "vue";
 export default {
   name: 'Navigation',
   methods : {
@@ -68,6 +70,15 @@ export default {
       return history.back();
     }
   },
+  setup(){
+    const userManager = useUserManager()
+
+    const isGuest = computed(() => userManager.isGuest());
+
+    return {
+      isGuest
+    }
+  }
 }
 </script>
 

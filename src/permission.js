@@ -3,12 +3,12 @@ import useUserManager from "@/store/user-manager";
 
 router.onError(async () => {
     // none
-})
+});
 
 router.beforeEach(async (to, from, next) => {
     //권한 처리
     const userManager = useUserManager();
-    const { unauthorized } = to.meta;
+    const { unauthorized, role } = to.meta;
     let next_path = undefined;
 
     if(to.path === '/login'){
@@ -21,13 +21,19 @@ router.beforeEach(async (to, from, next) => {
         }
     }
 
+    if(next_path === undefined && role) {
+        if (userManager.identity.role !== role) {
+            next_path = '/error'
+        }
+    }
+
     if(next_path === undefined) {
         next()
     } else {
         next(next_path)
     }
-})
+});
 
 router.afterEach(() => {
     // none
-})
+});

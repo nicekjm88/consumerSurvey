@@ -83,11 +83,28 @@ export default function useQuestionsManager() {
         return null;
     }
 
+    function hasValue(){
+        return store.state.questions.data.length > 0;
+    }
+
+    function isDone(){
+        return getData() !== null;
+    }
+
+    function getSelectedAt(pidx){
+        const items = store.getters["questions/data"];
+        const questions = items[pidx].ch[0].ch;
+        return questions.filter((x) => x.checked === true);
+    }
+
     return {
         fetch,
         clear,
         get: () => store.getters["questions/data"],
         selectChanged,
         getData,
+        hasValue,
+        isDone,
+        getSelectedAt,
     }
 }

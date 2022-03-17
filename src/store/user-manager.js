@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 export default function useUserManager(){
     const _user = store.state.user;
 
-    async function login(id, name, token){
-        await store.dispatch(ACTION.USER.makeDispatch(ACTION.USER.LOGIN), {id, name, token}).then(() => {
+    async function login(id, name, token, role){
+        await store.dispatch(ACTION.USER.makeDispatch(ACTION.USER.LOGIN), {id, name, token, role}).then(() => {
             const encoded_user = btoa(encodeURIComponent(JSON.stringify(_user)));
             Cookies.set('_ust', encoded_user);
         })
@@ -34,10 +34,15 @@ export default function useUserManager(){
         return true;
     }
 
+    function isGuest(){
+        return _user.role !== 1;
+    }
+
     return {
         login,
         logout,
         checkLogin,
-        identity: _user
+        identity: _user,
+        isGuest,
     }
 }
