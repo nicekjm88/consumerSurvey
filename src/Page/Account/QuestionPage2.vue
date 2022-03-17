@@ -140,7 +140,6 @@ export default {
     const productsManager = useProductsManager();
 
     onBeforeMount(() => {
-      console.log('11');
       // productsManager.fetch();
       if(!productsManager.hasValue()){
         router.push('/intro');
