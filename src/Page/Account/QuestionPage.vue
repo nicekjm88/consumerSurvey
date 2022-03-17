@@ -4,7 +4,7 @@
     <main class="qestion-area">
 
       <section v-for="(item, pidx) in items" :key="pidx">
-        <div v-if="step === pidx">
+        <div v-show="step === pidx">
           <div class="img-wrap">
             <img :src="require(`@/assets/image/bg-img${item.Value}.svg`)" />
           </div>
@@ -14,7 +14,7 @@
           </p>
         </div>
 
-        <ul class="select-list" v-if="step === pidx">
+        <ul class="select-list" v-show="step === pidx">
           <li v-for="(question, idx) in item.ch[0].ch" :key="idx">
             <div class="form-check">
               <input class="form-check-input" type="radio" :checked="question.checked" @change="selectChange(pidx, idx)" :id="`questions_${pidx}-${idx}`">
@@ -49,13 +49,25 @@ export default {
     const step = ref(0);
 
     onBeforeMount(() => {
-      questionsManager.fetch();
-    })
+      //questionsManager.fetch();
+      if(!questionsManager.hasValue()){
+        router.push('/intro');
+      }
+    });
 
     function onSubmit() {
-      step.value++;
-      if(step.value > 2){
-        router.push('/qna2');
+      const si = questionsManager.getSelectedAt(step.value);
+      if(si.length > 0) {
+        step.value++;
+        if (step.value > 2) {
+          if (questionsManager.isDone()) {
+            router.push('/qna2');
+          } else {
+            step.value = 0;
+          }
+        }
+      }else{
+        alert('문항을 선택해 주세요.');
       }
     }
 

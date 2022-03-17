@@ -58,9 +58,9 @@
       </div>
 
     </main>
-    <router-link to="/result">
-      <FixedBtn msg="작성완료" />
-    </router-link>
+<!--    <router-link to="/result">-->
+      <FixedBtn @click="onSubmit" msg="작성완료" />
+<!--    </router-link>-->
   </div>
 </template>
 
@@ -70,6 +70,7 @@ import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import ProgressBar from "@/components/Layout/ProgressBar.vue";
 import useProductsManager from "@/store/products-manager";
+import router from "@/router";
 
 export default {
   name: "QuestionPage2",
@@ -139,8 +140,19 @@ export default {
     const productsManager = useProductsManager();
 
     onBeforeMount(() => {
-      productsManager.fetch();
+      // productsManager.fetch();
+      if(!productsManager.hasValue()){
+        router.push('/intro');
+      }
     });
+
+    function onSubmit(){
+      if(productsManager.isDone()) {
+        router.push('/result');
+      }else{
+        alert('문항을 선택해 주세요.');
+      }
+    }
 
     function selectCancel(pidx) {
       productsManager.clearChecked(pidx);
@@ -156,6 +168,7 @@ export default {
       items,
       selectCancel,
       productToggle,
+      onSubmit,
     };
   },
 };

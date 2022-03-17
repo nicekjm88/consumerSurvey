@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import useUserManager from "@/store/user-manager";
+import {computed} from "vue";
 export default {
   name: 'Navigation',
   methods : {
@@ -74,6 +76,15 @@ export default {
       return history.back();
     }
   },
+  setup(){
+    const userManager = useUserManager()
+
+    const isGuest = computed(() => userManager.isGuest());
+
+    return {
+      isGuest
+    }
+  }
 }
 </script>
 

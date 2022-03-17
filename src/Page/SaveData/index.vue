@@ -73,6 +73,7 @@ import useSettingsManager from "@/store/settings-manager"
 import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
+import useUserManager from "@/store/user-manager"
 
 export default {
   name: 'SaveData',
@@ -86,6 +87,7 @@ export default {
     const productsManager = useProductsManager();
     const questionsManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
+    const userManager = useUserManager();
 
     const selectedProducts = productsManager.getSelected();
     const selectedQuestions = questionsManager.getData();
@@ -116,9 +118,9 @@ export default {
     });
 
     onBeforeMount(() => {
-      console.log('selectedProducts', selectedProducts)
-      console.log('selectedQuestions',selectedQuestions)
-      console.log('ssettings', settings)
+      if(!productsManager.isDone() || !questionsManager.isDone() || !settingsManager.isDone()){
+        router.push('/intro');
+      }
 
       //설문 수정
       if(isEdit.value) {
@@ -184,8 +186,15 @@ export default {
         data.CreateAt = date.value.replace(/\./gi, '');
 
         survey.save(data).then((r) => {
-          console.log(r);
-          router.push('/SaveDataList')
+          if (r.data.Status === 1 && r.data.Data) {
+            if (userManager.isGuest()) {
+              router.push(`/SaveDataView/${r.data.Data}`);
+            } else {
+              router.push('/SaveDataList')
+            }
+          }else {
+            alert('잠시후 다시 시도해 주세요.');
+          }
         });
       }
     }

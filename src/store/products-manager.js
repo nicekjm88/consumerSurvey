@@ -45,6 +45,15 @@ export default function useProductsManager() {
         return store.state.products.data.length > 0;
     }
 
+    function isDone(){
+        const items = store.getters["products/data"];
+        if(items.length > 0){
+            return items.filter((x) => (x.ch && x.ch.length > 0) && x.ch.filter(u=>u.checked).length > 0).length > 0;
+        }
+
+        return false;
+    }
+
     function getSelected() {
         const items = store.getters["products/data"];
         if (items.length > 0) {
@@ -93,8 +102,9 @@ export default function useProductsManager() {
         get: () => store.getters["products/data"],
         toggle,
         clearChecked,
-        hasValue,
         getSelected,
         getSelectedGroupCount,
+        hasValue,
+        isDone,
     }
 }

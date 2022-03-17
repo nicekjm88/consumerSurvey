@@ -78,6 +78,7 @@ export const defaultRoutes = [
     path: "/SaveDataList",
     name: "SaveDataList",
     component: () => import("@/Page/SaveData/SaveDataList"),
+    meta: { role: 1 },
   },
   {
     path: "/SaveDataView/:ResultNo",
@@ -85,6 +86,23 @@ export const defaultRoutes = [
     component: () => import("@/Page/SaveData/SaveDataView"),
     props: true,
   },
+  {
+    path: "/ShareView",
+    name: "ShareView",
+    component: () => import('@/Page/SaveData/SaveDataView'),
+    meta: { unauthorized:true },
+    props: true
+  },
+  {
+    // last place important
+    // not found 404
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    hidden: true,
+    permitAll: true,
+    component: () => import("@/Page/Error"),
+    meta: { unauthorized:true }
+  }
 ];
 
 const router = createRouter({

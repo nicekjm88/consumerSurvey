@@ -62,7 +62,6 @@
             </tr>
           </tbody>
         </table>
-
         <div class="shared-area" v-if="isShared">
           <p>
             <b>애터미가 궁금하신가요</b>
@@ -74,11 +73,7 @@
         </div>
 
         <div v-else>
-          <FixedBtn
-            @click="snsShare('나의 소비생활 알아보기', 'SaveDataView')"
-            type="button"
-            msg="공유하기"
-          />
+          <FixedBtn @click="snsShare('나의 소비생활 알아보기')" type="button" msg="공유하기" />
         </div>
       </section>
     </main>
@@ -92,6 +87,9 @@ import { computed, onBeforeMount, reactive } from "vue";
 import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
+import { Share } from '@capacitor/share';
+import {Capacitor} from "@capacitor/core";
+import {_BASE_URL} from "@/composables/api/common/define";
 
 export default {
   name: "SaveDataList",
@@ -104,8 +102,8 @@ export default {
     Navigation,
     FixedBtn,
   },
-  props: {
-    ResultNo: { required: true },
+  props:{
+    ResultNo:{ type: String},
   },
   setup(props) {
     const survey = useSurvey();
@@ -129,54 +127,91 @@ export default {
     });
 
     const item = computed(() => reactResult.Result);
+    const key = router.currentRoute.value.query.key;
 
-    onBeforeMount(() => {
-      survey.getResult(props.ResultNo).then((r) => {
-        if (r.data.Status === 1 && r.data.Data) {
-          const v = (reactResult.Result = r.data.Data);
-          reactResultFormatted.CreateAt = formatter.toDate(v.CreateAt);
-          reactResultFormatted.BirthDay = formatter.toDate(v.BirthDay, [
-            "년 ",
-            "월 ",
-            "일",
-          ]);
-          reactResultFormatted.Gender = formatter.toGender(v.Gender);
-          reactResultFormatted.Age = v.Age + "대";
-          reactResultFormatted.Families = v.Families + "인";
-          reactResultFormatted.PayBackCount = v.PayBackCount + "회";
-          reactResultFormatted.Phone = formatter.toPhone(v.Phone);
-          reactResultFormatted.UseAtomyYn = formatter.toYn(v.UseAtomyYn);
-          reactResultFormatted.AmountPerYear =
-            formatter.toPrice(v.AmountPerYear) + " 원";
-          reactResultFormatted.PVPerYear =
-            formatter.toPrice(v.PVPerYear) + " PV";
-        } else {
-          alert("잠시후 다시 시도해 주세요.");
-          router.back();
+    onBeforeMount(()=>{
+      if(router.currentRoute.value.name === 'ShareView'){
+        //공유 화면
+        if(key){
+          survey.getResultByKey(encodeURIComponent(key)).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              reactResult.Result = r.data.Data;
+              drawData(reactResult.Result);
+            } else {
+              alert('잠시후 다시 시도해 주세요.')
+            }
+          })
         }
-      });
+      }else{
+        //결과 화면
+        survey.getResult(props.ResultNo).then((r) => {
+          if (r.data.Status === 1 && r.data.Data) {
+            reactResult.Result = r.data.Data;
+            drawData(reactResult.Result);
+          } else {
+            alert('잠시후 다시 시도해 주세요.')
+            router.back();
+          }
+        });
+      }
     });
 
-    function snsShare(title, url) {
-      if (navigator.share) {
-        navigator.share({ title: title, url: url });
-      } else {
-        alert("지원하지 않는 브라우저입니다.");
-      }
+    function drawData(v) {
+      reactResultFormatted.CreateAt = formatter.toDate(v.CreateAt);
+      reactResultFormatted.BirthDay = formatter.toDate(v.BirthDay, ['년 ', '월 ', '일']);
+      reactResultFormatted.Gender = formatter.toGender(v.Gender);
+      reactResultFormatted.Age = v.Age + '대';
+      reactResultFormatted.Families = v.Families + '인';
+      reactResultFormatted.PayBackCount = v.PayBackCount + '회';
+      reactResultFormatted.Phone = formatter.toPhone(v.Phone);
+      reactResultFormatted.UseAtomyYn = formatter.toYn(v.UseAtomyYn);
+      reactResultFormatted.AmountPerYear = formatter.toPrice(v.AmountPerYear) + ' 원';
+      reactResultFormatted.PVPerYear = formatter.toPrice(v.PVPerYear) + ' PV';
+    }
+
+    function snsShare(title) {
+      survey.getResultKey(props.ResultNo).then(async (r) => {
+        if (r.data.Status === 1 && r.data.Data) {
+          const key = r.data.Data;
+          const url = `${_BASE_URL}/ShareView?key=${key}`;
+
+          if (!Capacitor.isNativePlatform()) {
+            if( typeof navigator.share === 'function' ) {
+              await navigator.share({
+                title: title,
+                url: url,
+                text: 'atomy text',
+                dialogTitle: 'atomy dialogTitle'
+              });
+            } else {
+              alert('지원하지 않는 브라우저입니다.');
+            }
+          } else {
+            const is_share = await Share.canShare();
+            if (is_share.value) {
+              await Share.share({
+                title: title,
+                text: 'Atomy\n\n\n',
+                url: url + '\n\n\nhttps://www.atomy.kr/v2/Home/Product/MallMain',
+              });
+            } else {
+              alert('지원하지 않는 디바이스 입니다.');
+            }
+          }
+        } else {
+          alert('잠시후 다시 시도해 주세요.')
+        }
+      });
     }
 
     function handleDelect() {
-      console.log("handleDelete");
-      if (
-        confirm(
-          "해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다."
-        )
-      ) {
+      console.log('handleDelete');
+      if (confirm('해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다.')) {
         survey.deletes([Number(props.ResultNo)]).then((r) => {
           if (r.data.Status === 1 && r.data.Data) {
             router.back();
           } else {
-            alert("잠시후 다시 시도해 주세요.");
+            alert('잠시후 다시 시도해 주세요.');
           }
         });
       }

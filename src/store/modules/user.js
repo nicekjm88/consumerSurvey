@@ -5,25 +5,28 @@ const state = {
     id: undefined,
     name: undefined,
     token: undefined,
+    role: undefined,
 }
 
 const getters = {
     id: (state) => state.id,
     name: (state) => state.name,
     token: (state) => state.token,
+    role: (state) => state.role,
 }
 
 const actions = {
-    [ACTION.USER.LOGIN] ({commit}, user){
+    [ACTION.USER.LOGIN]({commit}, user) {
         commit(MUTATION.USER.SET, user)
     },
 
-    [ACTION.USER.LOGOUT] ({commit}){
+    [ACTION.USER.LOGOUT]({commit}) {
         commit(MUTATION.USER.SET,
             {
                 id: undefined,
                 name: undefined,
                 token: undefined,
+                role: undefined,
             })
     },
 }
@@ -33,6 +36,7 @@ const mutations = {
         state.id = user.id;
         state.name = user.name;
         state.token = user.token;
+        state.role = user.role;
     }
 }
 

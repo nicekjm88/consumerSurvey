@@ -24,8 +24,14 @@ export default function useSettingsManager(){
         return store.getters['settings/data']
     }
 
+    function isDone(){
+        const data = getData();
+        return data.StdPV > 0 && data.StdN > 0 && data.StdScore > 0;
+    }
+
     return {
         fetch,
         getData,
+        isDone,
     }
 }
