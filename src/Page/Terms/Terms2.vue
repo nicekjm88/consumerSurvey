@@ -61,11 +61,11 @@ export default {
 .terms-area {
 
   article {
-    height: 47vh;
-    overflow: auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 10px;
+    // height: 47vh;
+    // overflow: auto;
+    // border: 1px solid #ccc;
+    // padding: 20px;
+    // margin-bottom: 10px;
 
     .list.list-order {
       & > li {

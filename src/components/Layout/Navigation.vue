@@ -7,12 +7,18 @@
       <span class="a11y">앱정보</span>
     </button>
     </router-link>
-    <router-link to="/SaveDataList">
-    <button type="button">
-      <i class="xi-list-square"></i>
-      <span class="a11y">저장 리스트</span>
-    </button>
+    <div>
+      <button type="button">
+        <i class="xi-log-out"></i>
+        <span class="a11y">로그아웃</span>
+      </button>
+      <router-link to="/SaveDataList">
+      <button type="button">
+        <i class="xi-list-square"></i>
+        <span class="a11y">저장 리스트</span>
+      </button>
     </router-link>
+    </div>
   </nav>
 
   <nav v-else-if="$route.name === 'SaveDataList'" class="navigation icon-alone">

@@ -27,8 +27,11 @@ export default {
   name: "progressBar",
   data() {
     return {
-      progressStatus: 45,
+    
     };
+  },
+  props: {
+    progressStatus: Number
   },
   methods() {},
 };

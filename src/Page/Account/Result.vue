@@ -26,6 +26,14 @@
             </div>
           </router-link>
 
+          <router-link to="/Result2">
+            <div class="d-grid">
+              <button class="btn btn-outline-primary block">
+                혹시 PV가 뭔지 궁금하신가요?
+              </button>
+            </div>
+          </router-link>
+
           <p>
             0인 가족 기준<br />
             애터미 쇼핑몰에서 위 상품 등을 구매하시면<br />
@@ -40,8 +48,8 @@
         </div>
       </section>
     </main>
-    <router-link to="/Result2">
-      <FixedBtn msg="다음" />
+    <router-link to="/SaveData">
+      <FixedBtn msg="자료저장" />
     </router-link>
   </div>
 </template>

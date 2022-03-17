@@ -15,9 +15,8 @@
         </p>
         <p>
           아래 애터미 사업 구조도를 봐주세요!<br />
-          내 하위에 있는 사람들을 한번 클릭해보시겠어요?
-        </p>
-        <p hidden>{{ conditionPv }}</p>
+          내 하위에 있는 사람들을 한번 눌러보시겠어요?
+        </p>        
         <p class="info">
           사람들을 <i class="xi-touch" style="font-size:20px"></i>해보세요.
         </p>
@@ -36,6 +35,7 @@
               @click.once="activate"
               @click="isAddPv2()"
               type="button"
+              :disabled="isButtonDisabled"              
             >
               <p>{{ leftUnder1 }}만 PV</p>
               <div class="dimmed"></div>
@@ -45,6 +45,7 @@
               @click.once="activate"
               @click="isAddPv21()"
               type="button"
+              :disabled="isButtonDisabled"
             >
               <p>{{ leftUnder2 }}만 PV</p>
               <div class="dimmed"></div>
@@ -54,6 +55,7 @@
               @click.once="activate"
               @click="isAddPv22()"
               type="button"
+              :disabled="isButtonDisabled"
             >
               <p>{{ leftUnder3 }}만 PV</p>
               <div class="dimmed"></div>
@@ -63,6 +65,7 @@
               @click.once="activate"
               @click="isAddPv3()"
               type="button"
+              :disabled="isButtonDisabled"
             >
               <p>{{ rightUnder1 }}만 PV</p>
               <div class="dimmed"></div>
@@ -72,6 +75,7 @@
               @click.once="activate"
               @click="isAddPv31()"
               type="button"
+              :disabled="isButtonDisabled"
             >
               <p>{{ rightUnder2 }}만 PV</p>
               <div class="dimmed"></div>
@@ -81,6 +85,7 @@
               @click.once="activate"
               @click="isAddPv32()"
               type="button"
+              :disabled="isButtonDisabled"
             >
               <p>{{ rightUnder3 }}만 PV</p>
               <div class="dimmed"></div>
@@ -1417,18 +1422,18 @@
         </div>
       </section>
 
+      
+
       <div class="page-step1" v-if="this.nextStep == true">
-        <p>
-          아주 잘하셨습니다.<br />그럼 내 하위 그룹 좌측과 우측 모두 30만 PV를
-          맞췄다면 얼만큼의 수당이 발생되는지 보겠습니다.
-        </p>
-        <p>아래 버튼을 클릭해보세요!</p>
-        <button
-          class="btn btn-outline-primary block"
-          @click="addClass(), result()"
-        >
-          수당 받기!!
-        </button>
+        <Modal />
+        <div class="d-grid">
+          <button
+            class="btn btn-outline-primary block"
+            @click="addClass(), result()"
+          >
+            수당 받기!!
+          </button>
+        </div>
       </div>
 
       <div
@@ -1480,6 +1485,7 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
+import Modal from "@/components/Modal"
 
 export default {
   name: "Result",
@@ -1492,35 +1498,28 @@ export default {
       rightUnder1: 0,
       rightUnder2: 0,
       rightUnder3: 0,
+      leftSum: 0,
+      rightSum: 0,
+      totalSum: 0,
       returnPv: 60000,
       nextStep: false,
       nextStep2: false,
       isAddClass: false,
+      isButtonDisabled: false
     };
   },
-  computed: {
-    conditionPv: function() {
-      let leftSum = 0;
-      let rightSum = 0;
-      let totalSum = 0;
-
-      leftSum = this.leftUnder1 + this.leftUnder2 + this.leftUnder3;
-      rightSum = this.rightUnder1 + this.rightUnder2 + this.rightUnder3;
-
-      totalSum = leftSum + rightSum;
-
-      while (totalSum === 60) {
-        if (leftSum === 30 && rightSum === 30) {
-          alert("축하합니다. 수당이 발생하셨습니다.");
-          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-          this.nextStep = true;
-
-          break;
-        }
+  updated() {
+    this.caculation();
+  },
+  watch: {
+    totalSum (value) {
+      if ( value >= 60 ) {
+        if ( this.leftSum >= 30 && this.rightSum >= 30 ) {
+          this.nextStep = true;  
+          this.isButtonDisabled = true;
+        }        
       }
-
-      return totalSum;
-    },
+    }
   },
   methods: {
     addClass() {
@@ -1553,6 +1552,11 @@ export default {
     isAddPv32() {
       this.rightUnder3 >= 30 ? 30 : (this.rightUnder3 += 10);
     },
+    caculation() {
+      this.leftSum = this.leftUnder1 + this.leftUnder2 + this.leftUnder3;
+      this.rightSum = this.rightUnder1 + this.rightUnder2 + this.rightUnder3;
+      this.totalSum = this.leftSum + this.rightSum;
+    },
     result() {
       this.nextStep2 = true;
       this.moneyUnit();
@@ -1567,15 +1571,15 @@ export default {
       const modal = this.$refs.modal;
 
       window.addEventListener("click", (e) => {
-        console.log(e.target);
         e.target !== modal ? modal.classList.remove("isActive") : false;
       });
-      console.log(modal);
+      
     },
   },
   components: {
     Navigation,
     FixedBtn,
+    Modal
   },
 };
 </script>
@@ -1769,7 +1773,7 @@ export default {
         left: 50%;
         font-size: 10px;
         transform: translateX(-50%);
-        margin-left: -48px;
+        margin-left: -47px;
         border-radius: 50%;
       }
 
@@ -1802,7 +1806,7 @@ export default {
         left: 50%;
         font-size: 10px;
         transform: translateX(-50%);
-        margin-left: 132px;
+        margin-left: 133px;
         border-radius: 50%;
       }
     }
@@ -1811,14 +1815,26 @@ export default {
   .img_wrap {
     text-align: center;
   }
+
+  .disabled-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.btn.btn-outline-primary.block {
+.btn.btn-outline-primary {
   border: 2px solid #00b5ef;
   color: #00b5ef;
-  height: 48px;
   margin-bottom: 1rem;
-  width: 100%;
+  height: 48px;
 }
 .btn.btn-outline-primary:hover {
   color: #00b5ef;
