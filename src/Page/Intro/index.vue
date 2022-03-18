@@ -965,10 +965,10 @@
 </template>
 
 <script>
-import "animate.css";
-import FixedBtn from "@/components/Layout/FixedBtn.vue";
-import Navigation from "@/components/Layout/Navigation.vue";
-import { onMounted } from "vue";
+import 'animate.css';
+import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import Navigation from '@/components/Layout/Navigation.vue';
+import {onBeforeMount} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager";
@@ -991,7 +991,7 @@ export default {
         .then(() => settingsManager.fetch(true));
     }
 
-    onMounted(() => {
+    onBeforeMount(()=>{
       loadData();
     });
   },

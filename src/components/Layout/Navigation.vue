@@ -1,11 +1,11 @@
 <template>
   <div>
     <nav v-if="$route.name === 'intro'" class="navigation intro">
-      <button type="button">
+      <button type="button" @click="logout">
         <img :src="require('@/assets/image/i-login.svg')" />
       </button>
 
-      <router-link to="/SaveDataList">
+      <router-link v-if="userType === 1" to="/SaveDataList">
         <button type="button">
           <i class="xi-list-square"></i>
           <span class="a11y">저장 리스트</span>
@@ -25,13 +25,13 @@
       </router-link>
     </nav>
 
-    <nav v-else-if="$route.name === 'SaveDataView'" class="navigation">
-      <button type="button" @click="historyBack">
+    <nav v-else-if="$route.name === 'SaveDataView' || $route.name === 'GuestView' || $route.name === 'ShareView'" class="navigation">
+      <button type="button" @click="historyBack" v-if="userType === 1">
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
 
-      <div>
+      <div v-if="userType !== 3" :style="userType === 2 ? { marginLeft:'auto' } : {}">
         <button type="button" @click="$emit('buttonEditClick', $event)">
           <img :src="require('@/assets/image/i-modify.svg')" />
           <span class="a11y">수정하기</span>
@@ -62,7 +62,8 @@
 
 <script>
 import useUserManager from "@/store/user-manager";
-import { computed } from "vue";
+import router from "@/router";
+
 export default {
   name: "Navigation",
   methods: {
@@ -70,16 +71,23 @@ export default {
       return history.back();
     },
   },
-  setup() {
-    const userManager = useUserManager();
 
-    const isGuest = computed(() => userManager.isGuest());
+  setup(){
+    const userManager = useUserManager()
+    const userType = userManager.getUserType();
+
+    function logout(){
+      userManager.logout().then(() => {
+        router.push('/login')
+      });
+    }
 
     return {
-      isGuest,
-    };
-  },
-};
+      userType,
+      logout,
+    }
+  }
+}
 </script>
 
 <style lang="scss">

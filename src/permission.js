@@ -22,7 +22,8 @@ router.beforeEach(async (to, from, next) => {
     }
 
     if(next_path === undefined && role) {
-        if (userManager.identity.role !== role) {
+        const r = role.filter((x) => x === userManager.identity.role);
+        if(r.length === 0){
             next_path = '/error'
         }
     }

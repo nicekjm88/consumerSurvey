@@ -86,13 +86,14 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
-import { computed, onBeforeMount, reactive } from "vue";
+import {computed, getCurrentInstance, onBeforeMount, reactive} from "vue";
 import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
 import { Share } from '@capacitor/share';
 import {Capacitor} from "@capacitor/core";
 import {_BASE_URL} from "@/composables/api/common/define";
+import useUserManager from "@/store/user-manager";
 
 export default {
   name: "SaveDataList",
@@ -111,6 +112,8 @@ export default {
   setup(props) {
     const survey = useSurvey();
     const formatter = useFormatter();
+    const userManager = useUserManager();
+    const that = getCurrentInstance();
 
     const reactResult = reactive({ Result: {} });
     const reactResultFormatted = reactive({
@@ -133,6 +136,7 @@ export default {
     const key = router.currentRoute.value.query.key;
 
     onBeforeMount(()=>{
+      that.data.isShared = userManager.getUserType() !== 1;
       if(router.currentRoute.value.name === 'ShareView'){
         //공유 화면
         if(key){
@@ -144,6 +148,18 @@ export default {
               alert('잠시후 다시 시도해 주세요.')
             }
           })
+        }
+      }else if(router.currentRoute.value.name === 'GuestView'){
+        //게스트 결과 화면
+        if(key){
+          survey.getResultForGuest(encodeURIComponent(key)).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              reactResult.Result = r.data.Data;
+              drawData(reactResult.Result);
+            } else {
+              alert('잠시후 다시 시도해 주세요.')
+            }
+          });
         }
       }else{
         //결과 화면
@@ -208,21 +224,33 @@ export default {
     }
 
     function handleDelect() {
-      console.log('handleDelete');
       if (confirm('해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다.')) {
-        survey.deletes([Number(props.ResultNo)]).then((r) => {
-          if (r.data.Status === 1 && r.data.Data) {
-            router.back();
-          } else {
-            alert('잠시후 다시 시도해 주세요.');
-          }
-        });
+        if (userManager.getUserType() === 1) {
+          survey.deletes([Number(props.ResultNo)]).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              router.back();
+            } else {
+              alert('잠시후 다시 시도해 주세요.');
+            }
+          });
+        }else {
+          survey.deleteForGuest(encodeURIComponent(key)).then((r)=>{
+            if (r.data.Status === 1 && r.data.Data) {
+              router.push('/intro');
+            }else{
+              alert('잠시후 다시 시도해 주세요.');
+            }
+          })
+        }
       }
     }
 
     function handleEdit() {
-      console.log("handleEdit");
-      router.push({ path: "/SaveData", query: { ResultNo: props.ResultNo } });
+      if (userManager.getUserType() === 1) {
+        router.push({path: "/SaveData", query: {ResultNo: props.ResultNo}});
+      } else {
+        router.push(`/SaveData?key=${encodeURIComponent(key)}`);
+      }
     }
 
     return {

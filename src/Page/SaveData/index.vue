@@ -96,8 +96,7 @@ export default {
     const survey = useSurvey();
     const formatter = useFormatter();
 
-    const isEdit = ref(router.currentRoute.value.query.ResultNo > 0);
-    const resultNo = router.currentRoute.value.query.ResultNo;
+    const isEdit = ref(router.currentRoute.value.query.ResultNo > 0 || !!router.currentRoute.value.query.key);
     const date = ref(getDateString())
 
     const data = reactive({
@@ -118,25 +117,39 @@ export default {
     });
 
     onBeforeMount(() => {
-      if(!productsManager.isDone() || !questionsManager.isDone() || !settingsManager.isDone()){
-        router.push('/intro');
-      }
-
       //설문 수정
       if(isEdit.value) {
-        survey.getResult(resultNo).then((r) => {
-          if(r.data.Status === 1 && r.data.Data){
-            const d = r.data.Data;
-            data.ResultNo = d.ResultNo;
-            data.Name = d.Name;
-            data.BirthDay = d.BirthDay;
-            data.Gender = d.Gender;
-            data.Phone = d.Phone;
-            date.value = formatter.toDate(d.CreateAt);
-          }
-        });
+        const user_type = userManager.getUserType();
+        if(user_type === 1) {
+          const resultNo = router.currentRoute.value.query.ResultNo;
+          survey.getResult(resultNo).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              initData(r.data.Data);
+            }
+          });
+        }else if(user_type === 2){
+          const key = router.currentRoute.value.query.key;
+          survey.getResultForGuest(encodeURIComponent(key)).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              initData(r.data.Data);
+            }
+          });
+        }
+      }else{
+        if(!productsManager.isDone() || !questionsManager.isDone() || !settingsManager.isDone()){
+          router.push('/intro');
+        }
       }
     });
+
+    function initData(d){
+      data.ResultNo = d.ResultNo;
+      data.Name = d.Name;
+      data.BirthDay = d.BirthDay;
+      data.Gender = d.Gender;
+      data.Phone = d.Phone;
+      date.value = formatter.toDate(d.CreateAt);
+    }
 
     function isRequiredName(value) {
       return value ? true : '이름을 입력해주세요.';
@@ -159,18 +172,30 @@ export default {
     }
 
     function onSubmit() {
-      if(isEdit.value){
+      if (isEdit.value) {
         //설문 수정
-        if(confirm("수정하시겠습니까?")) {
-          survey.edit(data).then((r) => {
-            if (r.data.Status === 1 && r.data.Data) {
-              router.back();
-            } else {
-              alert('잠시후 다시 시도해 주세요.');
-            }
-          });
+        if (confirm("수정하시겠습니까?")) {
+          const user_type = userManager.getUserType();
+          if(user_type === 1) {
+            survey.edit(data).then((r) => {
+              if (r.data.Status === 1 && r.data.Data) {
+                router.back();
+              } else {
+                alert('잠시후 다시 시도해 주세요.');
+              }
+            });
+          }else if(user_type === 2) {
+            const key = router.currentRoute.value.query.key;
+            survey.editForGuest(data, encodeURIComponent(key)).then((r) => {
+              if (r.data.Status === 1 && r.data.Data) {
+                router.back();
+              }else{
+                alert('잠시후 다시 시도해 주세요.');
+              }
+            })
+          }
         }
-      }else {
+      } else {
         //설문 저장
         data.Age = selectedQuestions.Age;
         data.Families = selectedQuestions.Families;
@@ -185,17 +210,24 @@ export default {
         data.PVPerYear = selectedProducts.PVPerYear;
         data.CreateAt = date.value.replace(/\./gi, '');
 
-        survey.save(data).then((r) => {
-          if (r.data.Status === 1 && r.data.Data) {
-            if (userManager.isGuest()) {
-              router.push(`/SaveDataView/${r.data.Data}`);
+        if (userManager.getUserType() === 2) {
+          survey.saveForGuest(data).then((r) => {
+            console.log(r);
+            if (r.data.Status === 1 && r.data.Data) {
+              router.push(`/GuestView?key=${r.data.Data}`);
             } else {
-              router.push('/SaveDataList')
+              alert('잠시후 다시 시도해 주세요.');
             }
-          }else {
-            alert('잠시후 다시 시도해 주세요.');
-          }
-        });
+          });
+        } else {
+          survey.save(data).then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              router.push('/SaveDataList')
+            } else {
+              alert('잠시후 다시 시도해 주세요.');
+            }
+          });
+        }
       }
     }
 

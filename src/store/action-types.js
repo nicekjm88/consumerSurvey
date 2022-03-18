@@ -7,7 +7,7 @@ export const ACTION = {
     PRODUCTS: {
         SET: 'SET_PRODUCTS',
         TOGGLE: 'TOGGLE_PRODUCT',
-        CLEAR_CHECKED: 'CLEAR_CHECKED_PRODUCT',
+        SELECT_OPERATION: 'SELECT_OPERATION_PRODUCT',
         makeDispatch: (action) => 'products/' + action
     },
     QUESTIONS: {
@@ -21,6 +21,7 @@ export const ACTION = {
     },
     APP:{
         SET_HTTP: 'SET_HTTP_APP',
+        SET_HTTP_IGNORE: 'SET_HTTP_IGNORE_APP',
         makeDispatch: (action) => 'app/' + action
     }
 }

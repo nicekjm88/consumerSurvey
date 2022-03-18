@@ -28,12 +28,12 @@ export default function useHttp() {
                     method: 'get',
                     url: url,
                     headers: headers
-                }).finally(() => appManager.resetHttpBusy());
+                }).finally(() => setTimeout(() => appManager.resetHttpBusy(), 100));
             } else {
                 return Http.get({
                     url: url,
                     headers: headers,
-                }).finally(() => appManager.resetHttpBusy());
+                }).finally(() => setTimeout(() => appManager.resetHttpBusy(), 100));
             }
         },
 
@@ -47,13 +47,13 @@ export default function useHttp() {
                     url: url,
                     data: data,
                     headers: headers
-                }).finally(() => appManager.resetHttpBusy());
+                }).finally(() => setTimeout(() => appManager.resetHttpBusy(), 100));
             } else {
                 return Http.post({
                     url: url,
                     headers: headers,
                     data: data,
-                }).finally(() => appManager.resetHttpBusy());
+                }).finally(() => setTimeout(() => appManager.resetHttpBusy(), 100));
             }
         }
     }

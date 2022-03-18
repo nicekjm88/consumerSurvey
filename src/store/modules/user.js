@@ -6,6 +6,7 @@ const state = {
     name: undefined,
     token: undefined,
     role: undefined,
+    remember: false,
 }
 
 const getters = {
@@ -13,6 +14,7 @@ const getters = {
     name: (state) => state.name,
     token: (state) => state.token,
     role: (state) => state.role,
+    remember: (state) => state.remember,
 }
 
 const actions = {
@@ -27,6 +29,7 @@ const actions = {
                 name: undefined,
                 token: undefined,
                 role: undefined,
+                remember: false,
             })
     },
 }
@@ -37,6 +40,7 @@ const mutations = {
         state.name = user.name;
         state.token = user.token;
         state.role = user.role;
+        state.remember = user.remember;
     }
 }
 

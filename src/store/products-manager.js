@@ -34,7 +34,19 @@ export default function useProductsManager() {
     }
 
     async function clearChecked(pidx = -1) {
-        return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.CLEAR_CHECKED), pidx);
+        return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.SELECT_OPERATION), {
+            pidx,
+            idx: -1,
+            checked: false
+        });
+    }
+
+    async function selectAll(pidx = -1) {
+        return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.SELECT_OPERATION), {
+            pidx,
+            idx: -1,
+            checked: true
+        });
     }
 
     async function toggle(pidx, idx) {
@@ -61,15 +73,16 @@ export default function useProductsManager() {
                 if (c.ch && c.ch.length > 0) {
                     const selected = c.ch.filter((x) => x.checked);
                     if (selected.length > 0) {
-                        selected.forEach((item) => {
-                            a.AmountPerYear += item.Cost * item.StdCount;
-                            a.PVPerYear += item.PV * item.StdCount;
-                            a.Products.push(item);
+                        selected.forEach((s) => {
+                            a.Count++;
+                            a.AmountPerYear += s.Cost * s.StdCount;
+                            a.PVPerYear += s.PV * s.StdCount;
+                            a.Products.push(s);
                         });
                     }
                 }
                 return a;
-            }, {AmountPerYear:0,PVPerYear:0, Products:[]});
+            }, {Count:0, AmountPerYear:0,PVPerYear:0, Products:[]});
             return item;
         }
 
@@ -102,6 +115,7 @@ export default function useProductsManager() {
         get: () => store.getters["products/data"],
         toggle,
         clearChecked,
+        selectAll,
         getSelected,
         getSelectedGroupCount,
         hasValue,

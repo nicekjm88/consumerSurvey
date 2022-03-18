@@ -1,5 +1,5 @@
 <template>
-  <div class="app_loading-warp" v-if="isHttpBusy">
+  <div class="app_loading-warp" v-show="isHttpBusy">
     <Loading />
       <!-- <p class="app_loading-spinner">
         <i class="xi-spinner-5 xi-spin"></i>

@@ -16,6 +16,7 @@
     "@capacitor/core": "^3.4.1",
     "@capacitor/ios": "^3.4.1",
     "@capacitor/share": "^1.1.2",
+    "@capacitor/storage": "^1.2.5",
     "@popperjs/core": "^2.9.3",
     "animate.css": "^4.1.1",
     "axios": "^0.25.0",
