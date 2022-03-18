@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="37.889" viewBox="0 0 44 37.889">
+  <g id="그룹_2624" data-name="그룹 2624" transform="translate(-38 -64)">
+    <path id="switch2" d="M11.584,21.938A8.58,8.58,0,0,1,8.494,5.353V8.408a5.835,5.835,0,1,0,6.867.5V5.655a8.578,8.578,0,0,1-3.777,16.283Zm.343-9.614a1.374,1.374,0,0,1-1.373-1.373V3.311a1.373,1.373,0,0,1,2.747,0v7.64A1.373,1.373,0,0,1,11.927,12.324Z" transform="translate(48.416 62.062)" fill="#76706b"/>
+    <text id="로그아웃" transform="translate(60 98.889)" font-size="11" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR" letter-spacing="0.1em"><tspan x="-21.89" y="0">로그아웃</tspan></text>
+  </g>
+</svg>

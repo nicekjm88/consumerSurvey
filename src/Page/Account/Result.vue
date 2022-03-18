@@ -8,7 +8,7 @@
         <div class="rounded-box rounded-box__wrapper">
           <h2 class="title">결과 확인 및 설명</h2>
           <hr />
-          <p>총 {{ groupCount.TotalCount }}개를 선택하였습니다.</p>
+          <p>총 00개 중 {{ groupCount.TotalCount }}개를 선택하였습니다.</p>
           <p>[선택리스트]</p>
           <ul class="list list-dot">
             <li v-for="(item, idx) in groupCount.Groups" :key="idx">
@@ -16,20 +16,10 @@
             </li>
           </ul>
 
-          <p>내가 선택한 상품 “애터미 쇼핑몰”에서 찾아보기</p>
-
           <router-link to="/AtomyProduct">
             <div class="d-grid">
               <button class="btn btn-outline-primary block">
                 선택하신 상품이 애터미 쇼핑몰에도 있어요!
-              </button>
-            </div>
-          </router-link>
-
-          <router-link to="/Result2">
-            <div class="d-grid">
-              <button class="btn btn-outline-primary block">
-                혹시 PV가 뭔지 궁금하신가요?
               </button>
             </div>
           </router-link>
@@ -41,10 +31,40 @@
             누적 포인트(PV)는 0,000,000 PV입니다.<br />
           </p>
           <p>
-            누적 포인트에 따라<br />
-            더 많은 혜택을 받고 싶으시다면 아래 버튼을<br />
-            클릭해주세요.
+            PV에 대한 설명을 알고 싶으신 분들은 아래 버튼을<br />클릭해주세요.
           </p>
+
+          더 많은 상품보기
+          <p>
+            애터미 쇼핑몰에는 500여가지 제품이 있으며,<br />수만가지 제품 등을
+            구매할 수 있는 애터미 아자몰이 있습니다.
+          </p>
+
+          <router-link to="/Result2">
+            <div class="d-grid">
+              <button class="btn btn-primary block">
+                PV 알아보기
+              </button>
+            </div>
+          </router-link>
+
+          <div class="family-site">
+            <div>
+              <a href="http://m.atomy.com/kr/m" target="_blank">
+                <img
+                  :src="require(`@/assets/image/logo2.svg`)"
+                  style="width: 65px"
+                />
+                <p>애터미 쇼핑몰의 상품이<br />궁금하시다면?</p>
+              </a>
+            </div>
+            <div>
+              <a href="https://atomyaza.co.kr/m/" target="_blank">
+                <img :src="require(`@/assets/image/logo-aza.svg`)" />
+                <p>애터미 아자몰의 상품이<br />궁금하시다면?</p>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -101,10 +121,20 @@ export default {
   }
 
   .btn {
-    border: 2px solid #00b5ef;
-    color: #00b5ef;
+    border: 2px solid $mainColor;
     height: 48px;
     margin-bottom: 1rem;
+    color: #00b5ef;
+
+    &.btn-primary {
+      background-color: #5ed8ff;
+      border-color: #5ed8ff;
+      color: #fff;
+    }
+
+    &.btn-outline-primary {
+      color: #00b5ef;
+    }
   }
 }
 
@@ -124,6 +154,37 @@ export default {
         line-height: 1;
       }
     }
+  }
+}
+
+.family-site {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  position: relative;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #414141;
+    text-align: center;
+
+    p {
+      margin-top: 10px;
+    }
+  }
+
+  &::after {
+    content: "";
+    width: 1px;
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    background-color: #ccc;
   }
 }
 </style>
