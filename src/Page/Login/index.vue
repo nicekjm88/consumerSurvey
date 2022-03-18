@@ -12,7 +12,7 @@
 
           <div class="save-id">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="saveId">
+              <input class="form-check-input" v-model="remember" type="checkbox" id="saveId">
               <label class="form-check-label" for="saveId">아이디 저장</label>
             </div>
           </div>
@@ -40,7 +40,7 @@
 
 <script>
 import { Field, Form } from 'vee-validate';
-import useAuth from "@/composables/api/auth";
+// import useAuth from "@/composables/api/auth";
 import useUserManager from "@/store/user-manager";
 import router from "@/router";
 import {ref} from 'vue';
@@ -52,9 +52,10 @@ export default {
     Form,
   },
   setup () {
-    const auth = useAuth();
+    const userManager = useUserManager();
 
     const isTryLogin = ref(false);
+    const remember = ref(false);
 
     function isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
@@ -65,22 +66,15 @@ export default {
     }
 
     function onSubmit(values) {
-      console.log(values);
-      //테스트 용
-      // values.atomyId === '120000' && values.atomyPw === 'atomy@8580'
-      //   ? router.push('/intro')
-      //   : alert('올바른 아이디/비밀번호가 아닙니다.');
-
       isTryLogin.value = true;
-      auth.login(values.atomyId, values.atomyPw).finally(() => {
-        isTryLogin.value = false;
-        const user = useUserManager();
-        if(user.identity.token){
-          router.push('/intro');
-        } else {
-          alert('아이디 비밀번호를 확인해주세요.')
-        }
-      })
+      userManager.login(values.atomyId, values.atomyPw, remember.value).finally(() => {
+          isTryLogin.value = false;
+          if(userManager.identity.token){
+            router.push('/intro');
+          } else {
+            alert('아이디 비밀번호를 확인해주세요.');
+          }
+      });
     }
 
     return {
@@ -88,6 +82,7 @@ export default {
       isRequiredBirthDay,
       onSubmit,
       isTryLogin,
+      remember,
     }
   }
 }

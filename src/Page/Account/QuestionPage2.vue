@@ -13,9 +13,15 @@
         <div id="answer">
           <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
             <strong class="answer-item__title">{{ item.Name }}</strong>
-            <button class="btn-cancel" @click="selectCancel(pidx)">
-              선택취소
-            </button>
+            <div class="btn-cancel">
+              <button @click="selectAll(pidx)">
+                전체선택
+              </button>
+              <button @click="selectCancel(pidx)">
+                선택취소
+              </button>
+            </div>
+
             <div class="rounded-box">
               <div
                 class="form-check"
@@ -23,11 +29,11 @@
                 :key="idx"
               >
                 <input
-                  class="form-check-input"
-                  type="checkbox"
-                  :checked="product.checked"
-                  @change="productToggle(pidx, idx)"
-                  :id="`products_${pidx}_${idx}`"
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="product.checked"
+                    @change="productToggle(product)"
+                    :id="`products_${pidx}_${idx}`"
                 />
                 <label
                   class="form-check-label"
@@ -48,13 +54,13 @@
         class="modal-dimmed page-step2"
         :class="{ isActive: isAddClass }"
         v-if="this.isModal == true"
-      >    
+      >
         <div class="icon">🎉</div>
         <p>
           축하합니다!!<br>
           30만 PV를 달성하셨습니다.<br>
           이제 수당을 받을 자격을<br>갖추게 되셨습니다.
-        </p>        
+        </p>
       </div>
 
     </main>
@@ -65,12 +71,13 @@
 </template>
 
 <script>
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import ProgressBar from "@/components/Layout/ProgressBar.vue";
 import useProductsManager from "@/store/products-manager";
 import router from "@/router";
+import { getCurrentInstance } from 'vue'
 
 export default {
   name: "QuestionPage2",
@@ -138,10 +145,12 @@ export default {
   },
   setup() {
     const productsManager = useProductsManager();
+    const that = getCurrentInstance()
+    const sumPV = ref(0);
 
     onBeforeMount(() => {
       // productsManager.fetch();
-      if(!productsManager.hasValue()){
+      if (!productsManager.hasValue()) {
         router.push('/intro');
       }
     });
@@ -156,10 +165,34 @@ export default {
 
     function selectCancel(pidx) {
       productsManager.clearChecked(pidx);
+      const sp = productsManager.getSelected();
+      if(sp && sp.PVPerYear !== undefined) {
+        sumPV.value = sp.PVPerYear;
+        updateProgress();
+      }
     }
 
-    function productToggle(pidx, idx) {
-      productsManager.toggle(pidx, idx);
+    function selectAll(pidx){
+      productsManager.selectAll(pidx);
+
+      const sp = productsManager.getSelected();
+      if(sp && sp.PVPerYear !== undefined) {
+        sumPV.value = sp.PVPerYear;
+        updateProgress();
+      }
+    }
+
+    function updateProgress(){
+      const val = Math.floor(sumPV.value / 3000);
+      that.data.progressStatus = val > 100 ? 100 : val;
+    }
+
+    function productToggle(product) {
+      const val = product.StdCount * product.PV
+      if(val) {
+        sumPV.value += (product.checked ? 1 : -1) * val;
+        updateProgress();
+      }
     }
 
     const items = computed(() => productsManager.get());
@@ -169,6 +202,7 @@ export default {
       selectCancel,
       productToggle,
       onSubmit,
+      selectAll,
     };
   },
 };
@@ -199,6 +233,10 @@ export default {
     background-color: transparent;
     color: #666;
     font-size: 12px;
+
+    & button{
+      background-color: transparent;
+    }
   }
 }
 .progress-bar {

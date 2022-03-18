@@ -22,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(product, i) in items" :key="i">
+              <tr v-for="(product, i) in items.Products" :key="i" v-show="i < maxCount">
                 <td>{{ product.Name }}</td>
                 <td>{{ product.MName }}</td>
                 <td>
@@ -32,20 +32,20 @@
               </tr>
             </tbody>
           </table>
-          <button class="btn-more" type="button">
+          <button class="btn-more" type="button" @click="showMore">
             <i class="xi-angle-down"></i> 더보기
           </button>
           <div class="total-product">
             <div class="total-product__count">
-              총 17개 상품
+              총 {{items.Count}}개 상품
             </div>
             <div class="total-product__price">
               <ul>
                 <li>
-                  가격 : <strong>156600</strong> 원
+                  가격 : <strong>{{items.AmountPerYear}}</strong> 원
                 </li>
                 <li>
-                  PV : <strong class="main-color">151315</strong> PV
+                  PV : <strong class="main-color">{{items.PVPerYear}}</strong> PV
                 </li>
               </ul>
             </div>
@@ -60,7 +60,7 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import useProductsManager from "@/store/products-manager";
-import { computed, onBeforeMount } from "vue";
+import { onBeforeMount, ref } from "vue";
 import router from "@/router";
 
 export default {
@@ -71,6 +71,9 @@ export default {
 
   setup() {
     const productsManager = useProductsManager();
+    const baseCount = 7;
+    const maxCount = ref(baseCount);
+    const items = productsManager.getSelected();
 
     onBeforeMount(() => {
       //설문 데이터가 없을때 처음으로 돌아간다.
@@ -79,10 +82,18 @@ export default {
       }
     });
 
-    const items = computed(() => productsManager.getSelected().Products);
+    function showMore(){
+      let max_count = maxCount.value + baseCount;
+      if(max_count > items.Count) max_count = items.Count;
+      maxCount.value = max_count;
+    }
+
+    // const items = computed(() => productsManager.getSelected());
 
     return {
       items,
+      showMore,
+      maxCount,
     };
   },
 };

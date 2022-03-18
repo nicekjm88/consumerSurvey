@@ -50,6 +50,7 @@
 import Navigation from '@/components/Layout/Navigation.vue';
 import {computed, onBeforeMount, reactive, ref} from "vue";
 import useSurvey from "@/composables/api/survey";
+import useAppManager from "@/store/app-manager";
 
 export default {
   name: 'SaveDataList',
@@ -58,6 +59,7 @@ export default {
   },
   setup() {
     const survey = useSurvey();
+    const appManager = useAppManager();
 
     const isEdit = ref(false)
     const reactResults = reactive({Results: []});
@@ -88,13 +90,14 @@ export default {
     }
 
     function nextResults(){
-      console.log('next');
-      survey.getResults(page.PageSize, page.PageNo + 1, page.Name).then((r) => {
-        if(r.data.Status === 1 && r.data.Data.length > 0) {
-          reactResults.Results.push(...r.data.Data);
-          page.PageNo++;
-        }
-      });
+      appManager.setIgnore(true).then(()=> {
+        return survey.getResults(page.PageSize, page.PageNo + 1, page.Name).then((r) => {
+          if (r.data.Status === 1 && r.data.Data.length > 0) {
+            reactResults.Results.push(...r.data.Data);
+            page.PageNo++;
+          }
+        })
+      }).finally(() => appManager.setIgnore(false));
     }
 
     function selectAll(){
@@ -108,7 +111,6 @@ export default {
     }
 
     function deleteList() {
-      console.log(selected);
       if(confirm('해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다.')){
         survey.deletes(selected.value).then((r) => {
           if(r.data.Status === 1){

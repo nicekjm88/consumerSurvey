@@ -18,11 +18,13 @@ const actions = {
         commit(MUTATION.PRODUCTS.TOGGLE, {pidx, idx});
     },
 
-    [ACTION.PRODUCTS.CLEAR_CHECKED] ({commit}, pidx){
+    [ACTION.PRODUCTS.SELECT_OPERATION] ({commit}, {pidx, idx, checked}){
         if(pidx === -1){
-            commit(MUTATION.PRODUCTS.CLEAR_ALL_CHECKED);
-        }else {
-            commit(MUTATION.PRODUCTS.CLEAR_CHECKED, pidx);
+            commit(MUTATION.PRODUCTS.SELECT_OPRATION_ALL, checked);
+        }else if(idx === -1){
+            commit(MUTATION.PRODUCTS.SELECT_OPERATION_GROUP, {pidx, checked});
+        }else{
+            commit(MUTATION.PRODUCTS.SELECT_OPERATION, {pidx, idx, checked});
         }
     }
 }
@@ -44,13 +46,25 @@ const mutations = {
         });
     },
 
-    [MUTATION.PRODUCTS.CLEAR_ALL_CHECKED] (state) {
+    [MUTATION.PRODUCTS.SELECT_OPERATION_GROUP] (state, {pidx, checked}) {
+        const products = state.data[pidx].ch;
+        products.forEach((product) => {
+            product.checked = checked;
+        });
+    },
+
+    [MUTATION.PRODUCTS.SELECT_OPERATION] (state, {pidx, idx,checked}) {
+        const product = state.data[pidx].ch[idx];
+        product.checked = checked;
+    },
+
+    [MUTATION.PRODUCTS.SELECT_OPRATION_ALL] (state, checked) {
         state.data.forEach((d) => {
             d.ch.forEach((product) => {
-                product.checked = false;
+                product.checked = checked;
             });
         });
-    }
+    },
 }
 
 export default {

@@ -8,11 +8,11 @@
     </button>
     </router-link>
     <div>
-      <button type="button">
+      <button type="button" @click="logout">
         <i class="xi-log-out"></i>
         <span class="a11y">로그아웃</span>
       </button>
-      <router-link to="/SaveDataList">
+      <router-link v-if="userType === 1" to="/SaveDataList">
       <button type="button">
         <i class="xi-list-square"></i>
         <span class="a11y">저장 리스트</span>
@@ -30,23 +30,23 @@
     </router-link>
   </nav>
 
-  <nav v-else-if="$route.name === 'SaveDataView'" class="navigation">
+  <nav v-else-if="$route.name === 'SaveDataView' || $route.name === 'GuestView' || $route.name === 'ShareView'" class="navigation">
 
-    <button type="button" @click="historyBack">
+    <button type="button" @click="historyBack" v-if="userType === 1">
       <i class="xi-angle-left"></i>
       <span class="a11y">뒤로</span>
     </button>
 
-    <div>
-    <button type="button" @click="$emit('buttonEditClick', $event)">
-      <img :src="require('@/assets/image/i-modify.svg')" />
-      <span class="a11y">수정하기</span>
-    </button>
+    <div v-if="userType !== 3" :style="userType === 2 ? { marginLeft:'auto' } : {}">
+      <button type="button" @click="$emit('buttonEditClick', $event)">
+        <img :src="require('@/assets/image/i-modify.svg')" />
+        <span class="a11y">수정하기</span>
+      </button>
 
-    <button type="button" @click="$emit('buttonDeleteClick', $event)">
-      <img :src="require('@/assets/image/i-delete.svg')" />
-      <span class="a11y">삭제</span>
-    </button>
+      <button type="button" @click="$emit('buttonDeleteClick', $event)">
+        <img :src="require('@/assets/image/i-delete.svg')" />
+        <span class="a11y">삭제</span>
+      </button>
     </div>
   </nav>
 
@@ -68,7 +68,8 @@
 
 <script>
 import useUserManager from "@/store/user-manager";
-import {computed} from "vue";
+import router from "@/router";
+
 export default {
   name: 'Navigation',
   methods : {
@@ -76,13 +77,22 @@ export default {
       return history.back();
     }
   },
+
   setup(){
     const userManager = useUserManager()
+    const userType = userManager.getUserType();
 
-    const isGuest = computed(() => userManager.isGuest());
+    console.log('userType', userType);
+
+    function logout(){
+      userManager.logout().then(() => {
+        router.push('/login')
+      });
+    }
 
     return {
-      isGuest
+      userType,
+      logout,
     }
   }
 }
