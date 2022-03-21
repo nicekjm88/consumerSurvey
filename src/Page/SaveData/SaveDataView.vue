@@ -60,7 +60,7 @@
               <th scope="row">선택상품</th>
               <td>
                 <!-- {{ item.ProductNames }} -->
-                <button type="button" class="btn btn-outline-dark">더보기</button>
+                <button @click="showView" type="button" class="btn btn-outline-dark">더보기</button>
               </td>
             </tr>
           </tbody>
@@ -107,12 +107,13 @@ export default {
     FixedBtn,
   },
   props:{
-    ResultNo:{ type: String},
+    resultNo:{ type: String, default: '0'},
   },
   setup(props) {
     const survey = useSurvey();
     const formatter = useFormatter();
     const userManager = useUserManager();
+
     const that = getCurrentInstance();
 
     const reactResult = reactive({ Result: {} });
@@ -140,7 +141,7 @@ export default {
       if(router.currentRoute.value.name === 'ShareView'){
         //공유 화면
         if(key){
-          survey.getResultByKey(encodeURIComponent(key)).then((r) => {
+          survey.getResultForShare(encodeURIComponent(key)).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               reactResult.Result = r.data.Data;
               drawData(reactResult.Result);
@@ -163,7 +164,7 @@ export default {
         }
       }else{
         //결과 화면
-        survey.getResult(props.ResultNo).then((r) => {
+        survey.getResult(props.resultNo).then((r) => {
           if (r.data.Status === 1 && r.data.Data) {
             reactResult.Result = r.data.Data;
             drawData(reactResult.Result);
@@ -189,7 +190,7 @@ export default {
     }
 
     function snsShare(title) {
-      survey.getResultKey(props.ResultNo).then(async (r) => {
+      survey.getResultKey(props.resultNo).then(async (r) => {
         if (r.data.Status === 1 && r.data.Data) {
           const key = r.data.Data;
           const url = `${_BASE_URL}/ShareView?key=${key}`;
@@ -226,7 +227,7 @@ export default {
     function handleDelect() {
       if (confirm('해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다.')) {
         if (userManager.getUserType() === 1) {
-          survey.deletes([Number(props.ResultNo)]).then((r) => {
+          survey.deletes([Number(props.resultNo)]).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               router.back();
             } else {
@@ -247,9 +248,20 @@ export default {
 
     function handleEdit() {
       if (userManager.getUserType() === 1) {
-        router.push({path: "/SaveData", query: {ResultNo: props.ResultNo}});
+        router.push({path: "/SaveData", query: {ResultNo: props.resultNo}});
       } else {
         router.push(`/SaveData?key=${encodeURIComponent(key)}`);
+      }
+    }
+
+    function showView() {
+      const user_type = userManager.getUserType();
+      if (user_type === 1) {
+        router.push(`/Result/AtomyProduct/${props.resultNo}`)
+      } else if (user_type === 2) {
+        router.push(`/Guest/AtomyProduct?key=${encodeURIComponent(key)}`);
+      } else {
+        router.push(`/Share/AtomyProduct?key=${encodeURIComponent(key)}`);
       }
     }
 
@@ -259,6 +271,7 @@ export default {
       handleDelect,
       handleEdit,
       reactResultFormatted,
+      showView,
     };
   },
 };

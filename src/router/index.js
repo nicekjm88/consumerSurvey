@@ -69,6 +69,26 @@ export const defaultRoutes = [
     component: () => import("@/Page/AtomyProduct/AtomyProduct"),
   },
   {
+    path: "/Result/AtomyProduct/:resultNo",
+    name: "ResultAtomyProduct",
+    component: () => import("@/Page/AtomyProduct/AtomyProduct"),
+    meta: {role: [1]},
+    props: true
+  },
+  {
+    path: "/Guest/AtomyProduct",
+    name: "GuestAtomyProduct",
+    component: () => import("@/Page/AtomyProduct/AtomyProduct"),
+    props: true
+  },
+  {
+    path: "/Share/AtomyProduct",
+    name: "ShareAtomyProduct",
+    component: () => import("@/Page/AtomyProduct/AtomyProduct"),
+    meta: { unauthorized:true },
+    props: true,
+  },
+  {
     path: "/SaveData",
     name: "SaveData",
     component: () => import("@/Page/SaveData"),
@@ -81,7 +101,7 @@ export const defaultRoutes = [
     meta: { role: [1] },
   },
   {
-    path: "/SaveDataView/:ResultNo",
+    path: "/SaveDataView/:resultNo",
     name: "SaveDataView",
     component: () => import("@/Page/SaveData/SaveDataView"),
     meta: { role: [1] },

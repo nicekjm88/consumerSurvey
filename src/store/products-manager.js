@@ -86,7 +86,25 @@ export default function useProductsManager() {
             return item;
         }
 
-        return {};
+        return genEmptySelected();
+    }
+
+    function genSelected(items){
+        if (items.length > 0) {
+            const item = items.reduce((a, c) => {
+                a.Count++;
+                a.AmountPerYear += c.Cost * c.StdCount;
+                a.PVPerYear += c.PV * c.StdCount;
+                a.Products.push(c);
+                return a;
+            }, {Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []})
+            return item;
+        }
+        return genEmptySelected();
+    }
+
+    function genEmptySelected(){
+        return {Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []};
     }
 
     function getSelectedGroupCount(){
@@ -120,5 +138,7 @@ export default function useProductsManager() {
         getSelectedGroupCount,
         hasValue,
         isDone,
+        genSelected,
+        genEmptySelected,
     }
 }
