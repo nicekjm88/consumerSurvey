@@ -1420,9 +1420,7 @@
             </svg>
           </div>
         </div>
-      </section>
-
-      
+      </section>      
 
       <div class="page-step1" v-if="this.nextStep == true">
         <Modal />
@@ -1442,6 +1440,59 @@
         :class="{ isActive: isAddClass }"
         v-if="this.nextStep2 == true"
       >
+        <div class="particles">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
         <div class="return-pv">
           <strong>약 ₩{{ returnPv }}원</strong>
         </div>
@@ -1456,13 +1507,9 @@
             받으실 수 있게됩니다.<br />
           </p>
           <p>
-            우리는 그저 좋은 제품을 구매해 사용하고 좋으면<br />
-            다른 사람들에게 알려주고 같이 사용하면서 돈도<br />
-            벌 수 있는 사업이 애터미 사업입니다.<br />
-
-            무료 회원가입과 유지비용이 전혀 없는 애터미 사업!<br />
-            무한 누적이 가능하며 무한 공유도 가능한 애터미 사업!<br />
-          </p>
+            무료 회원가입과 유지비용이 전혀 없는 애터미 사업!<br>
+            무한 누적이 가능하며 무한 공유도 가능한 애터미 사업!
+        </p>
           <p>
             <b>
               나의 스폰서와 함께<br />
@@ -1472,6 +1519,8 @@
               응원합니다!!<br />
             </b>
           </p>
+
+          <p><small>* 수당 지급에 대한 금액은 전체 매출 N가로 계산되어 지급하기 때문에 조금씩 변경이 되실 수 있습니다.</small></p>
         </div>
 
         <router-link to="/SaveData">
@@ -1864,9 +1913,51 @@ export default {
 
   &.isActive {
     bottom: 0;
-  }
 
-  .scroll-area {
+    .particles {
+      @for $i from 1 through 50 {
+      i:nth-of-type(#{$i}) {
+        transform: translate3d(
+            random(1400) - 700 + px,
+            random(1500) - 700 + px,
+            0
+          )
+          rotate(random(360) + deg);
+        background: hsla(random(360), 100%, 50%, 1);
+        animation: bang 1.25s ease-out forwards 1s;
+        opacity: 0;
+      }
+    }
+    }
   }
 }
+
+.particles {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative;
+  h1 {
+    color: #fff;
+    font-size: 1.5em;
+  }
+  i {
+    position: absolute;
+    display: block;
+    left: 50%;
+    top: 0;
+    width: 10px;
+    height: 20px;
+    background: red;
+    opacity: 0;
+  }
+}
+@keyframes bang {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
 </style>
