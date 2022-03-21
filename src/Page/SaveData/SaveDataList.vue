@@ -16,11 +16,17 @@
 
         <div class="edit-group clearfix">
           <div class="pull-left">
-            <button @click="listEdit">편집</button>
+            <button @click="listEdit">
+              <i class="xi-pen"></i> 편집
+            </button>
           </div>
           <div class="pull-right">
-            <button v-if="isEdit" @click="selectAll">전체선택</button>
-            <button v-if="isEdit" @click="deleteList">선택삭제</button>
+            <button v-if="isEdit" @click="selectAll">
+              <i class="xi-check-square-o"></i> 전체선택
+            </button>
+            <button v-if="isEdit" @click="deleteList">
+              <i class="xi-minus-square-o"></i> 선택삭제
+            </button>
           </div>
         </div>
 
@@ -192,11 +198,18 @@ export default {
 
 .edit-group {
   padding-bottom: 10px;
+  margin: 0 -10px;
 
   button {
     background-color: transparent;
-    font-weight: 700;
+    // font-weight: 700;
+    font-size: 14px;
     color: #333;
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 }
 
