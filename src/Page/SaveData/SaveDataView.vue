@@ -46,11 +46,11 @@
             </tr>
             <tr>
               <th scope="row">연 평균 생활소비 금액</th>
-              <td>{{ reactResultFormatted.AmountPerYear }}</td>
+              <td>약 {{ reactResultFormatted.AmountPerYear }}</td>
             </tr>
             <tr>
               <th scope="row">연 획득 총 PV</th>
-              <td>{{ reactResultFormatted.PVPerYear }}</td>
+              <td>약 {{ reactResultFormatted.PVPerYear }}</td>
             </tr>
             <tr>
               <th scope="row">예상 수당 지급 횟수(최소)</th>
@@ -68,10 +68,10 @@
         <div class="shared-area" v-if="isShared">
           <p>
             <b>애터미가 궁금하신가요</b>
-            소비가 이익이 되는 애터미를 마음껏 누려보세요.
+            소비가 소득이 되는
           </p>
           <div class="d-grid">
-            <button type="button" class="btn btn-primary block">사이트 보러가기</button>
+            <button type="button" class="btn btn-primary block">쇼핑몰 보러가기</button>
           </div>
         </div>
 

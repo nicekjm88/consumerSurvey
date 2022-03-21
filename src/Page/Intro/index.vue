@@ -4,12 +4,11 @@
     <main class="intro-page">
       <section>
         <article>
-          <strong class="intro-page__title">소비가 이익이 된다!</strong>
+          <strong class="intro-page__title">소비가 소득이 된다!</strong>
           <div class="intro-page__desc">
             <p>이루고 싶은 꿈이 있나요?<br />노후 준비가 되었나요?</p>
             <p>
-              나의 소비 생활을 점검하고<br />소비가 이익이 되는<br />애터미를
-              만나보세요
+              나의 소비가 소득이 되는<br>애터미를 만나보세요.
             </p>
           </div>
           <div class="intro-page__imgWrap">

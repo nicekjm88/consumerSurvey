@@ -4,7 +4,7 @@
     <main>
       <section>
         <article>
-          <h1 class="title">애터미 제품</h1>
+          <h1 class="title">애터미 쇼핑몰</h1>
           <table class="product-table text-center">
             <caption>
               애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보

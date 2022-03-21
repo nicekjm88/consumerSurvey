@@ -17,7 +17,7 @@
     </div>
     <div class="goal-label">
       <div>0</div>
-      <div>30만 PV</div>
+      <div>누적 PV</div>
     </div>
   </div>
 </template>

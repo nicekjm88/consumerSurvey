@@ -6,7 +6,7 @@
         <h1 class="title">설문에 참여해주셔서<br />감사합니다.</h1>
 
         <div class="rounded-box rounded-box__wrapper">
-          <h2 class="title">결과 확인 및 설명</h2>
+          <h2 class="title">결과 확인</h2>
           <hr />
           <p>총 00개 중 {{ groupCount.TotalCount }}개를 선택하였습니다.</p>
           <p>[선택리스트]</p>
@@ -25,19 +25,12 @@
           </router-link>
 
           <p>
-            0인 가족 기준<br />
-            애터미 쇼핑몰에서 위 상품 등을 구매하시면<br />
-            매년 소비 금액은 0,000,000원이며<br />
+            애터미 쇼핑몰에서 선택하신 상품을 구매하신다면<br />
+            매년 소비 금액은 약 0,000,000원이며<br />
             누적 포인트(PV)는 0,000,000 PV입니다.<br />
           </p>
           <p>
             PV에 대한 설명을 알고 싶으신 분들은 아래 버튼을<br />클릭해주세요.
-          </p>
-
-          더 많은 상품보기
-          <p>
-            애터미 쇼핑몰에는 500여가지 제품이 있으며,<br />수만가지 제품 등을
-            구매할 수 있는 애터미 아자몰이 있습니다.
           </p>
 
           <router-link to="/Result2">
@@ -47,6 +40,11 @@
               </button>
             </div>
           </router-link>
+          
+          <strong class="family-site__title">더 많은 상품보기</strong>
+          <p class="family-site__desc">
+            애터미 쇼핑몰에는 500여가지 제품이 있으며,<br />수만가지 제품 등을 구매할 수 있는 애터미 아자몰이 있습니다.
+          </p>
 
           <div class="family-site">
             <div>
@@ -136,6 +134,18 @@ export default {
       color: #00b5ef;
     }
   }
+
+  .family-site__title {
+    font-size: 20px;
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .family-site__desc {
+    margin-bottom: 40px;
+  }
+
 }
 
 .list {

@@ -276,6 +276,16 @@ strong {
   background-color: #f8fdff;
 }
 
+.select-list.type2 > li {
+  height: 60px;
+}
+
+.select-list.type2 > li .form-check label {
+  padding-right: 20px;
+  font-size: 13px;
+  padding-top: 12px;
+}
+
 .rounded-box {
   background-color: #fff;
   color: #000;

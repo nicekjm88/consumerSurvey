@@ -5,10 +5,7 @@
       <section>
         <ProgressBar :progressStatus="progressStatus" :class="{ 'is-show': !showProgressBar }" />
         <p class="notify" id="qestion">
-          <strong
-            >현재 마트, 온라인 쇼핑몰에서<br />자주 사용하는 생활용품을<br />선택해주세요.</strong
-          >
-          <span><em>(매월 기준)</em></span>
+          <strong>현재 쇼핑몰(온/오프라인)에서<br>구입하는 제품들을 선택해주세요.</strong>
         </p>
         <div id="answer">
           <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
@@ -23,24 +20,29 @@
             </div>
 
             <div class="rounded-box">
-              <div
-                class="form-check"
-                v-for="(product, idx) in item.ch"
-                :key="idx"
-              >
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    v-model="product.checked"
-                    @change="productToggle(product)"
-                    :id="`products_${pidx}_${idx}`"
-                />
-                <label
-                  class="form-check-label"
-                  :for="`products_${pidx}_${idx}`"
-                  >{{ product.Name }}</label
-                >
-              </div>
+              <ul class="select-list type2">
+                <li v-for="(product, idx) in item.ch"
+                    :key="idx">
+                  <div
+                    class="form-check"
+                  >
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        v-model="product.checked"
+                        @change="productToggle(product)"
+                        :id="`products_${pidx}_${idx}`"
+                    />
+                    <label
+                      class="form-check-label"
+                      :for="`products_${pidx}_${idx}`"
+                      >{{ product.Name }}</label
+                    >
+                  </div>
+                </li>
+              </ul>
+                
+
             </div>
           </div>
         </div>
@@ -268,6 +270,10 @@ export default {
   &.isActive {
     display: flex;
   }
+}
+
+#qestion {
+  text-align: left;
 }
 
 </style>
