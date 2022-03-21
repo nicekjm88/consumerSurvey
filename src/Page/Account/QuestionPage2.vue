@@ -21,11 +21,8 @@
 
             <div class="rounded-box">
               <ul class="select-list type2">
-                <li v-for="(product, idx) in item.ch"
-                    :key="idx">
-                  <div
-                    class="form-check"
-                  >
+                <li v-for="(product, idx) in item.ch" :key="idx">
+                  <div class="form-check">
                     <input
                         class="form-check-input"
                         type="checkbox"
@@ -34,6 +31,7 @@
                         :id="`products_${pidx}_${idx}`"
                     />
                     <label
+                      @click.once="showProgress"
                       class="form-check-label"
                       :for="`products_${pidx}_${idx}`"
                       >{{ product.Name }}</label
@@ -46,8 +44,6 @@
             </div>
           </div>
         </div>
-
-      <button type="button" @click="onClick" hidden>테스트버튼</button>
       </section>
 
 
@@ -128,9 +124,6 @@ export default {
       this.showProgressBar = window.pageYOffset < this.lastScrollPosition;
       this.lastScrollPosition = window.pageYOffset;
     },
-    onClick() {
-      this.progressStatus = 100;
-    },
     hideModal() {
       const modal = this.$refs.modal;
 
@@ -138,6 +131,9 @@ export default {
         e.target === modal ? modal.classList.remove("isActive") : false;
       });
     },
+    showProgress() {
+      this.showProgressBar = false
+    }
   },
   components: {
     FixedBtn,

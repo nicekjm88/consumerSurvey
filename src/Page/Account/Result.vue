@@ -59,7 +59,7 @@
             <div>
               <a href="https://atomyaza.co.kr/m/" target="_blank">
                 <img :src="require(`@/assets/image/logo-aza.svg`)" />
-                <p>애터미 아자몰의 상품이<br />궁금하시다면?</p>
+                <p class="last">애터미 아자몰의 상품이<br />궁금하시다면?</p>
               </a>
             </div>
           </div>
@@ -176,7 +176,7 @@ export default {
   & > div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     font-size: 12px;
     color: #414141;
@@ -188,6 +188,11 @@ export default {
 
     p {
       margin-top: 10px;
+      margin-bottom: 0;
+
+      &.last {
+        margin-top: 18px;
+      }
     }
   }
 
