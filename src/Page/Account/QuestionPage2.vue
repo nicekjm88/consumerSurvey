@@ -133,7 +133,6 @@ export default {
       const modal = this.$refs.modal;
 
       window.addEventListener("click", (e) => {
-        console.log(e.target);
         e.target === modal ? modal.classList.remove("isActive") : false;
       });
     },

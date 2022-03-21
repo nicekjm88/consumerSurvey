@@ -74,6 +74,7 @@ export default {
     const baseCount = 7;
     const maxCount = ref(baseCount);
     const items = productsManager.getSelected();
+    const option = { maximumFractionDigits: 4 };
 
     onBeforeMount(() => {
       //설문 데이터가 없을때 처음으로 돌아간다.
@@ -86,7 +87,10 @@ export default {
       let max_count = maxCount.value + baseCount;
       if(max_count > items.Count) max_count = items.Count;
       maxCount.value = max_count;
-    }
+    }  
+
+    items.AmountPerYear = items.AmountPerYear.toLocaleString("ko-KR", option);
+    items.PVPerYear = items.PVPerYear.toLocaleString("ko-KR", option);
 
     // const items = computed(() => productsManager.getSelected());
 
