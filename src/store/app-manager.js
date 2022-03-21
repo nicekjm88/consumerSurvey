@@ -10,15 +10,23 @@ export default function useAppManager(){
         return store.dispatch(ACTION.APP.makeDispatch(ACTION.APP.SET_HTTP_IGNORE), val);
     }
 
-    async function setHttpBusy(){
-        if(!store.state.app.http.ignore) {
+    async function setHttpBusy(force = false){
+        if(!store.state.app.http.ignore || force) {
             return store.dispatch(ACTION.APP.makeDispatch(ACTION.APP.SET_HTTP), true);
         }
     }
 
-    async function resetHttpBusy(){
-        if(!store.state.app.http.ignore) {
+    async function resetHttpBusy(force = false){
+        if(!store.state.app.http.ignore || force) {
             return store.dispatch(ACTION.APP.makeDispatch(ACTION.APP.SET_HTTP), false);
+        }
+    }
+
+    async function setHttpBusyForce(val){
+        if(val){
+            return setIgnore(val).then(() => setHttpBusy(true))
+        }else{
+            return setIgnore(val).then(() => resetHttpBusy(true))
         }
     }
 
@@ -27,5 +35,6 @@ export default function useAppManager(){
         setHttpBusy,
         resetHttpBusy,
         setIgnore,
+        setHttpBusyForce,
     }
 }

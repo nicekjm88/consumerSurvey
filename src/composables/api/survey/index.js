@@ -55,8 +55,22 @@ export default function useSurvey() {
             });
     }
 
+    async function getResultsV2(PageSize, ResultNo, Name = "") {
+        return http.get(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/results/v2`, {PageSize, ResultNo, Name}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token
+            });
+    }
+
     async function getResult(ResultNo){
         return http.get(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/result`, {ResultNo}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token
+            });
+    }
+
+    async function getResultProducts(ResultNo){
+        return http.get(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/result/products`, {ResultNo}),
             {
                 [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token
             });
@@ -77,11 +91,11 @@ export default function useSurvey() {
             });
     }
 
-    async function getResultByKey(key){
+    async function getResultForShare(key){
         return http.get(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/share/result`, {key}));
     }
 
-    async function getResultProductsByKey(key){
+    async function getResultProductsForShare(key){
         return http.get(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/share/result/products`, {key}));
     }
 
@@ -129,14 +143,20 @@ export default function useSurvey() {
         getProducts,
         getQuestions,
         getSettings,
+
         save,
         getResults,
         getResult,
         deletes,
         edit,
         getResultKey,
-        getResultByKey,
-        getResultProductsByKey,
+
+        getResultProducts,
+
+        getResultForShare,
+        getResultProductsForShare,
+
+        getResultsV2,
 
         saveForGuest,
         getResultForGuest,

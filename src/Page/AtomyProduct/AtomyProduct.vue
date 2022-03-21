@@ -26,8 +26,8 @@
                 <td>{{ product.Name }}</td>
                 <td>{{ product.MName }}</td>
                 <td>
-                  <div class="price">{{ product.Cost }}원</div>
-                  <div class="point-value">{{ product.PV }} PV</div>
+                  <div class="price">{{ formatter.toPrice(product.Cost) }}원</div>
+                  <div class="point-value">{{ formatter.toPrice(product.PV) }} PV</div>
                 </td>
               </tr>
             </tbody>
@@ -42,10 +42,10 @@
             <div class="total-product__price">
               <ul>
                 <li>
-                  가격 : <strong>{{items.AmountPerYear}}</strong> 원
+                  가격 : <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong> 원
                 </li>
                 <li>
-                  PV : <strong class="main-color">{{items.PVPerYear}}</strong> PV
+                  PV : <strong class="main-color">{{ formatter.toPrice(items.PVPerYear) }}</strong> PV
                 </li>
               </ul>
             </div>
@@ -62,42 +62,75 @@ import Navigation from "@/components/Layout/Navigation.vue";
 import useProductsManager from "@/store/products-manager";
 import { onBeforeMount, ref } from "vue";
 import router from "@/router";
+import useSurvey from "@/composables/api/survey";
+import useFormatter from "@/composables/api/utils/formatter";
 
 export default {
   name: "Terms",
   components: {
     Navigation,
   },
-
-  setup() {
+  props: {
+    resultNo:{ type: String, default: '0'},
+  },
+  setup(props) {
     const productsManager = useProductsManager();
+    const survey = useSurvey();
     const baseCount = 7;
     const maxCount = ref(baseCount);
-    const items = productsManager.getSelected();
-    const option = { maximumFractionDigits: 4 };
+    //const option = { maximumFractionDigits: 4 };
+    const items = ref(productsManager.genEmptySelected());
+    const formatter = useFormatter();
+
+    const key = router.currentRoute.value.query.key;
 
     onBeforeMount(() => {
-      //설문 데이터가 없을때 처음으로 돌아간다.
-      if (!productsManager.hasValue()) {
-        router.push("/intro");
+      if(router.currentRoute.value.name === 'AtomyProduct'){
+        if (!productsManager.hasValue()) {
+          router.push("/intro");
+        }
+        items.value = productsManager.getSelected();
+      }
+      else if(router.currentRoute.value.name === 'ResultAtomyProduct'){
+        survey.getResultProducts(props.resultNo).then((r) => {
+          console.log('ResultAtomyProduct', r)
+          if(r.data.Status === 1 && r.data.Data){
+            items.value = productsManager.genSelected(r.data.Data);
+          }
+        });
+      }
+      else if(router.currentRoute.value.name === 'GuestAtomyProduct'){
+        survey.GetResultProductsForGuest(encodeURIComponent(key)).then((r) => {
+          console.log('GuestAtomyProduct', r)
+          if(r.data.Status === 1 && r.data.Data){
+            items.value = productsManager.genSelected(r.data.Data);
+          }
+        });
+      }
+      else if(router.currentRoute.value.name === 'ShareAtomyProduct') {
+        survey.getResultProductsForShare(encodeURIComponent(key)).then((r) => {
+          console.log('ShareAtomyProduct', r)
+          if(r.data.Status === 1 && r.data.Data){
+            items.value = productsManager.genSelected(r.data.Data);
+          }
+        });
       }
     });
 
     function showMore(){
       let max_count = maxCount.value + baseCount;
-      if(max_count > items.Count) max_count = items.Count;
+      if(max_count > items.value.Count) max_count = items.value.Count;
       maxCount.value = max_count;
-    }  
+    }
 
-    items.AmountPerYear = items.AmountPerYear.toLocaleString("ko-KR", option);
-    items.PVPerYear = items.PVPerYear.toLocaleString("ko-KR", option);
-
-    // const items = computed(() => productsManager.getSelected());
+    //items.value.AmountPerYear = items.value.AmountPerYear.toLocaleString("ko-KR", option);
+    //items.value.PVPerYear = items.value.PVPerYear.toLocaleString("ko-KR", option);
 
     return {
       items,
       showMore,
       maxCount,
+      formatter,
     };
   },
 };

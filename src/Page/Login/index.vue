@@ -31,7 +31,7 @@
             </span>
         </div>
         <div>
-          -v 0.2.8
+          -v 0.1.1
         </div>
       </section>
     </main>

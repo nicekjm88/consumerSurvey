@@ -971,6 +971,7 @@ import {onBeforeMount} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager";
+import useAppManager from "@/store/app-manager";
 
 export default {
   name: "IntroPage",
@@ -982,12 +983,19 @@ export default {
     const productsManager = useProductsManager();
     const questionManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
+    const appManager = useAppManager();
 
     async function loadData() {
-      return questionManager
-        .fetch(true)
-        .then(() => productsManager.fetch(true))
-        .then(() => settingsManager.fetch(true));
+      return appManager.setHttpBusyForce(true)
+          .then(() => questionManager.fetch(true))
+          .then(() => productsManager.fetch(true))
+          .then(() => settingsManager.fetch(true))
+          .finally(() => appManager.setHttpBusyForce(false))
+
+      // return questionManager
+      //   .fetch(true)
+      //   .then(() => productsManager.fetch(true))
+      //   .then(() => settingsManager.fetch(true));
     }
 
     onBeforeMount(()=>{

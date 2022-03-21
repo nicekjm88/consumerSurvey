@@ -209,6 +209,7 @@ export default {
         data.AmountPerYear = selectedProducts.AmountPerYear;
         data.PVPerYear = selectedProducts.PVPerYear;
         data.CreateAt = date.value.replace(/\./gi, '');
+        data.PayBackCount = Math.floor(data.PVPerYear / data.StdPV);
 
         if (userManager.getUserType() === 2) {
           survey.saveForGuest(data).then((r) => {

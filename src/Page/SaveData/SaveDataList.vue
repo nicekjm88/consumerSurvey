@@ -40,10 +40,10 @@
             </div>
 
             <strong v-else>
-              <router-link :to="{ name:'SaveDataView', params: { ResultNo: item.ResultNo }}">{{item.Name}}</router-link>
+              <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">{{item.Name}}</router-link>
             </strong>
 
-            <router-link :to="{ name:'SaveDataView', params: { ResultNo: item.ResultNo }}">더보기</router-link>
+            <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
           </li>
         </ul>
         <button class="btn-more" type="button" @click="nextResults"> <i class="xi-angle-down"></i> 더보기</button>
@@ -69,14 +69,15 @@ export default {
 
     const isEdit = ref(false)
     const reactResults = reactive({Results: []});
-    const page = reactive({ PageSize: 10, PageNo: 1, Name:''});
+    const page = reactive({ PageSize: 10, ResultNo: 0, Name:''});
     const selected = ref([]);
 
     onBeforeMount(() => {
       console.log('SaveDataList onBeforeMount');
-      survey.getResults(page.PageSize, page.PageNo, page.Name).then((r) => {
-        if(r.data.Status === 1 && r.data.Data) {
+      survey.getResultsV2(page.PageSize, page.ResultNo, page.Name).then((r) => {
+        if(r.data.Status === 1 && r.data.Data && r.data.Data.length > 0) {
           reactResults.Results.push(...r.data.Data);
+          page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
         }
       });
     });
@@ -97,10 +98,10 @@ export default {
 
     function nextResults(){
       appManager.setIgnore(true).then(()=> {
-        return survey.getResults(page.PageSize, page.PageNo + 1, page.Name).then((r) => {
-          if (r.data.Status === 1 && r.data.Data.length > 0) {
+        return survey.getResultsV2(page.PageSize, page.ResultNo, page.Name).then((r) => {
+          if(r.data.Status === 1 && r.data.Data && r.data.Data.length > 0) {
             reactResults.Results.push(...r.data.Data);
-            page.PageNo++;
+            page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
           }
         })
       }).finally(() => appManager.setIgnore(false));
@@ -123,6 +124,7 @@ export default {
             const tmp = reactResults.Results.filter(x => !selected.value.includes(x.ResultNo));
             reactResults.Results.length = 0;
             reactResults.Results.push(...tmp);
+            page.ResultNo = tmp[tmp.length - 1].ResultNo;
           }
         });
       }
@@ -130,12 +132,12 @@ export default {
 
     function handleSearch(){
       console.log('search');
-      survey.getResults(page.PageSize, 1, page.Name).then((r) => {
+      survey.getResultsV2(page.PageSize, 0, page.Name).then((r) => {
         if(r.data.Status === 1) {
           listEdit(false);
           reactResults.Results.length = 0;
           reactResults.Results.push(...r.data.Data);
-          page.PageNo = 1;
+          page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
         }
       });
     }
