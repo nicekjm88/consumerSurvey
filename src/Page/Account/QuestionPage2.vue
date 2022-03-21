@@ -115,7 +115,7 @@ export default {
       }, 0.3);
     },
     onScroll() {
-      const OFFSET = 150;
+      const OFFSET = 100;
 
       if (window.pageYOffset < 0) {
         return;
@@ -236,6 +236,7 @@ export default {
 
     & button{
       background-color: transparent;
+      color: #666;
     }
   }
 }

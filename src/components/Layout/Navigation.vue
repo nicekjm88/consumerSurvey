@@ -2,7 +2,8 @@
   <div>
     <nav v-if="$route.name === 'intro'" class="navigation intro">
       <button type="button" @click="logout">
-        <img :src="require('@/assets/image/i-login.svg')" />
+        <img :src="require('@/assets/image/i-login.svg')" alt="" />
+        <span>로그아웃</span>
       </button>
 
       <router-link v-if="userType === 1" to="/SaveDataList">
@@ -113,6 +114,16 @@ export default {
 
   &.intro button {
     font-size: 30px;
+    position: relative;
+
+    span {
+      font-size: 12px;
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      margin-left: -28px;
+      width: 60px;
+    }
   }
 
   &.icon-alone {

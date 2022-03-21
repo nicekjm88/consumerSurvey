@@ -172,6 +172,10 @@ export default {
     color: #414141;
     text-align: center;
 
+    a {
+      color: #333;
+    }
+
     p {
       margin-top: 10px;
     }
