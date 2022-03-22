@@ -280,10 +280,21 @@ strong {
   height: 60px;
 }
 
+.select-list.type2 > li .form-check .form-check-input {
+  margin-left: -10px;
+  margin-top: 0;
+  position: relative;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
 .select-list.type2 > li .form-check label {
   padding-right: 10px;
   font-size: 13px;
   padding-top: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .rounded-box {

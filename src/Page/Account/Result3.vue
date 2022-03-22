@@ -17,9 +17,9 @@
           아래 애터미 사업 구조도를 봐주세요!<br />
           내 하위에 있는 사람들을 한번 눌러보시겠어요?
         </p>        
-        <p class="info">
+        <div class="info" @click="touchHide" v-if="this.isHide == false">
           사람들을 <i class="xi-touch" style="font-size:20px"></i>해보세요.
-        </p>
+        </div>
         <div class="interaction">
           <div class="interaction-area">
             <button
@@ -1463,7 +1463,7 @@
           <p>
             무료 회원가입과 유지비용이 전혀 없는 애터미 사업!<br>
             무한 누적이 가능하며 무한 공유도 가능한 애터미 사업!
-        </p>
+          </p>
           <p>
             <b>
               나의 스폰서와 함께<br />
@@ -1509,7 +1509,8 @@ export default {
       nextStep: false,
       nextStep2: false,
       isAddClass: false,
-      isButtonDisabled: false
+      isButtonDisabled: false,
+      isHide: false
     };
   },
   updated() {
@@ -1526,6 +1527,9 @@ export default {
     }
   },
   methods: {
+    touchHide() {
+      this.isHide = true;
+    },
     addClass() {
       setTimeout(() => {
         this.isAddClass = true;
@@ -1717,8 +1721,19 @@ export default {
 .info {
   text-align: center;
   font-size: 13px;
-  color: #686868;
-  margin-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, .5);
+  color: #fdfdfd;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .interaction {
