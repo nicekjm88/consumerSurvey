@@ -2719,6 +2719,11 @@
   "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001314.tgz"
   "version" "1.0.30001314"
 
+"capacitor-plugin-safe-area@^0.0.3":
+  "integrity" "sha512-AOsUOz56GRb74eu5cOEyCt34zgxNuyQV5XQKmFaHqtemXnycc4zSgivP9mpjf+vAGtHjozeEcCQSQqGBuiZnKQ=="
+  "resolved" "https://registry.npmjs.org/capacitor-plugin-safe-area/-/capacitor-plugin-safe-area-0.0.3.tgz"
+  "version" "0.0.3"
+
 "capacitor-updater@^2.0.8":
   "integrity" "sha512-1TOzNB7kGgaHkalU/inTL/SwrhVd192AqRzBMYhgImTvFnm75hQtMp+qFZqUUycamzEY4PoyWnJpnNWmXyFCkw=="
   "resolved" "https://registry.npmjs.org/capacitor-updater/-/capacitor-updater-2.0.8.tgz"

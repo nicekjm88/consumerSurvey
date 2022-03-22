@@ -23,6 +23,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.25.0",
     "bootstrap": "^5.1.0",
+    "capacitor-plugin-safe-area": "^0.0.3",
     "capacitor-updater": "^2.0.8",
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",

@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import SplashComponent from '@/components/SplashComponent';
+// import SplashComponent from '@/components/SplashComponent';
 // import {computed, onMounted, ref} from 'vue';
-import {computed} from 'vue';
+import {computed, onBeforeMount} from 'vue';
 import useAppManager from "@/store/app-manager";
 import Loading from '@/Page/Loading'
 import {StatusBar, Style} from "@capacitor/status-bar";
@@ -25,7 +25,7 @@ import {StatusBar, Style} from "@capacitor/status-bar";
 export default {
   name: 'App',
   components: {
-    SplashComponent,
+    // SplashComponent,
     Loading
   },
 
@@ -41,10 +41,11 @@ export default {
     // }
 
     //android only
-    StatusBar.setOverlaysWebView({ overlay: true });
-
-    StatusBar.setStyle({style: Style.Light});
-    StatusBar.setBackgroundColor({color: '#ffffff'});
+    onBeforeMount(async () => {
+      await StatusBar.setOverlaysWebView({ overlay: true });
+      await StatusBar.setStyle({style: Style.Light});
+      await StatusBar.setBackgroundColor({color: '#00000000'});
+    })
 
     // onMounted(() => {
     //   console.log('App onMounted');

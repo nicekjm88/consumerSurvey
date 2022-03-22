@@ -1,7 +1,7 @@
 <template>
   <div class="wrap-progressBar">
     <strong class="title">
-      PV 달성률
+      PV 달성률 {{sa}}
     </strong>
     <div class="progress">
       <div
@@ -23,17 +23,32 @@
 </template>
 
 <script>
+import { SafeArea } from "capacitor-plugin-safe-area";
+import {onBeforeMount, ref} from "vue";
 export default {
   name: "progressBar",
   data() {
     return {
-    
+
     };
   },
   props: {
     progressStatus: Number
   },
   methods() {},
+  setup(){
+    const sa = ref({})
+
+    onBeforeMount(() => {
+      SafeArea.getSafeAreaInsets().then(({insets}) => {
+        sa.value = insets;
+      })
+    })
+
+    return {
+      sa,
+    }
+  }
 };
 </script>
 
