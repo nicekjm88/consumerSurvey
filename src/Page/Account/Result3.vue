@@ -32,8 +32,7 @@
             </button>
             <button
               class="button left-under1"
-              @click.once="activate"
-              @click="isAddPv2()"
+              @click="isAddPv2"
               type="button"
               :disabled="isButtonDisabled"              
             >
@@ -42,8 +41,7 @@
             </button>
             <button
               class="button left-under2"
-              @click.once="activate"
-              @click="isAddPv21()"
+              @click="isAddPv21"
               type="button"
               :disabled="isButtonDisabled"
             >
@@ -52,8 +50,7 @@
             </button>
             <button
               class="button left-under3"
-              @click.once="activate"
-              @click="isAddPv22()"
+              @click="isAddPv22"
               type="button"
               :disabled="isButtonDisabled"
             >
@@ -62,8 +59,7 @@
             </button>
             <button
               class="button right-under1"
-              @click.once="activate"
-              @click="isAddPv3()"
+              @click="isAddPv3"
               type="button"
               :disabled="isButtonDisabled"
             >
@@ -72,8 +68,7 @@
             </button>
             <button
               class="button right-under2"
-              @click.once="activate"
-              @click="isAddPv31()"
+              @click="isAddPv31"
               type="button"
               :disabled="isButtonDisabled"
             >
@@ -82,8 +77,7 @@
             </button>
             <button
               class="button right-under3"
-              @click.once="activate"
-              @click="isAddPv32()"
+              @click="isAddPv32"
               type="button"
               :disabled="isButtonDisabled"
             >
@@ -1424,7 +1418,16 @@
 
       <div class="page-step1" v-if="this.nextStep == true">
         <Modal />
-        <div class="d-grid">
+
+        <div class="d-grid gap-2">
+
+          <button 
+            @click="init" 
+            class="btn btn-secondary"
+          >
+            <i class="xi-refresh"></i> 초기화 하기
+          </button>
+
           <button
             class="btn btn-outline-primary block"
             @click="addClass(), result()"
@@ -1441,56 +1444,7 @@
         v-if="this.nextStep2 == true"
       >
         <div class="particles">
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
+          <i v-for="item of particles" :key="item"></i>
         </div>
 
         <div class="return-pv">
@@ -1540,6 +1494,7 @@ export default {
   name: "Result",
   data() {
     return {
+      particles: 200,
       mine: 30,
       leftUnder1: 0,
       leftUnder2: 0,
@@ -1583,28 +1538,60 @@ export default {
     isAddPv() {
       this.mine >= 30 ? 30 : (this.mine += 10);
     },
-    isAddPv2() {
+    isAddPv2(e) {
+      this.activate(e);
       this.leftUnder1 >= 30 ? 30 : (this.leftUnder1 += 10);
     },
-    isAddPv21() {
+    isAddPv21(e) {
+      this.activate(e);
       this.leftUnder2 >= 30 ? 30 : (this.leftUnder2 += 10);
     },
-    isAddPv22() {
+    isAddPv22(e) {
+      this.activate(e);
       this.leftUnder3 >= 30 ? 30 : (this.leftUnder3 += 10);
     },
-    isAddPv3() {
+    isAddPv3(e) {
+      this.activate(e);
       this.rightUnder1 >= 30 ? 30 : (this.rightUnder1 += 10);
     },
-    isAddPv31() {
+    isAddPv31(e) {
+      this.activate(e);
       this.rightUnder2 >= 30 ? 30 : (this.rightUnder2 += 10);
     },
-    isAddPv32() {
+    isAddPv32(e) {
+      this.activate(e);
       this.rightUnder3 >= 30 ? 30 : (this.rightUnder3 += 10);
     },
     caculation() {
       this.leftSum = this.leftUnder1 + this.leftUnder2 + this.leftUnder3;
       this.rightSum = this.rightUnder1 + this.rightUnder2 + this.rightUnder3;
       this.totalSum = this.leftSum + this.rightSum;
+    },
+    init() { 
+      this.leftUnder1 = 0;
+      this.leftUnder2 = 0;
+      this.leftUnder3 = 0;
+      this.leftSum = 0;
+      this.rightUnder1 = 0;
+      this.rightUnder2 = 0;
+      this.rightUnder3 = 0;
+      this.rightSum = 0;
+      this.totalSum = 0;
+      this.isButtonDisabled = false;
+      this.nextStep = false;
+      this.nextStep2 = false;
+      this.isAddClass = false;
+
+      const btns = document.querySelectorAll('.interaction-area button');
+
+      btns.forEach((item, index) => {
+        
+        if ( index !== 0 ) {
+          item.classList.remove('is-active');
+        }       
+        
+      })
+
     },
     result() {
       this.nextStep2 = true;
@@ -1879,11 +1866,14 @@ export default {
   }
 }
 
+.d-grid.gap-2 .btn {
+  height: 48px;
+}
+
 .btn.btn-outline-primary {
   border: 2px solid #00b5ef;
   color: #00b5ef;
   margin-bottom: 1rem;
-  height: 48px;
 }
 .btn.btn-outline-primary:hover {
   color: #00b5ef;
@@ -1915,19 +1905,20 @@ export default {
     bottom: 0;
 
     .particles {
-      @for $i from 1 through 50 {
-      i:nth-of-type(#{$i}) {
-        transform: translate3d(
+
+      @for $i from 1 through 200 {
+        i:nth-of-type(#{$i}) {
+          transform: translate3d(
             random(1400) - 700 + px,
             random(1500) - 700 + px,
             0
           )
           rotate(random(360) + deg);
-        background: hsla(random(360), 100%, 50%, 1);
-        animation: bang 1.25s ease-out forwards 1s;
-        opacity: 0;
+          background: hsla(random(360), 100%, 50%, 1);
+          animation: bang 1.25s ease-out forwards 1s;
+          opacity: 0;
+        }
       }
-    }
     }
   }
 }
@@ -1938,10 +1929,13 @@ export default {
   padding: 10px 0;
   cursor: pointer;
   position: relative;
+  top: 36px;
+
   h1 {
     color: #fff;
     font-size: 1.5em;
   }
+
   i {
     position: absolute;
     display: block;
