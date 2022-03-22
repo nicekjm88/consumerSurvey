@@ -1,14 +1,7 @@
 <template>
   <div class="app_loading-warp" v-show="isHttpBusy">
     <Loading />
-      <!-- <p class="app_loading-spinner">
-        <i class="xi-spinner-5 xi-spin"></i>
-      </p> -->
   </div>
-<!--  <div v-if="!isLoaded">-->
-<!--    <splash-component></splash-component>-->
-<!--  </div>-->
-<!--  <div v-else>-->
   <div>
     <router-view></router-view>
   </div>
@@ -30,15 +23,8 @@ export default {
   },
 
   setup () {
-    // const isLoaded = ref(false)
     const appManager = useAppManager();
     const isHttpBusy = computed(() => appManager.IsHttpBusy());
-
-    // const splashing = () => {
-    //   setTimeout(() => {
-    //     isLoaded.value = true
-    //   }, 2500)
-    // }
 
     //android only
     onBeforeMount(async () => {
@@ -47,13 +33,7 @@ export default {
       await StatusBar.setBackgroundColor({color: '#00000000'});
     })
 
-    // onMounted(() => {
-    //   console.log('App onMounted');
-      //splashing();
-    // })
-
     return {
-      // isLoaded,
       isHttpBusy,
     }
   }
@@ -74,12 +54,4 @@ export default {
   background-color: #fff;
 }
 
-.app_loading-spinner {
-  position: absolute;
-  left: 50%;
-  top:50%;
-  font-size: 50px;
-  color: white;
-  transform:translate(-50%, -50%);
-}
 </style>

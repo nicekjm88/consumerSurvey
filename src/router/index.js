@@ -72,7 +72,7 @@ export const defaultRoutes = [
     path: "/Result/AtomyProduct/:resultNo",
     name: "ResultAtomyProduct",
     component: () => import("@/Page/AtomyProduct/AtomyProduct"),
-    meta: {role: [1]},
+    meta: { role: [1] },
     props: true
   },
   {
@@ -85,7 +85,7 @@ export const defaultRoutes = [
     path: "/Share/AtomyProduct",
     name: "ShareAtomyProduct",
     component: () => import("@/Page/AtomyProduct/AtomyProduct"),
-    meta: { unauthorized:true },
+    meta: { unauthorized: true },
     props: true,
   },
   {
@@ -117,7 +117,7 @@ export const defaultRoutes = [
     path: "/ShareView",
     name: "ShareView",
     component: () => import('@/Page/SaveData/SaveDataView'),
-    meta: { unauthorized:true },
+    meta: { unauthorized: true },
     props: true
   },
   {
@@ -128,13 +128,16 @@ export const defaultRoutes = [
     hidden: true,
     permitAll: true,
     component: () => import("@/Page/Error"),
-    meta: { unauthorized:true }
+    meta: { unauthorized: true }
   }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes: defaultRoutes,
+  scrollBehavior() {
+    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 export default router;
