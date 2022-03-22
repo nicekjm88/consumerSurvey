@@ -5,20 +5,22 @@
         <i class="xi-spinner-5 xi-spin"></i>
       </p> -->
   </div>
-  <div v-if="!isLoaded">
-    <splash-component></splash-component>
-  </div>
-  <div v-else>
+<!--  <div v-if="!isLoaded">-->
+<!--    <splash-component></splash-component>-->
+<!--  </div>-->
+<!--  <div v-else>-->
+  <div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import SplashComponent from '@/components/SplashComponent';
-import {computed, onMounted, ref} from 'vue';
+// import {computed, onMounted, ref} from 'vue';
+import {computed} from 'vue';
 import useAppManager from "@/store/app-manager";
 import Loading from '@/Page/Loading'
-
+import {StatusBar, Style} from "@capacitor/status-bar";
 
 export default {
   name: 'App',
@@ -28,24 +30,29 @@ export default {
   },
 
   setup () {
-    const isLoaded = ref(false)
+    // const isLoaded = ref(false)
     const appManager = useAppManager();
     const isHttpBusy = computed(() => appManager.IsHttpBusy());
 
-    const splashing = () => {
-      setTimeout(() => {
-        isLoaded.value = true
-      }, 2500)
-    }
+    // const splashing = () => {
+    //   setTimeout(() => {
+    //     isLoaded.value = true
+    //   }, 2500)
+    // }
 
-    onMounted(() => {
-      console.log('App onMounted');
-      splashing();
+    //android only
+    StatusBar.setOverlaysWebView({ overlay: true });
 
-    })
+    StatusBar.setStyle({style: Style.Light});
+    StatusBar.setBackgroundColor({color: '#ffffff'});
+
+    // onMounted(() => {
+    //   console.log('App onMounted');
+      //splashing();
+    // })
 
     return {
-      isLoaded,
+      // isLoaded,
       isHttpBusy,
     }
   }
