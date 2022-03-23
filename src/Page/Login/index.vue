@@ -4,7 +4,7 @@
       <section>
         <img class="logo" :src="require('@/assets/image/logo2.svg')" />
         <Form @submit="onSubmit" v-slot="{ errors }">
-          <Field type="text" name="atomyId" class="form-control" placeholder="아이디(ID) / 닉네임" :rules="isRequiredName" />
+          <Field type="text" name="atomyId" class="form-control" placeholder="아이디(ID) / 닉네임" :rules="isRequiredName" v-model="userId" @blur="userIdAuto" />
           <span class="error-message">{{ errors.atomyId }}</span>
 
           <Field type="password" name="atomyPw" class="form-control" placeholder="비밀번호(Password)" :rules="isRequiredBirthDay" />
@@ -30,9 +30,9 @@
               <a href="http://m.atomy.com/kr/m/account/find/password/popup" class="btn btn-sm">비밀번호 찾기</a>
             </span>
         </div>
-        <div>
-          -v 0.1.1
-        </div>
+<!--        <div>-->
+<!--          -v 0.1.1-->
+<!--        </div>-->
       </section>
     </main>
   </div>
@@ -56,6 +56,7 @@ export default {
 
     const isTryLogin = ref(false);
     const remember = ref(false);
+    const userId = ref('');
 
     function isRequiredName(value) {
       return value ? true : '아이디를 입력해주세요.';
@@ -77,12 +78,47 @@ export default {
       });
     }
 
+    function userIdAuto(){
+      userId.value = getUserIdFormat(userId.value);
+    }
+
+    //한국 소스에서 발취
+    function getUserIdFormat(value) {
+      let userId = value,
+          preId = 'S',
+          stdLen = 8,
+          len = userId.length,
+          extLen = stdLen - len;
+
+      if (len == 0) {
+        return value;
+      }
+
+      if (userId.indexOf('S') > -1) {
+        userId = userId.replace(/S/g, '');
+        len = userId.length;
+        extLen = stdLen - len;
+      }
+
+      if (len < stdLen) {
+        for (let i = 1; i < extLen; i++) {
+          preId = preId + '0';
+        }
+        userId = preId + userId;
+      }
+
+      return userId;
+    }
+
     return {
       isRequiredName,
       isRequiredBirthDay,
       onSubmit,
+      userIdAuto,
+
       isTryLogin,
       remember,
+      userId,
     }
   }
 }

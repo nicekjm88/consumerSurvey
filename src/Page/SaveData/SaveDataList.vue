@@ -21,8 +21,9 @@
             </button>
           </div>
           <div class="pull-right">
+
             <button v-if="isEdit" @click="selectAll">
-              <i class="xi-check-square-o"></i> 전체선택
+              <i class="xi-check-square-o"></i> {{ isUnselectAll ? '전체해제' : '전체선택' }}
             </button>
             <button v-if="isEdit" @click="deleteList">
               <i class="xi-minus-square-o"></i> 선택삭제
@@ -107,14 +108,20 @@ export default {
       }).finally(() => appManager.setIgnore(false));
     }
 
-    function selectAll(){
-      const sel = reactResults.Results.reduce((a, c) => {
-        a.push(c.ResultNo)
-        return a;
-      }, [])
+    const isUnselectAll = computed(() => selected.value.length === reactResults.Results.length);
 
-      selected.value.length = 0;
-      selected.value.push(...sel);
+    function selectAll(){
+      if(isUnselectAll.value){
+        selected.value.length = 0;
+      }else {
+        const sel = reactResults.Results.reduce((a, c) => {
+          a.push(c.ResultNo)
+          return a;
+        }, [])
+
+        selected.value.length = 0;
+        selected.value.push(...sel);
+      }
     }
 
     function deleteList() {
@@ -151,6 +158,7 @@ export default {
       selected,
       items,
       page,
+      isUnselectAll,
     }
   }
 }
