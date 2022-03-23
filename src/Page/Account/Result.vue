@@ -8,7 +8,7 @@
         <div class="rounded-box rounded-box__wrapper">
           <h2 class="title">결과 확인</h2>
           <hr />
-          <p>총 00개 중 {{ groupCount.TotalCount }}개를 선택하였습니다.</p>
+          <p>총 {{ groupCount.TotalCount }}개 중 {{ groupCount.SelectedCount }}개를 선택하였습니다.</p>
           <p>[선택리스트]</p>
           <ul class="list list-dot">
             <li v-for="(item, idx) in groupCount.Groups" :key="idx">
@@ -26,8 +26,8 @@
 
           <p>
             애터미 쇼핑몰에서 선택하신 상품을 구매하신다면<br />
-            매년 소비 금액은 약 0,000,000원이며<br />
-            누적 포인트(PV)는 0,000,000 PV입니다.<br />
+            매년 소비 금액은 약 {{ formatter.toPrice(groupCount.AmountPerYear) }}원이며<br />
+            누적 포인트(PV)는 {{ formatter.toPrice(groupCount.PVPerYear) }}PV입니다.<br />
           </p>
           <p>
             PV에 대한 설명을 알고 싶으신 분들은 아래 버튼을<br />클릭해주세요.
@@ -40,7 +40,7 @@
               </button>
             </div>
           </router-link>
-          
+
           <strong class="family-site__title">더 많은 상품보기</strong>
           <p class="family-site__desc">
             애터미 쇼핑몰에는 500여가지 제품이 있으며,<br />수만가지 제품 등을 구매할 수 있는 애터미 아자몰이 있습니다.
@@ -76,6 +76,7 @@
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import useProductsManager from "@/store/products-manager";
+import useFormatter from "@/composables/api/utils/formatter";
 import { computed } from "vue";
 export default {
   name: "Result",
@@ -85,10 +86,13 @@ export default {
   },
   setup() {
     const productsManager = useProductsManager();
+    const formatter = useFormatter();
+
     const groupCount = computed(() => productsManager.getSelectedGroupCount());
 
     return {
       groupCount,
+      formatter,
     };
   },
 };

@@ -15,6 +15,7 @@ import useAppManager from "@/store/app-manager";
 import Loading from '@/Page/Loading'
 import {StatusBar, Style} from "@capacitor/status-bar";
 import {SafeArea} from "capacitor-plugin-safe-area";
+import {Capacitor} from "@capacitor/core";
 
 export default {
   name: 'App',
@@ -35,9 +36,11 @@ export default {
         wrapPaddingTop.value = 70 + Math.ceil(insets.top) + 5 + 'px';
       })
 
-      await StatusBar.setOverlaysWebView({ overlay: true });
-      await StatusBar.setStyle({style: Style.Light});
-      await StatusBar.setBackgroundColor({color: '#FFFFFFFF'});
+      if(Capacitor.getPlatform() !== 'web') {
+        await StatusBar.setOverlaysWebView({overlay: true});
+        await StatusBar.setStyle({style: Style.Light});
+        await StatusBar.setBackgroundColor({color: '#FFFFFFFF'});
+      }
     });
 
     return {

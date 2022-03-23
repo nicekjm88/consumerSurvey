@@ -114,12 +114,19 @@ export default function useProductsManager() {
                 if (c.ch && c.ch.length > 0) {
                     const selected = c.ch.filter((x) => x.checked);
                     if (selected.length > 0) {
-                        a.TotalCount += selected.length;
+                        a.SelectedCount += selected.length;
                         a.Groups.push({Name: c.Name, Count: selected.length});
+
+                        selected.forEach((s) => {
+                            a.AmountPerYear += s.Cost * s.StdCount;
+                            a.PVPerYear += s.PV * s.StdCount;
+                        });
                     }
+
+                    a.TotalCount += c.ch.length;
                 }
                 return a;
-            }, {TotalCount:0, Groups: []});
+            }, {TotalCount:0, SelectedCount:0, AmountPerYear: 0, PVPerYear: 0, Groups: []});
 
             return item;
         }

@@ -71,10 +71,9 @@
             소비가 소득이 되는
           </p>
           <div class="d-grid">
-            <button type="button" class="btn btn-primary block">쇼핑몰 보러가기</button>
+              <button type="button" class="btn btn-primary block" @click="goShop">쇼핑몰 보러가기</button>
           </div>
         </div>
-
         <div v-else>
           <FixedBtn @click="snsShare('나의 소비생활 알아보기')" type="button" msg="공유하기" />
         </div>
@@ -148,7 +147,7 @@ export default {
             } else {
               alert('잠시후 다시 시도해 주세요.')
             }
-          })
+          });
         }
       }else if(router.currentRoute.value.name === 'GuestView'){
         //게스트 결과 화면
@@ -199,8 +198,7 @@ export default {
             if( typeof navigator.share === 'function' ) {
               await navigator.share({
                 title: title,
-                text: 'Atomy\n\n\n',
-                url: url + '\n\n\nhttps://www.atomy.kr/v2/Home/Product/MallMain',
+                url: url,
               });
             } else {
               alert('지원하지 않는 브라우저입니다.');
@@ -210,8 +208,7 @@ export default {
             if (is_share.value) {
               await Share.share({
                 title: title,
-                text: 'Atomy\n\n\n',
-                url: url + '\n\n\nhttps://www.atomy.kr/v2/Home/Product/MallMain',
+                url: url,
               });
             } else {
               alert('지원하지 않는 디바이스 입니다.');
@@ -264,6 +261,10 @@ export default {
       }
     }
 
+    function goShop(){
+      window.open('http://m.atomy.com/kr/m', '_blank');
+    }
+
     return {
       snsShare,
       item,
@@ -271,6 +272,7 @@ export default {
       handleEdit,
       reactResultFormatted,
       showView,
+      goShop,
     };
   },
 };

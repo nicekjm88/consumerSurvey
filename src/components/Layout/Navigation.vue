@@ -45,6 +45,13 @@
       </div>
     </nav>
 
+    <nav v-else-if="$route.name === 'AtomyProduct' || $route.name === 'ResultAtomyProduct' || $route.name === 'GuestAtomyProduct' || $route.name === 'ShareAtomyProduct'" class="navigation">
+      <button type="button" @click="historyBack">
+        <i class="xi-angle-left"></i>
+        <span class="a11y">뒤로</span>
+      </button>
+    </nav>
+
     <nav v-else class="navigation">
       <button type="button" @click="historyBack">
         <i class="xi-angle-left"></i>

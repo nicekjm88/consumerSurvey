@@ -29,7 +29,6 @@
               <tr>
                 <th scope="row">생년월일</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="ex) 19880808" v-model="$store.state.testerBirthDay" /> -->
                     <Field type="number" name="testerBirthDay" class="form-control" placeholder="8자리로 입력해주세요." v-model="data.BirthDay" :rules="isRequiredBirthDay" />
                     <span class="error-message">{{ errors.testerBirthDay }}</span>
                 </td>
@@ -48,7 +47,6 @@
               <tr>
                 <th scope="row">전화번호</th>
                 <td>
-                  <!-- <input type="text" class="form-control" placeholder="ex) 01012345678" v-model="$store.state.testerTellNumber" /> -->
                     <Field type="number" name="testerTellNumber" class="form-control" placeholder="[-]를 제외하고 입력해주세요."  v-model="data.Phone" :rules="isRequiredTellNumber" />
                     <span class="error-message">{{ errors.testerTellNumber }}</span>
                 </td>
@@ -74,6 +72,7 @@ import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
 import useUserManager from "@/store/user-manager"
+import useValidator from "@/composables/api/utils/validator";
 
 export default {
   name: 'SaveData',
@@ -88,6 +87,7 @@ export default {
     const questionsManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
     const userManager = useUserManager();
+    const validator = useValidator();
 
     const selectedProducts = productsManager.getSelected();
     const selectedQuestions = questionsManager.getData();
@@ -157,7 +157,11 @@ export default {
 
     function isRequiredBirthDay(value) {
       if (value) {
-        return value.length === 8 ? true : '생년월일 8자리를 입력해주세요.';
+        if(value.length !== 8) return '생년월일 8자리를 입력해주세요.';
+        if(!validator.isBirthday(value)) return '정확한 생년월일을 입력해주세요.';
+        // if(validator.checkAge(value, (age) => age < 18)) return '18세 이상 회원만 참여 하실 수 있습니다.'
+
+        return true;
       }
 
       return '생년월일을 입력해주세요.';

@@ -4,7 +4,7 @@
     <main>
       <section>
         <article>
-          <h1 class="title">애터미 쇼핑몰</h1>
+          <h1 class="title">{{ title }}</h1>
           <table class="product-table text-center">
             <caption>
               애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보
@@ -32,7 +32,7 @@
               </tr>
             </tbody>
           </table>
-          <button class="btn-more" type="button" @click="showMore">
+          <button v-if="!hideMore" class="btn-more" type="button" @click="showMore">
             <i class="xi-angle-down"></i> 더보기
           </button>
           <div class="total-product">
@@ -60,7 +60,7 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import useProductsManager from "@/store/products-manager";
-import { onBeforeMount, ref } from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import router from "@/router";
 import useSurvey from "@/composables/api/survey";
 import useFormatter from "@/composables/api/utils/formatter";
@@ -78,14 +78,17 @@ export default {
     const survey = useSurvey();
     const baseCount = 7;
     const maxCount = ref(baseCount);
-    //const option = { maximumFractionDigits: 4 };
     const items = ref(productsManager.genEmptySelected());
     const formatter = useFormatter();
+    const title = ref('선택 상품');
+
+    const hideMore = computed(() => maxCount.value >= items.value.Products.length);
 
     const key = router.currentRoute.value.query.key;
 
     onBeforeMount(() => {
       if(router.currentRoute.value.name === 'AtomyProduct'){
+        title.value = '애터미 제품'
         if (!productsManager.hasValue()) {
           router.push("/intro");
         }
@@ -117,20 +120,20 @@ export default {
       }
     });
 
-    function showMore(){
+    function showMore() {
       let max_count = maxCount.value + baseCount;
-      if(max_count > items.value.Count) max_count = items.value.Count;
+      if (max_count > items.value.Count) max_count = items.value.Count;
       maxCount.value = max_count;
     }
 
-    //items.value.AmountPerYear = items.value.AmountPerYear.toLocaleString("ko-KR", option);
-    //items.value.PVPerYear = items.value.PVPerYear.toLocaleString("ko-KR", option);
-
     return {
-      items,
       showMore,
+
+      items,
       maxCount,
       formatter,
+      title,
+      hideMore,
     };
   },
 };
