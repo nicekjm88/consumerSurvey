@@ -8,6 +8,7 @@
           맞췄다면 얼만큼의 수당이<br>
           발생되는지 보겠습니다.<br>
           <br>
+          <i class="xi-arrow-down"></i> 아래로 내려서 <i class="xi-arrow-down"></i><br>
           수당 받기 버튼을 눌러보세요!
         </p>        
       </div>

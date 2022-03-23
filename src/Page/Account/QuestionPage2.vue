@@ -3,7 +3,7 @@
     <Navigation />
     <main class="qestion-area">
       <section>
-        <ProgressBar :progressStatus="progressStatus" :class="{ 'is-show': !showProgressBar }" />
+        <ProgressBar :progressStatus="progressStatus" :class="{ 'is-show': !hideProgressBar }" />
         <p class="notify" id="qestion">
           <strong>현재 쇼핑몰(온/오프라인)에서<br>구입하는 제품들을 선택해주세요.</strong>
         </p>
@@ -81,10 +81,10 @@ export default {
   name: "QuestionPage2",
   data() {
     return {
-      showProgressBar: true,
       lastScrollPosition: 0,
       scrollValue: 0,
       progressStatus: 0,
+      hideProgressBar: true,
       isFinished: false,
       isModal: false,
       isAddClass: false,
@@ -98,11 +98,18 @@ export default {
     window.removeEventListener("scroll", this.onScroll);
   },
   watch: {
-    progressStatus () {
+    progressStatus () {    
+      const progressCount = document.querySelector('.progress-bar__count');
+
+      this.progressStatus >= 48
+        ? progressCount.style.color = '#fff'
+        : progressCount.style.color = '#333'
+
       if ( this.progressStatus >= 100 ) {
         this.isModal = true;
         this.addClass();
       }
+      
     }
   },
   methods: {
@@ -121,7 +128,7 @@ export default {
       if (Math.abs(window.pageYOffset - this.lastScrollPosition) < OFFSET) {
         return;
       }
-      this.showProgressBar = window.pageYOffset < this.lastScrollPosition;
+      this.hideProgressBar = window.pageYOffset < this.lastScrollPosition;
       this.lastScrollPosition = window.pageYOffset;
     },
     hideModal() {
@@ -132,7 +139,7 @@ export default {
       });
     },
     showProgress() {
-      this.showProgressBar = false
+      this.hideProgressBar = false
     }
   },
   components: {

@@ -217,6 +217,7 @@ strong {
 .notify em {
   font-size: 13px;
   display: block;
+  word-break: keep-all;
 }
 
 .notify span {

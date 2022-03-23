@@ -12,7 +12,7 @@
         aria-valuemax="100"
         :style="`width: ${progressStatus}%`"
       >
-        {{ progressStatus }}%
+        <span class="progress-bar__count">{{ progressStatus }}%</span>
       </div>
     </div>
     <div class="goal-label">
@@ -72,10 +72,21 @@ export default {
     display: block;
     margin-bottom: 10px;
   }
+
+  .progress-bar {
+    background-color: $mainColor;
+  }
 }
 .goal-label {
   margin-top: 5px;
   display: flex;
   justify-content: space-between;
+}
+
+.progress-bar__count {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
 }
 </style>

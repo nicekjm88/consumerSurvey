@@ -1720,7 +1720,6 @@ export default {
 
 .info {
   text-align: center;
-  font-size: 13px;
   position: fixed;
   top: 0;
   left: 0;
@@ -1734,10 +1733,13 @@ export default {
   color: #fdfdfd;
   margin-bottom: 0;
   margin-top: 0;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .interaction {
   position: relative;
+  margin-top: 50px;
 
   &-area {
     position: absolute;
