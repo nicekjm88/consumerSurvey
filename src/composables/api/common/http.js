@@ -8,7 +8,7 @@ export default function useHttp() {
     const appManager = useAppManager();
 
     const defaultHeaders = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
         [_ATOMY_API_TOKEN_NAME]: _ATOMY_API_TOKEN,
         [_ATOMY_USER_TOKEN_NAME]: ''
@@ -49,10 +49,11 @@ export default function useHttp() {
                     headers: headers
                 }).finally(() => appManager.resetHttpBusy());
             } else {
+                const std_data = JSON.parse(JSON.stringify(data));
                 return Http.post({
                     url: url,
                     headers: headers,
-                    data: data,
+                    data: std_data,
                 }).finally(() => appManager.resetHttpBusy());
             }
         }

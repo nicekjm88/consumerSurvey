@@ -129,7 +129,7 @@ export default {
           });
         }else if(user_type === 2){
           const key = router.currentRoute.value.query.key;
-          survey.getResultForGuest(encodeURIComponent(key)).then((r) => {
+          survey.getResultForGuest(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               initData(r.data.Data);
             }
@@ -186,7 +186,7 @@ export default {
             });
           }else if(user_type === 2) {
             const key = router.currentRoute.value.query.key;
-            survey.editForGuest(data, encodeURIComponent(key)).then((r) => {
+            survey.editForGuest(data, key).then((r) => {
               if (r.data.Status === 1 && r.data.Data) {
                 router.back();
               }else{
@@ -213,7 +213,6 @@ export default {
 
         if (userManager.getUserType() === 2) {
           survey.saveForGuest(data).then((r) => {
-            console.log(r);
             if (r.data.Status === 1 && r.data.Data) {
               router.push(`/GuestView?key=${r.data.Data}`);
             } else {

@@ -130,9 +130,10 @@ export default function useSurvey() {
     }
 
     async function deleteForGuest(key){
+        debugger;
         return http.post(url.getUrl(`/atomy/consumersurvey/${_JISA_CODE}/v1/guest/result/delete`),
             {
-                key:key
+                key: encodeURIComponent(key)
             },
             {
                 [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token

@@ -100,7 +100,7 @@ export default {
         });
       }
       else if(router.currentRoute.value.name === 'GuestAtomyProduct'){
-        survey.GetResultProductsForGuest(encodeURIComponent(key)).then((r) => {
+        survey.GetResultProductsForGuest(key).then((r) => {
           console.log('GuestAtomyProduct', r)
           if(r.data.Status === 1 && r.data.Data){
             items.value = productsManager.genSelected(r.data.Data);
@@ -108,7 +108,7 @@ export default {
         });
       }
       else if(router.currentRoute.value.name === 'ShareAtomyProduct') {
-        survey.getResultProductsForShare(encodeURIComponent(key)).then((r) => {
+        survey.getResultProductsForShare(key).then((r) => {
           console.log('ShareAtomyProduct', r)
           if(r.data.Status === 1 && r.data.Data){
             items.value = productsManager.genSelected(r.data.Data);
