@@ -118,7 +118,7 @@ export default {
     }
 
     function deleteList() {
-      if(confirm('해당 정보(들)을 삭제하시겠습니까?\n삭제하시면 저장된 리스트가 삭제되며\n복구가 불가능합니다.')){
+      if(confirm('해당 정보(들)를 삭제하시겠습니까?\n만약 삭제하신다면 복구가 불가능합니다.')){
         survey.deletes(selected.value).then((r) => {
           if(r.data.Status === 1){
             const tmp = reactResults.Results.filter(x => !selected.value.includes(x.ResultNo));

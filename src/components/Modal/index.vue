@@ -8,7 +8,6 @@
           맞췄다면 얼만큼의 수당이<br>
           발생되는지 보겠습니다.<br>
           <br>
-          <i class="xi-arrow-down"></i> 아래로 내려서 <i class="xi-arrow-down"></i><br>
           수당 받기 버튼을 눌러보세요!
         </p>        
       </div>
@@ -18,14 +17,18 @@
 export default {
   name: "Modal",
   methods: {
-    hideModal(e) {
-
-      const modal = document.querySelector('.modal-dimmed');
-
-      if ( e.target === modal ) {
-        e.target.setAttribute('style','display: none');
-      }
+    scrollToElement() {
+      const el = document.querySelector('.scrolltop-position');
       
+      if (el) {
+        el.scrollIntoView({behavior: 'smooth'});
+      }
+    },
+    hideModal(e) {
+      const modal = document.querySelector('.modal-dimmed');
+      if ( e.target === modal ) e.target.setAttribute('style','display: none');
+
+      this.scrollToElement();
     },
   },
 
@@ -33,6 +36,20 @@ export default {
 </script>
 
 <style lang="scss">
+// Animation
+@keyframes arrow-movement {
+  0% { 
+      opacity: 0;
+      top: 45%;
+  }
+  70% {
+      opacity: 1;
+  }
+  100% { 
+      opacity: 0;
+  }
+} 
+
 .modal-dimmed {
   position: fixed;
   bottom: 0;

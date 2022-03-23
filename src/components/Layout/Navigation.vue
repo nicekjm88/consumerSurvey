@@ -45,6 +45,13 @@
       </div>
     </nav>
 
+    <nav v-else-if="$route.name === 'AtomyProduct'" class="navigation icon-alone">
+      <button type="button" @click="historyBack" v-if="userType === 1">
+        <i class="xi-close"></i>
+        <span class="a11y">닫기</span>
+      </button>
+    </nav>
+
     <nav v-else class="navigation">
       <button type="button" @click="historyBack">
         <i class="xi-angle-left"></i>
