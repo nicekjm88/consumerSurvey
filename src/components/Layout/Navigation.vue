@@ -64,6 +64,8 @@
 <script>
 import useUserManager from "@/store/user-manager";
 import router from "@/router";
+import {onBeforeMount, ref} from "vue";
+import {SafeArea} from "capacitor-plugin-safe-area";
 
 export default {
   name: "Navigation",
@@ -74,8 +76,10 @@ export default {
   },
 
   setup(){
-    const userManager = useUserManager()
+    const userManager = useUserManager();
     const userType = userManager.getUserType();
+    const mgt = ref('0px');
+    const pgt = ref('0px');
 
     function logout(){
       userManager.logout().then(() => {
@@ -83,9 +87,18 @@ export default {
       });
     }
 
+    onBeforeMount(() => {
+      SafeArea.getSafeAreaInsets().then(({insets}) => {
+        mgt.value = -(insets.top + 5) + 'px';
+        pgt.value = insets.top + 10 + 'px'
+      })
+    })
+
     return {
       userType,
       logout,
+      mgt,
+      pgt
     }
   }
 }
@@ -95,7 +108,13 @@ export default {
 .navigation {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+
+  margin-bottom: v-bind(mgt) !important;
+  padding-top: v-bind(pgt) !important;
+
+  padding-right: 10px;
+  padding-left: 10px;
+
   background: transparent;
   position: absolute;
   top: 0;

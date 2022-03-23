@@ -131,7 +131,6 @@ export default {
     }
 
     function handleSearch(){
-      console.log('search');
       survey.getResultsV2(page.PageSize, 0, page.Name).then((r) => {
         if(r.data.Status === 1) {
           listEdit(false);

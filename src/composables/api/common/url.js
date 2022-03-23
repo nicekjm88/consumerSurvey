@@ -9,7 +9,7 @@ export default function useUrl(){
             const names = Object.getOwnPropertyNames(parameters);
             const p = names.reduce((a, c, i)=>{
                 if(i > 0) a += '&';
-                a += `${c}=${parameters[c]}`
+                a += `${c}=${encodeURIComponent(parameters[c])}`
                 return a;
             },'?');
             if(p){

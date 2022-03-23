@@ -141,7 +141,7 @@ export default {
       if(router.currentRoute.value.name === 'ShareView'){
         //공유 화면
         if(key){
-          survey.getResultForShare(encodeURIComponent(key)).then((r) => {
+          survey.getResultForShare(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               reactResult.Result = r.data.Data;
               drawData(reactResult.Result);
@@ -153,7 +153,7 @@ export default {
       }else if(router.currentRoute.value.name === 'GuestView'){
         //게스트 결과 화면
         if(key){
-          survey.getResultForGuest(encodeURIComponent(key)).then((r) => {
+          survey.getResultForGuest(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               reactResult.Result = r.data.Data;
               drawData(reactResult.Result);
@@ -199,9 +199,8 @@ export default {
             if( typeof navigator.share === 'function' ) {
               await navigator.share({
                 title: title,
-                url: url,
-                text: 'atomy text',
-                dialogTitle: 'atomy dialogTitle'
+                text: 'Atomy\n\n\n',
+                url: url + '\n\n\nhttps://www.atomy.kr/v2/Home/Product/MallMain',
               });
             } else {
               alert('지원하지 않는 브라우저입니다.');
@@ -235,7 +234,7 @@ export default {
             }
           });
         }else {
-          survey.deleteForGuest(encodeURIComponent(key)).then((r)=>{
+          survey.deleteForGuest(key).then((r)=>{
             if (r.data.Status === 1 && r.data.Data) {
               router.push('/intro');
             }else{
