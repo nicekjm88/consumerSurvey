@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="goal-label">
-      <div>0</div>
+      <div>{{formatter.toPrice(pv)}} PV</div>
       <div>누적 PV</div>
     </div>
   </div>
@@ -25,6 +25,7 @@
 <script>
 import { SafeArea } from "capacitor-plugin-safe-area";
 import {onBeforeMount, ref} from "vue";
+import useFormatter from "@/composables/api/utils/formatter";
 export default {
   name: "progressBar",
   data() {
@@ -33,10 +34,15 @@ export default {
     };
   },
   props: {
-    progressStatus: Number
+    progressStatus: Number,
+    pv: {
+      type: Number,
+      default: 0
+    }
   },
   methods() {},
   setup(){
+    const formatter = useFormatter();
     const mgt = ref('0px');
     const pgt = ref('0px');
 
@@ -50,6 +56,7 @@ export default {
     return {
       mgt,
       pgt,
+      formatter,
     }
   }
 };

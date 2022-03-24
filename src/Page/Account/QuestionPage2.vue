@@ -3,7 +3,7 @@
     <Navigation />
     <main class="qestion-area">
       <section>
-        <ProgressBar :progressStatus="progressStatus" :class="{ 'is-show': !hideProgressBar }" />
+        <ProgressBar :pv="pv" :progressStatus="progressStatus" :class="{ 'is-show': !hideProgressBar }" />
         <p class="notify" id="qestion">
           <strong>현재 쇼핑몰(온/오프라인)에서<br>구입하는 제품들을 선택해주세요.</strong>
         </p>
@@ -39,7 +39,7 @@
                   </div>
                 </li>
               </ul>
-                
+
 
             </div>
           </div>
@@ -84,6 +84,7 @@ export default {
       lastScrollPosition: 0,
       scrollValue: 0,
       progressStatus: 0,
+      pv: 0,
       hideProgressBar: true,
       isFinished: false,
       isModal: false,
@@ -98,7 +99,7 @@ export default {
     window.removeEventListener("scroll", this.onScroll);
   },
   watch: {
-    progressStatus () {    
+    progressStatus () {
       const progressCount = document.querySelector('.progress-bar__count');
 
       this.progressStatus >= 48
@@ -109,7 +110,7 @@ export default {
         this.isModal = true;
         this.addClass();
       }
-      
+
     }
   },
   methods: {
@@ -189,6 +190,7 @@ export default {
     function updateProgress(){
       const val = Math.floor(sumPV.value / 3000);
       that.data.progressStatus = val > 100 ? 100 : val;
+      that.data.pv = sumPV.value;
     }
 
     function productToggle(product) {
