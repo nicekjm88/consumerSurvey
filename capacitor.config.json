@@ -1,6 +1,6 @@
 {
   "appId": "myconsumption.atomy.com",
-  "appName": "Atomy Consumer Survey",
+  "appName": "애터미 큐레이팅",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "windowsAndroidStudioPath": "C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe",
@@ -9,7 +9,7 @@
       "autoUpdateUrl": "https://capgo.app/api/latest?appid=myconsumption.atomy.com&channel=dev"
     },
     "SplashScreen": {
-      "launchShowDuration": 3000,
+      "launchShowDuration": 1000,
       "launchAutoHide": true,
       "backgroundColor": "#ffffffff",
       "androidSplashResourceName": "splash",
