@@ -2,16 +2,18 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import store from '@/store';
 import router from '@/router';
+import {Capacitor} from "@capacitor/core";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import './permission';
 
-import {CapacitorUpdater} from "capacitor-updater";
-CapacitorUpdater.notifyAppReady();
+const app = createApp(App);
 
-const app = createApp(App)
+if(Capacitor.getPlatform() !== 'web') {
+    const updator = require('capacitor-updater');
+    updator.CapacitorUpdater.notifyAppReady();
+}
 
 //native back button
 import { App as capApp } from '@capacitor/app';
