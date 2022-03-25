@@ -14,7 +14,7 @@
         <p>
           아래 그림을 봐주세요!<br>
           그림에 나온 사람들은 나를 통해 애터미 쇼핑몰에서 제품을 구입한 소비자입니다.
-        </p>        
+        </p>
         <p>
           소비자들의 PV가 점점 쌓인다면<br>
           당신은 수당을 받을 수 있습니다!
@@ -36,7 +36,7 @@
               class="button left-under1"
               @click="isAddPv2"
               type="button"
-              :disabled="isButtonDisabled"              
+              :disabled="isButtonDisabled"
             >
               <p>{{ leftUnder1 }}만 PV</p>
               <div class="dimmed"></div>
@@ -1416,15 +1416,15 @@
             </svg>
           </div>
         </div>
-      </section>      
+      </section>
 
       <div class="page-step1" v-if="this.nextStep == true">
         <Modal />
 
         <div class="d-grid gap-2">
 
-          <button 
-            @click="init" 
+          <button
+            @click="init"
             class="btn btn-secondary"
           >
             <i class="xi-refresh"></i> 초기화 하기
@@ -1493,7 +1493,7 @@ import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import Modal from "@/components/Modal"
 
 export default {
-  name: "Result",
+  name: "Result3",
   data() {
     return {
       particles: 200,
@@ -1522,9 +1522,9 @@ export default {
     totalSum (value) {
       if ( value >= 60 ) {
         if ( this.leftSum >= 30 && this.rightSum >= 30 ) {
-          this.nextStep = true;  
+          this.nextStep = true;
           this.isButtonDisabled = true;
-        }        
+        }
       }
     }
   },
@@ -1573,7 +1573,7 @@ export default {
       this.rightSum = this.rightUnder1 + this.rightUnder2 + this.rightUnder3;
       this.totalSum = this.leftSum + this.rightSum;
     },
-    init() { 
+    init() {
       this.leftUnder1 = 0;
       this.leftUnder2 = 0;
       this.leftUnder3 = 0;
@@ -1591,11 +1591,11 @@ export default {
       const btns = document.querySelectorAll('.interaction-area button');
 
       btns.forEach((item, index) => {
-        
+
         if ( index !== 0 ) {
           item.classList.remove('is-active');
-        }       
-        
+        }
+
       })
 
     },
@@ -1615,7 +1615,7 @@ export default {
       window.addEventListener("click", (e) => {
         e.target !== modal ? modal.classList.remove("isActive") : false;
       });
-      
+
     },
   },
   components: {
@@ -1953,7 +1953,7 @@ export default {
       font-weight: 700;
     }
   }
-  
+
 }
 
 .particles {

@@ -90,7 +90,7 @@ export default {
           len = userId.length,
           extLen = stdLen - len;
 
-      if (len == 0) {
+      if (len === 0) {
         return value;
       }
 

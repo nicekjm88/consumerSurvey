@@ -26,20 +26,18 @@
 
           <p>
             애터미 쇼핑몰에서 선택하신 상품을 구매하신다면<br />
-            매년 소비 금액은 약 {{ formatter.toPrice(groupCount.AmountPerYear) }}원이며<br />
-            누적 포인트(PV)는 {{ formatter.toPrice(groupCount.PVPerYear) }}PV입니다.<br />
+<!--            매년 소비 금액은 약 {{ formatter.toPrice(groupCount.AmountPerYear) }}원이며<br />-->
+<!--            누적 포인트(PV)는 {{ formatter.toPrice(groupCount.PVPerYear) }}PV입니다.<br />-->
           </p>
           <p>
             소비가 소득이 된다!<br>누적된 PV로 캐시백(수당) 받는 방법 아래 버튼 클릭!
           </p>
 
-          <router-link to="/Result2">
-            <div class="d-grid">
-              <button class="btn btn-primary block">
-                PV 알아보기
-              </button>
-            </div>
-          </router-link>
+          <div class="d-grid">
+            <button class="btn btn-primary block" @click="goPV">
+              PV 알아보기
+            </button>
+          </div>
 
           <strong class="family-site__title">더 많은 상품보기</strong>
           <p class="family-site__desc">
@@ -77,7 +75,10 @@ import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import useProductsManager from "@/store/products-manager";
 import useFormatter from "@/composables/api/utils/formatter";
-import { computed } from "vue";
+import useSettingsManager from "@/store/settings-manager";
+import {onBeforeMount} from "vue";
+import router from "@/router";
+
 export default {
   name: "Result",
   components: {
@@ -87,12 +88,27 @@ export default {
   setup() {
     const productsManager = useProductsManager();
     const formatter = useFormatter();
+    const settingManager = useSettingsManager();
+    const setting = settingManager.getData();
+    const groupCount = productsManager.getSelectedGroupCount();
 
-    const groupCount = computed(() => productsManager.getSelectedGroupCount());
+    onBeforeMount(()=>{
+      if(!productsManager.isDone()){
+        router.push('/intro');
+      }
+    });
+
+    function goPV(){
+      const pbc = Math.floor(groupCount.PVPerYear / setting.StdPV);
+      const pba = Math.floor(pbc * setting.StdScore * setting.StdN);
+      router.push(`/result2/${groupCount.AmountPerYear}/${groupCount.PVPerYear}/${pbc}/${pba}`);
+    }
 
     return {
       groupCount,
       formatter,
+      setting,
+      goPV,
     };
   },
 };

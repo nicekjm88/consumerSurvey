@@ -54,9 +54,10 @@ export const defaultRoutes = [
     component: () => import("@/Page/Account/Result"),
   },
   {
-    path: "/result2",
+    path: "/result2/:amount/:pv/:pbc/:pba",
     name: "Result2",
     component: () => import("@/Page/Account/Result2"),
+    props: true
   },
   {
     path: "/result3",

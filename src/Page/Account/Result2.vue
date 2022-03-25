@@ -16,10 +16,10 @@
           애터미 쇼핑몰을 통해 본인 누적 30만 PV 이상 달성하시면 후원수당을 받을 수 있는 조건이 주어집니다.
         </p>
         <p>
-          앞서 선택하신 제품을 꾸준히 구매하신다면 연간 약 0,000,000원이 지출되며 PV는 약 0,000,000PV가 누적됩니다.
+          앞서 선택하신 제품을 꾸준히 구매하신다면 연간 약 {{ formatter.toPrice(amount) }}원이 지출되며 PV는 약 {{ formatter.toPrice(pv) }}PV가 누적됩니다.
         </p>
         <p>
-          예상 캐시백(후원수당) 횟수는 약 0회(최소)이며<br>총 캐시백 금액은 약 000,000원 입니다.
+          예상 캐시백(후원수당) 횟수는 약 {{pbc}}회(최소)이며<br>총 캐시백 금액은 약 {{ formatter.toPrice(pba) }}원 입니다.
         </p>
 
         <div class="img_wrap">
@@ -298,15 +298,29 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
+import useFormatter from "@/composables/api/utils/formatter";
 
 export default {
-  name: "Result",
+  name: "Result2",
   computed: {},
   methods: {},
   components: {
     Navigation,
     FixedBtn,
   },
+  props:{
+    amount: [Number, String],
+    pv: [Number, String],
+    pbc: [Number, String],
+    pba: [Number, String]
+  },
+  setup(){
+    const formatter = useFormatter();
+
+    return {
+      formatter,
+    }
+  }
 };
 </script>
 
