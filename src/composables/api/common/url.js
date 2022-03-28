@@ -19,7 +19,6 @@ export default function useUrl(){
 
     return {
         getUrl: function (url, parameters) {
-            debugger;
             if (Capacitor.getPlatform() !== 'web') {
                 if (url.match(`(^${_ATOMY_URL})`)) {
                     const m = new RegExp(`(^${_ATOMY_URL})`)

@@ -9,8 +9,6 @@ export default function useQuestionsManager() {
     async function fetch(force = false) {
         if (!force && store.state.questions.data.length > 0) return;
 
-        debugger;
-
         const res = await survey.getQuestions();
         if (res.status === 200 && res.data.Data) {
             const tmp_questions = res.data.Data;

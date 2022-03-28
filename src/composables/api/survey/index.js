@@ -24,7 +24,6 @@ export default function useSurvey() {
     }
 
     async function getQuestions(){
-        debugger;
         return http.get(url.getUrl(`${_ATOMY_URL}/consumersurvey/${_JISA_CODE}/v1/questions`),
             {
                 [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token
@@ -138,7 +137,6 @@ export default function useSurvey() {
     }
 
     async function deleteForGuest(key){
-        debugger;
         return http.post(url.getUrl(`${_ATOMY_URL}/consumersurvey/${_JISA_CODE}/v1/guest/result/delete`),
             {
                 key: encodeURIComponent(key)
