@@ -33,7 +33,7 @@
             </tbody>
           </table>
           <button v-if="!hideMore" class="btn-more" type="button" @click="showMore">
-            <i class="xi-angle-down"></i> 더보기
+            <i class="xi-angle-down"></i> 더보기({{maxCount}}/{{items.Count}})
           </button>
           <div class="total-product">
             <div class="total-product__count">
@@ -118,6 +118,7 @@ export default {
           }
         });
       }
+
     });
 
     function showMore() {

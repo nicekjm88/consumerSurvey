@@ -1,9 +1,7 @@
 import {Capacitor} from "@capacitor/core";
+import {_ATOMY_PROXY, _ATOMY_URL} from "@/composables/api/common/define";
 
 export default function useUrl(){
-    const _ATOMY_PROXY = 'https://test-dev.atomy.com/apiglobal';
-    const _ATOMY = '/atomy';
-
     function addParameter(url, parameters) {
         if(typeof parameters === 'object'){
             const names = Object.getOwnPropertyNames(parameters);
@@ -21,9 +19,10 @@ export default function useUrl(){
 
     return {
         getUrl: function (url, parameters) {
+            debugger;
             if (Capacitor.getPlatform() !== 'web') {
-                if (url.match(`(^${_ATOMY})`)) {
-                    const m = new RegExp(`(^${_ATOMY})`)
+                if (url.match(`(^${_ATOMY_URL})`)) {
+                    const m = new RegExp(`(^${_ATOMY_URL})`)
                     url = url.replace(m, _ATOMY_PROXY);
                 }
             }
@@ -35,6 +34,6 @@ export default function useUrl(){
             return url;
         },
 
-        atomy: _ATOMY,
+        atomy: _ATOMY_URL,
     }
 }
