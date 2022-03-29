@@ -22,14 +22,14 @@
               <tr>
                 <th scope="row">이름</th>
                 <td>
-                    <Field type="text" name="testerName" class="form-control" placeholder="김터미" v-model="data.Name" :rules="isRequiredName" />
+                    <Field type="text" name="testerName" class="form-control" placeholder="이름을 입력해주세요" v-model="data.Name" :rules="isRequiredName" />
                     <span class="error-message">{{ errors.testerName }}</span>
                 </td>
               </tr>
               <tr>
                 <th scope="row">생년월일</th>
                 <td>
-                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="8자리로 입력해주세요." v-model="data.BirthDay" :rules="isRequiredBirthDay" />
+                    <Field type="number" name="testerBirthDay" class="form-control" placeholder="8자리로 입력해주세요" v-model="data.BirthDay" :rules="isRequiredBirthDay" />
                     <span class="error-message">{{ errors.testerBirthDay }}</span>
                 </td>
               </tr>
@@ -47,7 +47,7 @@
               <tr>
                 <th scope="row">전화번호</th>
                 <td>
-                    <Field type="number" name="testerTellNumber" class="form-control" placeholder="[-]를 제외하고 입력해주세요."  v-model="data.Phone" :rules="isRequiredTellNumber" />
+                    <Field type="number" name="testerTellNumber" class="form-control" placeholder="[-]를 제외하고 입력해주세요"  v-model="data.Phone" :rules="isRequiredTellNumber" />
                     <span class="error-message">{{ errors.testerTellNumber }}</span>
                 </td>
               </tr>

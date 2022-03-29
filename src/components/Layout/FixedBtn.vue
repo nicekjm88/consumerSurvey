@@ -23,6 +23,8 @@ export default {
   color: #fff;
   font-weight: 700;
   z-index: 98;
+  padding: 15px 0 calc(constant(safe-area-inset-bottom) + 15px);
+  padding: 15px 0 calc(env(safe-area-inset-bottom) + 15px);
 
   &:disabled {
     background-color: #999;
