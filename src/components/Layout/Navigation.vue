@@ -6,12 +6,21 @@
         <span>로그아웃</span>
       </button>
 
-      <router-link v-if="userType === 1" to="/SaveDataList">
+      <div>
         <button type="button">
-          <i class="xi-list-square"></i>
-          <span class="a11y">저장 리스트</span>
+          <router-link to="/Terms">
+            <i class="xi-help"></i>
+            <span class="a11y">애터미 큐레이팅이란?</span>
+          </router-link>
         </button>
-      </router-link>
+
+        <button type="button">
+          <router-link v-if="userType === 1" to="/SaveDataList">
+            <i class="xi-list-square"></i>
+            <span class="a11y">저장 리스트</span>
+          </router-link>
+        </button>
+      </div>
     </nav>
 
     <nav
@@ -26,13 +35,23 @@
       </router-link>
     </nav>
 
-    <nav v-else-if="$route.name === 'SaveDataView' || $route.name === 'GuestView' || $route.name === 'ShareView'" class="navigation">
+    <nav
+      v-else-if="
+        $route.name === 'SaveDataView' ||
+          $route.name === 'GuestView' ||
+          $route.name === 'ShareView'
+      "
+      class="navigation"
+    >
       <button type="button" @click="historyBack" v-if="userType === 1">
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
 
-      <div v-if="userType !== 3" :style="userType === 2 ? { marginLeft:'auto' } : {}">
+      <div
+        v-if="userType !== 3"
+        :style="userType === 2 ? { marginLeft: 'auto' } : {}"
+      >
         <button type="button" @click="$emit('buttonEditClick', $event)">
           <img :src="require('@/assets/image/i-modify.svg')" />
           <span class="a11y">수정하기</span>
@@ -45,7 +64,17 @@
       </div>
     </nav>
 
-    <nav v-else-if="$route.name === 'AtomyProduct' || $route.name === 'ResultAtomyProduct' || $route.name === 'GuestAtomyProduct' || $route.name === 'ShareAtomyProduct'" class="navigation icon-alone">
+    <nav
+      v-else-if="
+        $route.name === 'terms' ||
+          $route.name === 'terms2' ||
+          $route.name === 'AtomyProduct' ||
+          $route.name === 'ResultAtomyProduct' ||
+          $route.name === 'GuestAtomyProduct' ||
+          $route.name === 'ShareAtomyProduct'
+      "
+      class="navigation icon-alone"
+    >
       <button type="button" @click="historyBack">
         <i class="xi-close"></i>
         <span class="a11y">닫기</span>
@@ -71,8 +100,8 @@
 <script>
 import useUserManager from "@/store/user-manager";
 import router from "@/router";
-import {onBeforeMount, ref} from "vue";
-import {SafeArea} from "capacitor-plugin-safe-area";
+import { onBeforeMount, ref } from "vue";
+import { SafeArea } from "capacitor-plugin-safe-area";
 
 export default {
   name: "Navigation",
@@ -82,33 +111,33 @@ export default {
     },
   },
 
-  setup(){
+  setup() {
     const userManager = useUserManager();
     const userType = userManager.getUserType();
-    const mgt = ref('0px');
-    const pgt = ref('0px');
+    const mgt = ref("0px");
+    const pgt = ref("0px");
 
-    function logout(){
+    function logout() {
       userManager.logout().then(() => {
-        router.push('/login')
+        router.push("/login");
       });
     }
 
     onBeforeMount(() => {
-      SafeArea.getSafeAreaInsets().then(({insets}) => {
-        mgt.value = -(insets.top + 5) + 'px';
-        pgt.value = insets.top + 10 + 'px'
-      })
-    })
+      SafeArea.getSafeAreaInsets().then(({ insets }) => {
+        mgt.value = -(insets.top + 5) + "px";
+        pgt.value = insets.top + 10 + "px";
+      });
+    });
 
     return {
       userType,
       logout,
       mgt,
-      pgt
-    }
-  }
-}
+      pgt,
+    };
+  },
+};
 </script>
 
 <style lang="scss">

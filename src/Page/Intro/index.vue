@@ -7,9 +7,7 @@
           <strong class="intro-page__title">소비가 소득이 된다!</strong>
           <div class="intro-page__desc">
             <p>이루고 싶은 꿈이 있나요?<br />노후 준비가 되었나요?</p>
-            <p>
-              나의 소비가 소득이 되는<br>애터미를 만나보세요.
-            </p>
+            <p>나의 소비가 소득이 되는<br />애터미를 만나보세요.</p>
           </div>
           <div class="intro-page__imgWrap">
             <svg
@@ -957,17 +955,17 @@
         </article>
       </section>
     </main>
-    <router-link to="/Terms">
+    <router-link to="/qna">
       <FixedBtn msg="시작하기" />
     </router-link>
   </div>
 </template>
 
 <script>
-import 'animate.css';
-import FixedBtn from '@/components/Layout/FixedBtn.vue';
-import Navigation from '@/components/Layout/Navigation.vue';
-import {onBeforeMount} from "vue";
+import "animate.css";
+import FixedBtn from "@/components/Layout/FixedBtn.vue";
+import Navigation from "@/components/Layout/Navigation.vue";
+import { onBeforeMount } from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager";
@@ -986,11 +984,12 @@ export default {
     const appManager = useAppManager();
 
     async function loadData() {
-      return appManager.setHttpBusyForce(true)
-          .then(() => questionManager.fetch(true))
-          .then(() => productsManager.fetch(true))
-          .then(() => settingsManager.fetch(true))
-          .finally(() => appManager.setHttpBusyForce(false))
+      return appManager
+        .setHttpBusyForce(true)
+        .then(() => questionManager.fetch(true))
+        .then(() => productsManager.fetch(true))
+        .then(() => settingsManager.fetch(true))
+        .finally(() => appManager.setHttpBusyForce(false));
 
       // return questionManager
       //   .fetch(true)
@@ -998,7 +997,7 @@ export default {
       //   .then(() => settingsManager.fetch(true));
     }
 
-    onBeforeMount(()=>{
+    onBeforeMount(() => {
       loadData();
     });
   },
