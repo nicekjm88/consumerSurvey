@@ -3,10 +3,10 @@
     <Navigation />
     <main class="result2-area">
       <section>
-        <h1 class="title">후원수당을 받으려면?</h1>
+        <h1 class="title">캐쉬백을 받으려면?</h1>
         <hr />
         <p>
-          후원수당은 일일 소실적 기준 누적 <b>30만 PV</b>를<br />달성할 경우 수령 조건에 충족됩니다.
+          캐쉬백은 일일 소실적 기준 누적 <b>30만 PV</b>를<br />달성할 경우 수령 조건에 충족됩니다.
         </p>
         <p class="scrolltop-position">
           애터미 쇼핑몰로 마트체인지해서<br>나와 같은 소비자들이 주변에 생긴다면 소비자들의 일일 누적 PV에 따라 캐시백을 받을 수 있습니다!
@@ -16,8 +16,7 @@
           그림에 나온 사람들은 나를 통해 애터미 쇼핑몰에서 제품을 구입한 소비자입니다.
         </p>
         <p>
-          소비자들의 PV가 점점 쌓인다면<br>
-          당신은 수당을 받을 수 있습니다!
+          소비자들의 PV가 점점 쌓인다면 당신은 수당을 받을 수 있습니다!
         </p>
         <div class="info" @click="touchHide" v-if="this.isHide == false">
           사람들을 <i class="xi-touch" style="font-size:20px"></i>해보세요.

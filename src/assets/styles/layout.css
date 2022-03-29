@@ -140,6 +140,9 @@ a:active {
   text-decoration: none;
   color: inherit;
 }
+em {
+  font-weight: 700;
+}
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -218,6 +221,7 @@ strong {
   font-size: 13px;
   display: block;
   word-break: keep-all;
+  font-weight: 400;
 }
 
 .notify span {

@@ -5,7 +5,7 @@
     </strong>
     <div class="progress">
       <div
-        class="progress-bar progress-bar-striped progress-bar-animated"
+        class="progress-bar progress-bar-animated"
         role="progressbar"
         :aria-valuenow="`${progressStatus}`"
         aria-valuemin="0"
@@ -89,6 +89,7 @@ export default {
   .progress-bar {
     background-color: $mainColor;
   }
+  
 }
 .goal-label {
   margin-top: 5px;

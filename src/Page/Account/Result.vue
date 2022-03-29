@@ -15,25 +15,56 @@
               {{ item.Name }} {{ item.Count }}개
             </li>
           </ul>
+          <p>
+            <em>애터미 쇼핑몰에서 선택하신 상품을 구매하신다면?</em>
+          </p>
+          <table class="table table-bordered table-striped">
+            <caption>구매금액 및 누적 PV</caption>
+            <colgroup>
+              <col style="width: 35%">
+              <col>
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>구매금액</th>
+                <td>000,000원</td>
+              </tr>
+              <tr>
+                <th>누적 PV</th>
+                <td>000,000PV</td>
+              </tr>
+            </tbody>
+          </table>
 
-          <router-link to="/AtomyProduct">
-            <div class="d-grid">
-              <button class="btn btn-outline-primary block">
+          <p>
+            <em>내가 연간 받을 수 있는 혜택은?</em>
+          </p>
+          <table class="table table-bordered table-striped">
+            <caption>구매금액 및 누적 PV</caption>
+            <colgroup>
+              <col style="width: 35%">
+              <col>
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>캐쉬백 횟수</th>
+                <td>약 3회(최소)</td>
+              </tr>
+              <tr>
+                <th>총 캐쉬백 금액</th>
+                <td>약 000,000원</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-grid gap-3">
+            
+            <button class="btn btn-outline-primary block">
+              <router-link to="/AtomyProduct">
                 선택하신 상품이 애터미 쇼핑몰에도 있어요!
-              </button>
-            </div>
-          </router-link>
-
-          <p>
-            애터미 쇼핑몰에서 선택하신 상품을 구매하신다면<br />
-<!--            매년 소비 금액은 약 {{ formatter.toPrice(groupCount.AmountPerYear) }}원이며<br />-->
-<!--            누적 포인트(PV)는 {{ formatter.toPrice(groupCount.PVPerYear) }}PV입니다.<br />-->
-          </p>
-          <p>
-            소비가 소득이 된다!<br>누적된 PV로 캐시백(수당) 받는 방법 아래 버튼 클릭!
-          </p>
-
-          <div class="d-grid">
+              </router-link>
+            </button>           
+            
             <button class="btn btn-primary block" @click="goPV">
               PV 알아보기
             </button>
@@ -141,7 +172,6 @@ export default {
   .btn {
     border: 2px solid $mainColor;
     height: 48px;
-    margin-bottom: 1rem;
     color: #00b5ef;
 
     &.btn-primary {

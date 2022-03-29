@@ -15,12 +15,38 @@
         <p>
           애터미 쇼핑몰을 통해 본인 누적 30만 PV 이상 달성하시면 후원수당을 받을 수 있는 조건이 주어집니다.
         </p>
-        <p>
+        <table class="table table-bordered table-striped">
+          <caption>연소비금액 및 연 누적포인트</caption>
+          <colgroup>
+            <col style="width: 35%">
+            <col>
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>연 소비 금액</th>
+              <td>약 {{ formatter.toPrice(amount) }}월 <small>(월 평균 {{ formatter.toPrice(Math.round(amount / 12)) }}원)</small></td>
+            </tr>
+            <tr>
+              <th>연 누적 포인트</th>
+              <td>약 {{ formatter.toPrice(pv) }}PV</td>
+            </tr>
+            <tr>
+              <th>캐쉬백 횟수</th>
+              <td><em>{{pbc}}</em>회 <small>(최소)</small></td>
+            </tr>
+            <tr>
+              <th>총 캐쉬백 금액</th>
+              <td>약 <em>{{ formatter.toPrice(pba) }}</em>원</td>
+            </tr>                        
+          </tbody>
+        </table>
+
+        <!-- <p>
           앞서 선택하신 제품을 꾸준히 구매하신다면 연간 약 {{ formatter.toPrice(amount) }}원이 지출되며 PV는 약 {{ formatter.toPrice(pv) }}PV가 누적됩니다.
         </p>
         <p>
           예상 캐시백(후원수당) 횟수는 약 {{pbc}}회(최소)이며<br>총 캐시백 금액은 약 {{ formatter.toPrice(pba) }}원 입니다.
-        </p>
+        </p> -->
 
         <div class="img_wrap">
           <svg

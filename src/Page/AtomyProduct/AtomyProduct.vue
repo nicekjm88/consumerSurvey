@@ -27,7 +27,7 @@
                 <td>{{ product.MName }}</td>
                 <td>
                   <div class="price">{{ formatter.toPrice(product.Cost) }}원</div>
-                  <div class="point-value">{{ formatter.toPrice(product.PV) }} PV</div>
+                  <div class="point-value"><span class="main-color">{{ formatter.toPrice(product.PV) }}</span> PV</div>
                 </td>
               </tr>
             </tbody>
@@ -153,6 +153,7 @@ export default {
   td {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
+    word-break: keep-all;
   }
 
   &.text-center {
@@ -177,12 +178,11 @@ export default {
 
     ul > li {
       margin-bottom: 10px;
-
-      .main-color {
-        color: $mainColor;
-      }
     }
   }
 }
 
+.main-color {
+  color: $mainColor;
+}
 </style>

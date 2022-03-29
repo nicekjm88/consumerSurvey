@@ -57,14 +57,12 @@
         <p>
           축하합니다!!<br>
           30만 PV를 달성하셨습니다.<br>
-          이제 수당을 받을 자격을<br>갖추게 되셨습니다.
+        이제 수당을 받을 자격을<br>갖추게 되셨습니다.
         </p>
       </div>
 
     </main>
-<!--    <router-link to="/result">-->
-      <FixedBtn @click="onSubmit" msg="작성완료" />
-<!--    </router-link>-->
+    <FixedBtn @click="onSubmit" msg="작성완료" />
   </div>
 </template>
 
@@ -101,15 +99,16 @@ export default {
   watch: {
     progressStatus () {
       const progressCount = document.querySelector('.progress-bar__count');
+      const progressBar = document.querySelector('.progress-bar');
 
       this.progressStatus >= 48
         ? progressCount.style.color = '#fff'
         : progressCount.style.color = '#333'
 
-      if ( this.progressStatus >= 100 ) {
-        this.isModal = true;
-        this.addClass();
-      }
+      this.progressStatus >= 100
+        ? progressBar.classList.add('progress-bar-striped')
+        : progressBar.classList.remove('progress-bar-striped')
+      
 
     }
   },
@@ -246,10 +245,6 @@ export default {
     }
   }
 }
-.progress-bar {
-  background-color: $mainColor;
-}
-
 .modal-dimmed {
   position: fixed;
   bottom: 0;
