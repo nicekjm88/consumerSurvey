@@ -103,7 +103,7 @@
             </tbody>
           </table>
 
-          <div class="agree-area clearfix">
+          <div v-if="!isEdit" class="agree-area clearfix">
             <div class="pull-left">
               <div class="form-check">
                 <input
@@ -119,10 +119,8 @@
               </div>
             </div>
             <div class="pull-right">
-              <button type="button" class="btn btn-outline-dark">
-                <router-link to="/Terms2">
+              <button type="button" class="btn btn-outline-dark" @click="clickTerms2">
                   전문 보기
-                </router-link>
               </button>
             </div>
           </div>
@@ -138,7 +136,7 @@
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import { Field, Form } from "vee-validate";
-import { onBeforeMount, reactive, ref } from "vue";
+import {onBeforeMount, onMounted, reactive, ref} from "vue";
 import useProductsManager from "@/store/products-manager";
 import useQuestionsManager from "@/store/questions-manager";
 import useSettingsManager from "@/store/settings-manager";
@@ -146,6 +144,7 @@ import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
 import useUserManager from "@/store/user-manager";
+import useBufferManager from "@/store/buffer-mamager";
 import useValidator from "@/composables/api/utils/validator";
 
 export default {
@@ -161,11 +160,14 @@ export default {
     const questionsManager = useQuestionsManager();
     const settingsManager = useSettingsManager();
     const userManager = useUserManager();
+    const bufferManager = useBufferManager();
+
     const validator = useValidator();
 
     const selectedProducts = productsManager.getSelected();
     const selectedQuestions = questionsManager.getData();
     const settings = settingsManager.getData();
+
 
     const survey = useSurvey();
     const formatter = useFormatter();
@@ -196,6 +198,7 @@ export default {
     const checked = ref(false);
 
     onBeforeMount(() => {
+      console.log('save_data beforemount');
       //설문 수정
       if (isEdit.value) {
         const user_type = userManager.getUserType();
@@ -222,6 +225,20 @@ export default {
         ) {
           router.push("/intro");
         }
+      }
+    });
+
+    onMounted(() => {
+      if(router.options.history.state.forward)
+      {
+        const surveyee = bufferManager.getSurveyee();
+        data.Name = surveyee.Name;
+        data.BirthDay = surveyee.BirthDay;
+        data.Gender = surveyee.Gender;
+        data.Phone = surveyee.Phone;
+        checked.value = surveyee.IsChecked;
+      }else{
+        bufferManager.clearSurveyee();
       }
     });
 
@@ -260,6 +277,7 @@ export default {
     }
 
     function onSubmit() {
+      bufferManager.clearSurveyee();
       if (isEdit.value) {
         //설문 수정
         if (confirm("수정하시겠습니까?")) {
@@ -325,14 +343,27 @@ export default {
       }
     }
 
+    function clickTerms2(){
+      bufferManager.setSurveyee({
+        Name : data.Name,
+        BirthDay : data.BirthDay,
+        Gender : data.Gender,
+        Phone : data.Phone,
+        IsChecked : checked.value,
+      }).then(() => router.push('/Terms2'));
+    }
+
     return {
       isRequiredName,
       isRequiredBirthDay,
       isRequiredTellNumber,
       onSubmit,
+      clickTerms2,
+
       date,
       data,
       checked,
+      isEdit,
     };
   },
 };

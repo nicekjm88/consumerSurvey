@@ -67,11 +67,12 @@
 </template>
 
 <script>
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import ProgressBar from "@/components/Layout/ProgressBar.vue";
 import useProductsManager from "@/store/products-manager";
+import useSettingsManager from "@/store/settings-manager";
 import router from "@/router";
 import { getCurrentInstance } from 'vue'
 
@@ -147,15 +148,19 @@ export default {
   },
   setup() {
     const productsManager = useProductsManager();
+    const settingsManager = useSettingsManager();
+
     const that = getCurrentInstance()
     const sumPV = ref(0);
 
     onBeforeMount(() => {
       // productsManager.fetch();
-      if (!productsManager.hasValue()) {
+      if (!productsManager.hasValue() || !settingsManager.isDone()) {
         router.push('/intro');
       }
     });
+
+    onMounted(() => initProgress());
 
     function onSubmit(){
       if(productsManager.isDone()) {
@@ -165,33 +170,30 @@ export default {
       }
     }
 
-    function selectCancel(pidx) {
-      productsManager.clearChecked(pidx);
+    function initProgress(){
       const sp = productsManager.getSelected();
-      if(sp && sp.PVPerYear !== undefined) {
-        sumPV.value = sp.PVPerYear;
+      if(sp) {
+        sumPV.value = sp.TotalPV;
         updateProgress();
       }
+    }
+
+    function selectCancel(pidx) {
+      productsManager.clearChecked(pidx).then(() => initProgress());
     }
 
     function selectAll(pidx){
-      productsManager.selectAll(pidx);
-
-      const sp = productsManager.getSelected();
-      if(sp && sp.PVPerYear !== undefined) {
-        sumPV.value = sp.PVPerYear;
-        updateProgress();
-      }
+      productsManager.selectAll(pidx).then(() => initProgress());
     }
 
     function updateProgress(){
-      const val = Math.floor(sumPV.value / 3000);
+      const val = Math.floor(sumPV.value / (settingsManager.getData().StdPV * 0.01));
       that.data.progressStatus = val > 100 ? 100 : val;
       that.data.pv = sumPV.value;
     }
 
     function productToggle(product) {
-      const val = product.StdCount * product.PV
+      const val = product.PV
       if(val) {
         sumPV.value += (product.checked ? 1 : -1) * val;
         updateProgress();

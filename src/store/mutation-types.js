@@ -20,5 +20,8 @@ export const MUTATION = {
     APP: {
         SET_HTTP: 'SET_HTTP_APP',
         SET_HTTP_IGNORE: 'SET_HTTP_IGNORE_APP',
+    },
+    BUFFER: {
+        SET_SURVEYEE: 'SET_SURVEY_BUFFER',
     }
 }
