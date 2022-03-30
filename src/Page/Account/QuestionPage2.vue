@@ -106,10 +106,8 @@ export default {
         : progressCount.style.color = '#333'
 
       this.progressStatus >= 100
-        ? progressBar.classList.add('progress-bar-striped')
-        : progressBar.classList.remove('progress-bar-striped')
-      
-
+        ? progressBar.classList.add('progress-bar-animated')
+        : progressBar.classList.remove('progress-bar-animated')
     }
   },
   methods: {

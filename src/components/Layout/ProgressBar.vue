@@ -5,7 +5,7 @@
     </strong>
     <div class="progress">
       <div
-        class="progress-bar progress-bar-animated"
+        class="progress-bar progress-bar-striped"
         role="progressbar"
         :aria-valuenow="`${progressStatus}`"
         aria-valuemin="0"
