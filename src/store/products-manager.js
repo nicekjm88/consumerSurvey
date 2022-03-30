@@ -77,12 +77,13 @@ export default function useProductsManager() {
                             a.Count++;
                             a.AmountPerYear += s.Cost * s.StdCount;
                             a.PVPerYear += s.PV * s.StdCount;
+                            a.TotalPV += s.PV;
                             a.Products.push(s);
                         });
                     }
                 }
                 return a;
-            }, {Count:0, AmountPerYear:0,PVPerYear:0, Products:[]});
+            }, {TotalPV:0, Count:0, AmountPerYear:0,PVPerYear:0, Products:[]});
             return item;
         }
 
@@ -95,9 +96,10 @@ export default function useProductsManager() {
                 a.Count++;
                 a.AmountPerYear += c.Cost * c.StdCount;
                 a.PVPerYear += c.PV * c.StdCount;
+                a.TotalPV += c.PV;
                 a.Products.push(c);
                 return a;
-            }, {Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []})
+            }, {TotalPV:0, Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []})
             return item;
         }
         return genEmptySelected();
