@@ -31,7 +31,7 @@
                 <tr>
                   <th scope="col" colspan="2">
                     <img :src="require(`@/assets/image/i-question.svg`)" />
-                    선택하신 상품을 구매하신다면?
+                    애터미 쇼핑몰에서 구매한다면?
                   </th>
                 </tr>
               </thead>
