@@ -1,5 +1,5 @@
 import {Capacitor} from "@capacitor/core";
-import {_ATOMY_PROXY, _ATOMY_URL} from "@/composables/api/common/define";
+import {_ATOMY_URL, _ATOMY_PROXY} from "@/composables/api/common/define";
 
 export default function useUrl(){
     function addParameter(url, parameters) {

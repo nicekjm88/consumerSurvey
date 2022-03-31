@@ -35,6 +35,8 @@ export default function useQuestionsManager() {
                 return a;
             }, []);
 
+            console.log(questions);
+
             return store.dispatch(ACTION.QUESTIONS.makeDispatch(ACTION.QUESTIONS.SET), questions);
         } else {
             return clear();
@@ -59,13 +61,13 @@ export default function useQuestionsManager() {
                   if(gch && gch.length > 0){
                       const sel = gch.filter(x => x.checked);
                       if(sel.length > 0){
-                          if(c.Value === '0'){
+                          if(c.Code === '010000'){
                               //나이
                               d.Age = Number(sel[0].Value);
-                          }else if(c.Value === '1'){
+                          }else if(c.Code === '020000'){
                               //가족수
                               d.Families = Number(sel[0].Value);
-                          }else if(c.Value === '2'){
+                          }else if(c.Code === '030000'){
                               //애터미 제품 사용 여부
                               d.UseAtomyYn = sel[0].Value;
                           }

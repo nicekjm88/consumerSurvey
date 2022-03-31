@@ -91,7 +91,6 @@ import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
 import { Share } from '@capacitor/share';
 import {Capacitor} from "@capacitor/core";
-import {_BASE_URL} from "@/composables/api/common/define";
 import useUserManager from "@/store/user-manager";
 
 export default {
@@ -192,7 +191,7 @@ export default {
       survey.getResultKey(props.resultNo).then(async (r) => {
         if (r.data.Status === 1 && r.data.Data) {
           const key = r.data.Data;
-          const url = `${_BASE_URL}/ShareView?key=${key}`;
+          const url = `${process.env.VUE_APP_BASE_URL}/ShareView?key=${key}`;
 
           if (!Capacitor.isNativePlatform()) {
             if( typeof navigator.share === 'function' ) {
