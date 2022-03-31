@@ -14,8 +14,8 @@
           </router-link>
         </button>
 
-        <button type="button">
-          <router-link v-if="userType === 1" to="/SaveDataList">
+        <button v-if="userType === 1" type="button">
+          <router-link to="/SaveDataList">
             <i class="xi-list-square"></i>
             <span class="a11y">저장 리스트</span>
           </router-link>

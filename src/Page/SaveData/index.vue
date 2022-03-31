@@ -3,7 +3,7 @@
     <Navigation />
     <main class="input-area">
       <section>
-        <h1 class="title">자료저장</h1>
+        <h1 class="title">{{ isEdit ? '수정하기' : '자료저장' }}</h1>
         <hr />
         <Form @submit="onSubmit" v-slot="{ errors }">
           <table class="common-table">

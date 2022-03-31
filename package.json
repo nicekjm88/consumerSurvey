@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+
     "lint": "vue-cli-service lint",
     "buildCapAndroidOpen": "vue-cli-service build && npx cap sync android && npx cap open android",
     "buildCapIOSOpen": "vue-cli-service build && npx cap sync ios && npx cap open ios"

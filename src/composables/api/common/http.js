@@ -1,7 +1,7 @@
 import {Capacitor} from "@capacitor/core";
 import {Http} from '@capacitor-community/http'
 import axios from "axios";
-import {_ATOMY_API_TOKEN_NAME,_ATOMY_USER_TOKEN_NAME,_ATOMY_API_TOKEN} from "@/composables/api/common/define";
+import {_ATOMY_API_TOKEN_NAME,_ATOMY_USER_TOKEN_NAME} from "@/composables/api/common/define";
 import useAppManager from "@/store/app-manager";
 
 export default function useHttp() {
@@ -10,7 +10,7 @@ export default function useHttp() {
     const defaultHeaders = {
         'Content-Type': 'application/json;charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
-        [_ATOMY_API_TOKEN_NAME]: _ATOMY_API_TOKEN,
+        [_ATOMY_API_TOKEN_NAME]: process.env.VUE_APP_ATOMY_API_TOKEN,
         [_ATOMY_USER_TOKEN_NAME]: ''
     }
 

@@ -1,5 +1,5 @@
 'use strict'
-const path = require('path')
+const path = require('path');
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -24,7 +24,6 @@ module.exports = {
         proxy: {
             '/atomy': {
                 target: 'https://test-dev.atomy.com/apiglobal/',
-                //target: 'https://api.atomy.com/apiglobal/',
                 pathRewrite: {'^/atomy' : ''}
             },
         }
