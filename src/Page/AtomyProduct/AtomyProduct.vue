@@ -173,7 +173,7 @@ export default {
   td {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
-    word-break: keep-all;
+    // word-break: keep-all; iOS에서 오류 발생함 
     font-size: 13px;
   }
 
