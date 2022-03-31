@@ -163,6 +163,7 @@ export default {
   border-top: 1px solid #686868;
   width: 100%;
   margin-bottom: 0;
+  table-layout: fixed;
 
   thead {
     border-bottom: 1px solid #d5d5d5;
