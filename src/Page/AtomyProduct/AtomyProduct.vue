@@ -163,6 +163,7 @@ export default {
   border-top: 1px solid #686868;
   width: 100%;
   margin-bottom: 0;
+  table-layout: fixed;
 
   thead {
     border-bottom: 1px solid #d5d5d5;
@@ -173,6 +174,7 @@ export default {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
     word-break: break-all;
+    // word-break: keep-all; iOS에서 오류 발생함 
     font-size: 13px;
     table-layout: fixed;
   }
