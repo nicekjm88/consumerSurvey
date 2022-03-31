@@ -60,7 +60,13 @@
               <th scope="row">선택상품</th>
               <td>
                 <!-- {{ item.ProductNames }} -->
-                <button @click="showView" type="button" class="btn btn-outline-dark">더보기</button>
+                <button
+                  @click="showView"
+                  type="button"
+                  class="btn btn-outline-dark"
+                >
+                  더보기
+                </button>
               </td>
             </tr>
           </tbody>
@@ -71,11 +77,17 @@
             소비가 소득이 되는
           </p>
           <div class="d-grid">
-              <button type="button" class="btn btn-primary block" @click="goShop">쇼핑몰 보러가기</button>
+            <button type="button" class="btn btn-primary block" @click="goShop">
+              쇼핑몰 보러가기
+            </button>
           </div>
         </div>
         <div v-else>
-          <FixedBtn @click="snsShare('나의 소비생활 알아보기')" type="button" msg="공유하기" />
+          <FixedBtn
+            @click="snsShare('나의 소비생활 알아보기')"
+            type="button"
+            msg="공유하기"
+          />
         </div>
       </section>
     </main>
@@ -85,28 +97,28 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
-import {computed, getCurrentInstance, onBeforeMount, reactive} from "vue";
+import { computed, getCurrentInstance, onBeforeMount, reactive } from "vue";
 import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
-import { Share } from '@capacitor/share';
-import {Capacitor} from "@capacitor/core";
-import {_BASE_URL} from "@/composables/api/common/define";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
+import { _BASE_URL } from "@/composables/api/common/define";
 import useUserManager from "@/store/user-manager";
 
 export default {
   name: "SaveDataList",
   data() {
     return {
-      isShared: false
-    }
+      isShared: false,
+    };
   },
   components: {
     Navigation,
     FixedBtn,
   },
-  props:{
-    resultNo:{ type: String, default: '0'},
+  props: {
+    resultNo: { type: String, default: "0" },
   },
   setup(props) {
     const survey = useSurvey();
@@ -135,40 +147,40 @@ export default {
     const item = computed(() => reactResult.Result);
     const key = router.currentRoute.value.query.key;
 
-    onBeforeMount(()=>{
+    onBeforeMount(() => {
       that.data.isShared = userManager.getUserType() !== 1;
-      if(router.currentRoute.value.name === 'ShareView'){
+      if (router.currentRoute.value.name === "ShareView") {
         //공유 화면
-        if(key){
+        if (key) {
           survey.getResultForShare(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               reactResult.Result = r.data.Data;
               drawData(reactResult.Result);
             } else {
-              alert('잠시후 다시 시도해 주세요.')
+              alert("잠시후 다시 시도해 주세요.");
             }
           });
         }
-      }else if(router.currentRoute.value.name === 'GuestView'){
+      } else if (router.currentRoute.value.name === "GuestView") {
         //게스트 결과 화면
-        if(key){
+        if (key) {
           survey.getResultForGuest(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               reactResult.Result = r.data.Data;
               drawData(reactResult.Result);
             } else {
-              alert('잠시후 다시 시도해 주세요.')
+              alert("잠시후 다시 시도해 주세요.");
             }
           });
         }
-      }else{
+      } else {
         //결과 화면
         survey.getResult(props.resultNo).then((r) => {
           if (r.data.Status === 1 && r.data.Data) {
             reactResult.Result = r.data.Data;
             drawData(reactResult.Result);
           } else {
-            alert('잠시후 다시 시도해 주세요.')
+            alert("잠시후 다시 시도해 주세요.");
             router.back();
           }
         });
@@ -177,15 +189,20 @@ export default {
 
     function drawData(v) {
       reactResultFormatted.CreateAt = formatter.toDate(v.CreateAt);
-      reactResultFormatted.BirthDay = formatter.toDate(v.BirthDay, ['년 ', '월 ', '일']);
+      reactResultFormatted.BirthDay = formatter.toDate(v.BirthDay, [
+        "년 ",
+        "월 ",
+        "일",
+      ]);
       reactResultFormatted.Gender = formatter.toGender(v.Gender);
-      reactResultFormatted.Age = v.Age + '대';
-      reactResultFormatted.Families = v.Families + '인';
-      reactResultFormatted.PayBackCount = v.PayBackCount + '회';
+      reactResultFormatted.Age = v.Age + "대";
+      reactResultFormatted.Families = v.Families + "인";
+      reactResultFormatted.PayBackCount = v.PayBackCount + "회";
       reactResultFormatted.Phone = formatter.toPhone(v.Phone);
       reactResultFormatted.UseAtomyYn = formatter.toYn(v.UseAtomyYn);
-      reactResultFormatted.AmountPerYear = formatter.toPrice(v.AmountPerYear) + ' 원';
-      reactResultFormatted.PVPerYear = formatter.toPrice(v.PVPerYear) + ' PV';
+      reactResultFormatted.AmountPerYear =
+        formatter.toPrice(v.AmountPerYear) + " 원";
+      reactResultFormatted.PVPerYear = formatter.toPrice(v.PVPerYear) + " PV";
     }
 
     function snsShare(title) {
@@ -195,13 +212,13 @@ export default {
           const url = `${_BASE_URL}/ShareView?key=${key}`;
 
           if (!Capacitor.isNativePlatform()) {
-            if( typeof navigator.share === 'function' ) {
+            if (typeof navigator.share === "function") {
               await navigator.share({
                 title: title,
                 url: url,
               });
             } else {
-              alert('지원하지 않는 브라우저입니다.');
+              alert("지원하지 않는 브라우저입니다.");
             }
           } else {
             const is_share = await Share.canShare();
@@ -211,40 +228,44 @@ export default {
                 url: url,
               });
             } else {
-              alert('지원하지 않는 디바이스 입니다.');
+              alert("지원하지 않는 디바이스 입니다.");
             }
           }
         } else {
-          alert('잠시후 다시 시도해 주세요.')
+          alert("잠시후 다시 시도해 주세요.");
         }
       });
     }
 
     function handleDelect() {
-      if (confirm('해당 정보(들)를 삭제하시겠습니까?\n만약 삭제하신다면 복구가 불가능합니다.')) {
+      if (
+        confirm(
+          "해당 정보(들)를 삭제하시겠습니까?\n만약 삭제하신다면 복구가 불가능합니다."
+        )
+      ) {
         if (userManager.getUserType() === 1) {
           survey.deletes([Number(props.resultNo)]).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
               router.back();
             } else {
-              alert('잠시후 다시 시도해 주세요.');
+              alert("잠시후 다시 시도해 주세요.");
             }
           });
-        }else {
-          survey.deleteForGuest(key).then((r)=>{
+        } else {
+          survey.deleteForGuest(key).then((r) => {
             if (r.data.Status === 1 && r.data.Data) {
-              router.push('/intro');
-            }else{
-              alert('잠시후 다시 시도해 주세요.');
+              router.push("/intro");
+            } else {
+              alert("잠시후 다시 시도해 주세요.");
             }
-          })
+          });
         }
       }
     }
 
     function handleEdit() {
       if (userManager.getUserType() === 1) {
-        router.push({path: "/SaveData", query: {ResultNo: props.resultNo}});
+        router.push({ path: "/SaveData", query: { ResultNo: props.resultNo } });
       } else {
         router.push(`/SaveData?key=${encodeURIComponent(key)}`);
       }
@@ -253,7 +274,7 @@ export default {
     function showView() {
       const user_type = userManager.getUserType();
       if (user_type === 1) {
-        router.push(`/Result/AtomyProduct/${props.resultNo}`)
+        router.push(`/Result/AtomyProduct/${props.resultNo}`);
       } else if (user_type === 2) {
         router.push(`/Guest/AtomyProduct?key=${encodeURIComponent(key)}`);
       } else {
@@ -261,8 +282,8 @@ export default {
       }
     }
 
-    function goShop(){
-      window.open('http://m.atomy.com/kr/m', '_blank');
+    function goShop() {
+      window.open("http://m.atomy.com/kr/m", "_blank");
     }
 
     return {
@@ -292,6 +313,10 @@ export default {
   td {
     border-left: 1px solid #ddd;
     text-align: right;
+
+    .btn {
+      background-color: #fff;
+    }
   }
 }
 

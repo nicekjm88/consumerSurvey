@@ -4,7 +4,7 @@
     <main>
       <section>
         <article>
-          <h1 class="title">애터미 큐레이팅</h1>
+          <h1 class="title">애터미<br />큐레이팅</h1>
           <p class="term-desc">
             본 서비스는 소비자가 일상에서 구매하는 상품을 알아보고, 이를
             바탕으로 애터미 쇼핑몰 이용시 받을 수 있는 혜택을 제시해 드립니다.

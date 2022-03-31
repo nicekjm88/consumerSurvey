@@ -10,44 +10,33 @@
           누적되는 포인트입니다.
         </p>
         <p>
-          일반 오프라인 매장과 온라인 쇼핑몰에서 구매하시던 상품을 애터미 쇼핑몰에서 구입하신다면 PV 누적을 통해 더 많은 혜택을 누릴 수 있습니다.
+          일반 오프라인 매장과 온라인 쇼핑몰에서 구매하시던 상품을 애터미
+          쇼핑몰에서 구입하신다면 PV 누적을 통해 더 많은 혜택을 누릴 수
+          있습니다.
         </p>
         <p>
-          애터미 쇼핑몰을 통해 본인 누적 30만 PV 이상 달성하시면 후원수당을 받을 수 있는 조건이 주어집니다.
+          애터미 쇼핑몰을 통해 본인 누적 30만 PV 이상 달성하시면 후원수당을 받을
+          수 있는 조건이 주어집니다.
         </p>
-        <table class="table table-bordered table-striped">
-          <caption>연소비금액 및 연 누적포인트</caption>
-          <colgroup>
-            <col style="width: 35%">
-            <col>
-          </colgroup>
-          <tbody>
-            <tr>
-              <th>연 소비 금액</th>
-              <td>약 {{ formatter.toPrice(amount) }}월 <small>(월 평균 {{ formatter.toPrice(Math.round(amount / 12)) }}원)</small></td>
-            </tr>
-            <tr>
-              <th>연 누적 포인트</th>
-              <td>약 {{ formatter.toPrice(pv) }}PV</td>
-            </tr>
-            <tr>
-              <th>캐쉬백 횟수</th>
-              <td><em>{{pbc}}</em>회 <small>(최소)</small></td>
-            </tr>
-            <tr>
-              <th>총 캐쉬백 금액</th>
-              <td>약 <em>{{ formatter.toPrice(pba) }}</em>원</td>
-            </tr>                        
-          </tbody>
-        </table>
-
-        <!-- <p>
-          앞서 선택하신 제품을 꾸준히 구매하신다면 연간 약 {{ formatter.toPrice(amount) }}원이 지출되며 PV는 약 {{ formatter.toPrice(pv) }}PV가 누적됩니다.
+        <p>&nbsp;</p>
+        <p>
+          선택한 제품을 꾸준히 구매하실 경우?<br />
+          연 소비 금액: 약 <em>{{ formatter.toPrice(amount) }}</em
+          >원
+          <small>
+            (월 평균 <em>{{ formatter.toPrice(Math.round(amount / 12)) }}</em
+            >원)
+          </small>
+          <br />
+          연 누적 포인트(PV): 약 <em>{{ formatter.toPrice(pv) }}</em
+          >PV
         </p>
         <p>
-          예상 캐시백(후원수당) 횟수는 약 {{pbc}}회(최소)이며<br>총 캐시백 금액은 약 {{ formatter.toPrice(pba) }}원 입니다.
-        </p> -->
-
+          캐쉬백 횟수: 약 <em>{{ pbc }}</em
+          >회 <small>(최소)</small><br />총 캐쉬백 금액: 약
+          <em>{{ formatter.toPrice(pba) }}</em
+          >원
+        </p>
         <div class="img_wrap">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -314,7 +303,7 @@
         </div>
 
         <router-link to="/result3">
-          <FixedBtn msg="다음" />
+          <FixedBtn msg="캐쉬백 알아보기" />
         </router-link>
       </section>
     </main>
@@ -334,19 +323,19 @@ export default {
     Navigation,
     FixedBtn,
   },
-  props:{
+  props: {
     amount: [Number, String],
     pv: [Number, String],
     pbc: [Number, String],
-    pba: [Number, String]
+    pba: [Number, String],
   },
-  setup(){
+  setup() {
     const formatter = useFormatter();
 
     return {
       formatter,
-    }
-  }
+    };
+  },
 };
 </script>
 

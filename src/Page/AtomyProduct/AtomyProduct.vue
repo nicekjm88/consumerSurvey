@@ -7,7 +7,7 @@
           <h1 class="title">{{ title }}</h1>
           <table class="product-table text-center">
             <caption>
-              애터미 제품 - 카테고리, 이름, 금액 / PV에 관한 정보
+              애터미 제품 - 분류, 상품명, 가격 / PV에 관한 정보
             </caption>
             <colgroup>
               <col style="width: 30%;" />
@@ -16,41 +16,61 @@
             </colgroup>
             <thead>
               <tr>
-                <th scope="col">카테고리</th>
-                <th scope="col">이름</th>
-                <th scope="col">금액 / PV</th>
+                <th scope="col">분류</th>
+                <th scope="col">상품명</th>
+                <th scope="col">가격 / PV</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(product, i) in items.Products" :key="i" v-show="i < maxCount">
+              <tr
+                v-for="(product, i) in items.Products"
+                :key="i"
+                v-show="i < maxCount"
+              >
                 <td>{{ product.Name }}</td>
                 <td>{{ product.MName }}</td>
                 <td>
-                  <div class="price">{{ formatter.toPrice(product.Cost) }}원</div>
-                  <div class="point-value"><span class="main-color">{{ formatter.toPrice(product.PV) }}</span> PV</div>
+                  <div class="price">
+                    {{ formatter.toPrice(product.Cost) }}원
+                  </div>
+                  <div class="point-value">
+                    <span class="main-color">{{
+                      formatter.toPrice(product.PV)
+                    }}</span>
+                    PV
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          <button v-if="!hideMore" class="btn-more" type="button" @click="showMore">
-            <i class="xi-angle-down"></i> 더보기({{maxCount}}/{{items.Count}})
+          <button
+            v-if="!hideMore"
+            class="btn-more"
+            type="button"
+            @click="showMore"
+          >
+            <i class="xi-angle-down"></i> 더보기
+            <small>({{ maxCount }}/{{ items.Count }})</small>
           </button>
           <div class="total-product">
-            <div class="total-product__count">
-              총 {{items.Count}}개 상품
-            </div>
+            <div class="total-product__count">총 {{ items.Count }}개 상품</div>
             <div class="total-product__price">
               <ul>
                 <li>
-                  가격 : <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong> 원
+                  가격 :
+                  <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong>
+                  원
                 </li>
                 <li>
-                  PV : <strong class="main-color">{{ formatter.toPrice(items.PVPerYear) }}</strong> PV
+                  PV :
+                  <strong class="main-color">{{
+                    formatter.toPrice(items.PVPerYear)
+                  }}</strong>
+                  PV
                 </li>
               </ul>
             </div>
           </div>
-
         </article>
       </section>
     </main>
@@ -60,7 +80,7 @@
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
 import useProductsManager from "@/store/products-manager";
-import {computed, onBeforeMount, ref} from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import router from "@/router";
 import useSurvey from "@/composables/api/survey";
 import useFormatter from "@/composables/api/utils/formatter";
@@ -71,7 +91,7 @@ export default {
     Navigation,
   },
   props: {
-    resultNo:{ type: String, default: '0'},
+    resultNo: { type: String, default: "0" },
   },
   setup(props) {
     const productsManager = useProductsManager();
@@ -80,45 +100,43 @@ export default {
     const maxCount = ref(baseCount);
     const items = ref(productsManager.genEmptySelected());
     const formatter = useFormatter();
-    const title = ref('선택 상품');
+    const title = ref("선택 상품");
 
-    const hideMore = computed(() => maxCount.value >= items.value.Products.length);
+    const hideMore = computed(
+      () => maxCount.value >= items.value.Products.length
+    );
 
     const key = router.currentRoute.value.query.key;
 
     onBeforeMount(() => {
-      if(router.currentRoute.value.name === 'AtomyProduct'){
-        title.value = '애터미 제품'
+      if (router.currentRoute.value.name === "AtomyProduct") {
+        title.value = "애터미 제품";
         if (!productsManager.hasValue()) {
           router.push("/intro");
         }
         items.value = productsManager.getSelected();
-      }
-      else if(router.currentRoute.value.name === 'ResultAtomyProduct'){
+      } else if (router.currentRoute.value.name === "ResultAtomyProduct") {
         survey.getResultProducts(props.resultNo).then((r) => {
-          console.log('ResultAtomyProduct', r)
-          if(r.data.Status === 1 && r.data.Data){
+          console.log("ResultAtomyProduct", r);
+          if (r.data.Status === 1 && r.data.Data) {
             items.value = productsManager.genSelected(r.data.Data);
           }
         });
-      }
-      else if(router.currentRoute.value.name === 'GuestAtomyProduct'){
+      } else if (router.currentRoute.value.name === "GuestAtomyProduct") {
         survey.GetResultProductsForGuest(key).then((r) => {
-          console.log('GuestAtomyProduct', r)
-          if(r.data.Status === 1 && r.data.Data){
+          console.log("GuestAtomyProduct", r);
+          if (r.data.Status === 1 && r.data.Data) {
             items.value = productsManager.genSelected(r.data.Data);
           }
         });
-      }
-      else if(router.currentRoute.value.name === 'ShareAtomyProduct') {
+      } else if (router.currentRoute.value.name === "ShareAtomyProduct") {
         survey.getResultProductsForShare(key).then((r) => {
-          console.log('ShareAtomyProduct', r)
-          if(r.data.Status === 1 && r.data.Data){
+          console.log("ShareAtomyProduct", r);
+          if (r.data.Status === 1 && r.data.Data) {
             items.value = productsManager.genSelected(r.data.Data);
           }
         });
       }
-
     });
 
     function showMore() {
@@ -142,11 +160,12 @@ export default {
 
 <style lang="scss">
 .product-table {
+  border-top: 1px solid #686868;
   width: 100%;
   margin-bottom: 0;
 
   thead {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #d5d5d5;
   }
 
   th,
@@ -154,6 +173,7 @@ export default {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
     word-break: keep-all;
+    font-size: 13px;
   }
 
   &.text-center {
@@ -167,7 +187,7 @@ export default {
 }
 
 .total-product {
-  border-top: 2px solid #686868;
+  border-top: 1px solid #686868;
   padding: 15px 0;
   display: flex;
   justify-content: space-between;

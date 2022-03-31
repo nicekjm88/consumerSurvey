@@ -171,6 +171,11 @@ export default {
     font-size: 30px;
     position: relative;
 
+    img {
+      vertical-align: top;
+      padding-top: 6px;
+    }
+
     span {
       font-size: 12px;
       position: absolute;
