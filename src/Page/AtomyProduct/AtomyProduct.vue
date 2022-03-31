@@ -172,8 +172,9 @@ export default {
   td {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
-    word-break: keep-all;
+    word-break: break-all;
     font-size: 13px;
+    table-layout: fixed;
   }
 
   &.text-center {
