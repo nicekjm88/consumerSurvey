@@ -1,28 +1,20 @@
-const program = require('commander');
-const updator = require('capacitor-updater');
-const util = require('util');
-const { spawnSync } = require('child_process');
+'use strict'
 
-// const chalk = require('chalk');
+const program = require('commander');
+const cp = require('child_process');
+const fs = require('fs');
 
 program
     .version('0.0.1', '-v, --version') // 버젼
     .usage('[options]') // 설명서(commander는 설명서를 자동생성해줌)
-    // .command('production')
     .description('capgo upload')
-    .option('-uv, --uversion <uversion>', 'upload version')
+    .option('-pv, --pversion <pversion>', 'production version')
     .alias('prod')
     .action((options) => {
-        // console.log(chalk.red('멋쟁이!!'));
-        console.log('abcd');
-        console.log(options.uversion);
-        console.log(options)
-        const cg = spawnSync('capgo', ['-h']);
-        console.log(cg);
+        const rawdata = fs.readFileSync('./capacitor.config.json');
+        const ccj = JSON.parse(rawdata.toString());
 
-        // updator.CapacitorUpdater.list().then((r) => {
-        //     console.log(r.versions);
-        // });
+        cp.execSync(`capgo upload -v ${options.pversion} -a aea6b1da-a3f3-4686-9dd0-f86a11c45b52 ${ccj.appId}`, {stdio: 'inherit'});
     });
 
 program.parse(process.argv);

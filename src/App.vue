@@ -23,7 +23,14 @@ export default {
     // SplashComponent,
     Loading
   },
-
+  metaInfo: {
+    title: 'My Example App',
+    titleTemplate: '%s - Yay!',
+    htmlAttrs: {
+      lang: 'en',
+      amp: true
+    }
+  },
   setup () {
     const appManager = useAppManager();
     const isHttpBusy = computed(() => appManager.IsHttpBusy());
