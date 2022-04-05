@@ -175,7 +175,7 @@ export default {
 
 <style lang="scss">
 .bg-sky {
-  padding-top: 70px;
+  padding-top: 100px;
   background-color: #5ed8ff;
   color: #fff;
 }
@@ -228,6 +228,8 @@ export default {
 }
 
 .list {
+  margin-bottom: 1rem;
+  
   &.list-dot {
     > li {
       padding-left: 15px;

@@ -123,7 +123,15 @@ export default {
 
 <style lang="scss">
   .login-area {
-    padding-top: 140px;
+    padding-top: 0;
+
+    main {
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     .save-id {
       margin-top: 10px;
@@ -136,8 +144,7 @@ export default {
       margin-left: -63.5px;
     }
     section {
-      width: 80%;
-      margin: 0 auto;
+      width: 80%;      
     }
     section .form-control {
       margin-top: 10px;
