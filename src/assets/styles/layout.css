@@ -4,6 +4,7 @@
   font-weight: 700;
   src: url("../fonts/ATOMY-BOLD.woff");
 }
+
 html,
 body,
 div,
@@ -92,9 +93,11 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 caption {
   display: none;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -109,19 +112,23 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1.4 !important;
 }
+
 ol,
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -129,10 +136,12 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 a:link,
 a:visited,
 a:hover,
@@ -140,19 +149,23 @@ a:active {
   text-decoration: none;
   color: inherit;
 }
+
 em {
   font-weight: 700;
 }
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  max-width: 768px;
+  /* max-width: 768px; */
   margin: 0 auto;
 }
+
 button {
   border: none;
 }
+
 .a11y {
   position: absolute;
   overflow: hidden;
@@ -163,13 +176,16 @@ button {
   border: 0;
   clip: rect(0, 0, 0, 0);
 }
+
 .wrap {
   padding-top: 70px;
 }
+
 ol,
 ul {
   padding-left: 0 !important;
 }
+
 input::placeholder {
   color: #ccc;
 }
@@ -239,7 +255,7 @@ strong {
   margin-left: -15px;
 }
 
-.select-list > li {
+.select-list>li {
   width: calc(50% - 15px);
   position: relative;
   height: 48px;
@@ -247,19 +263,19 @@ strong {
   margin-bottom: 15px;
 }
 
-.select-list > li .form-check {
+.select-list>li .form-check {
   margin-bottom: 0;
   height: 100%;
 }
 
-.select-list > li .form-check .form-check-input {
+.select-list>li .form-check .form-check-input {
   margin-left: -10px;
   margin-top: 15px;
   position: relative;
   z-index: 1;
 }
 
-.select-list > li .form-check label {
+.select-list>li .form-check label {
   position: absolute;
   top: 0;
   left: 0;
@@ -270,23 +286,23 @@ strong {
   height: 100%;
 }
 
-.select-list > li .form-check .form-check-input:checked {
+.select-list>li .form-check .form-check-input:checked {
   background-color: #00b5ef;
   border-color: #00b5ef;
 }
 
-.select-list > li .form-check .form-check-input:checked + label {
+.select-list>li .form-check .form-check-input:checked+label {
   color: #00b5ef;
   border-color: #00b5ef;
   background-color: #f8fdff;
 }
 
-.select-list.type2 > li {
+.select-list.type2>li {
   height: 60px;
   width: 100%;
 }
 
-.select-list.type2 > li .form-check .form-check-input {
+.select-list.type2>li .form-check .form-check-input {
   margin-left: -10px;
   margin-top: 0;
   position: relative;
@@ -295,7 +311,7 @@ strong {
   transform: translateY(-50%);
 }
 
-.select-list.type2 > li .form-check label {
+.select-list.type2>li .form-check label {
   padding-right: 10px;
   font-size: 13px;
   padding-top: 12px;
@@ -327,4 +343,14 @@ strong {
 
 .input-area {
   padding: 0 20px 80px;
+}
+
+@media (min-width: 1180px) {
+  .select-list>li {
+    width: calc(33.333% - 15px);
+  }
+
+  .select-list.type2>li {
+    width: calc(50% - 15px);
+  }
 }
