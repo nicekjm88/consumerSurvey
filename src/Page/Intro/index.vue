@@ -1035,6 +1035,8 @@ export default {
   &__imgWrap {
     width: 215px;
     margin: 1rem auto 0;
+    height: 250px;
+    overflow: hidden;
 
     img {
       width: 215px;
