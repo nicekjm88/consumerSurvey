@@ -1414,7 +1414,7 @@
               </g>
             </svg>
           </div>
-        </div>
+        </div> 
       </section>
 
       <div class="page-step1" v-if="this.nextStep == true">
