@@ -22,7 +22,7 @@ export default {
   left: 0;
   background: $mainColor;
   z-index: 98;
-  padding: 0 0 env(safe-area-inset-bottom);
+  // padding: 0 0 env(safe-area-inset-bottom);
 }
 .fixed-btn {
   width: 100%;
