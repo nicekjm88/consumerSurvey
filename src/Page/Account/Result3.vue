@@ -16,7 +16,7 @@
           그림에 나온 사람들은 나를 통해 애터미 쇼핑몰에서 제품을 구입한 소비자입니다.
         </p>
         <p>
-          소비자들의 PV가 점점 쌓인다면 당신은 수당을 받을 수 있습니다!
+          소비자들의 PV가 점점 쌓인다면 당신은 캐쉬백을 받을 수 있습니다!
         </p>
         <div class="info" @click="touchHide" v-if="this.isHide == false">
           사람들을 <i class="xi-touch" style="font-size:20px"></i>해보세요.
@@ -1433,7 +1433,7 @@
             class="btn btn-outline-primary block"
             @click="addClass(), result()"
           >
-            수당 받기!!
+            캐쉬백 받기!!
           </button>
         </div>
       </div>

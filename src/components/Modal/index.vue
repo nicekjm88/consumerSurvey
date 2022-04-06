@@ -2,13 +2,13 @@
   <div class="modal-dimmed" @click="hideModal">    
         <div class="icon">🎉</div>
         <p>
-          아주 잘하셨습니다.<br>
-          그럼 내 하위 그룹 좌측과<br>
-          우측 모두 30만 PV를<br>
-          맞췄다면 얼만큼의 수당이<br>
-          발생되는지 보겠습니다.<br>
+          축하드립니다.<br>
           <br>
-          수당 받기 버튼을 눌러보세요!
+          내 하위 양쪽 그룹에서<br>
+          각각 30만PV 이상 누적되었다면<br>
+          캐시백이 지급됩니다!<br>
+          <br>
+          캐쉬백 받기 버튼을 눌러보세요!
         </p>        
       </div>
 </template>
