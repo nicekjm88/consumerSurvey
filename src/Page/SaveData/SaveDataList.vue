@@ -197,7 +197,7 @@ export default {
     margin-bottom: 10px;
   }
   .form-outline {
-    width: calc(100% - 42px);
+    width: calc(100% - 45px);
   }
   .pull-left,
   .pull-right {

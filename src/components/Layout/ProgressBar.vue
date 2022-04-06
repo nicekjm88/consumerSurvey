@@ -86,6 +86,10 @@ export default {
     margin-bottom: 10px;
   }
 
+  .progress {
+    position: relative;
+  }
+
   .progress-bar {
     background-color: $mainColor;
   }
@@ -99,8 +103,11 @@ export default {
 
 .progress-bar__count {
   position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   color: #333;
+  height: 16px;
+  line-height: 16px;
 }
 </style>
