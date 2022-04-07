@@ -45,6 +45,7 @@ export default {
   background-color: $mainColor;
   color: #fff;
   font-weight: 700;
+  border-radius: 0 !important;
 
   &:disabled {
     background-color: #999;
