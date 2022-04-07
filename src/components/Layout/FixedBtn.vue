@@ -5,12 +5,27 @@
 </template>
 
 <script>
+import { onBeforeMount, ref } from "vue";
+import { SafeArea } from "capacitor-plugin-safe-area";
 
 export default {
   name: 'FixedBtn',
   props: {
     msg: String,
-  }
+  },
+  setup() {
+  const pgt = ref("0px");
+
+  onBeforeMount(() => {
+    SafeArea.getSafeAreaInsets().then(({ insets }) => {      
+      pgt.value = insets.bottom + "px";
+    });
+  });
+
+  return {
+    pgt,
+  };
+},
 }
 </script>
 
@@ -22,7 +37,7 @@ export default {
   left: 0;
   background: $mainColor;
   z-index: 98;
-  // padding: 0 0 env(safe-area-inset-bottom);
+  padding-bottom: v-bind(pgt);
 }
 .fixed-btn {
   width: 100%;
@@ -30,7 +45,6 @@ export default {
   background-color: $mainColor;
   color: #fff;
   font-weight: 700;
-  border-radius: 0 !important;
 
   &:disabled {
     background-color: #999;
