@@ -78,6 +78,7 @@ export default function useProductsManager() {
                             a.AmountPerYear += s.Cost * s.StdCount;
                             a.PVPerYear += s.PV * s.StdCount;
                             a.TotalPV += s.PV;
+                            a.TotalAmount += s.Cost;
                             a.Products.push(s);
                         });
                     }
@@ -96,6 +97,7 @@ export default function useProductsManager() {
                 a.AmountPerYear += c.Cost * c.StdCount;
                 a.PVPerYear += c.PV * c.StdCount;
                 a.TotalPV += c.PV;
+                a.TotalAmount += c.Cost;
                 a.Products.push(c);
                 return a;
             }, genEmptySelected())
@@ -104,7 +106,7 @@ export default function useProductsManager() {
     }
 
     function genEmptySelected(){
-        return {TotalPV:0, Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []};
+        return {TotalAmount: 0, TotalPV:0, Count: 0, AmountPerYear: 0, PVPerYear: 0, Products: []};
     }
 
     function getSelectedGroupCount(){
@@ -120,6 +122,8 @@ export default function useProductsManager() {
                         selected.forEach((s) => {
                             a.AmountPerYear += s.Cost * s.StdCount;
                             a.PVPerYear += s.PV * s.StdCount;
+                            a.TotalPV += s.PV;
+                            a.TotalAmount += s.Cost;
                         });
                     }
 
@@ -133,7 +137,7 @@ export default function useProductsManager() {
     }
 
     function genEmptySelectedGroupCount(){
-        return {TotalCount:0, SelectedCount:0, AmountPerYear: 0, PVPerYear: 0, Groups: []};
+        return {TotalAmount:0, TotalPV:0, TotalCount:0, SelectedCount:0, AmountPerYear: 0, PVPerYear: 0, Groups: []};
     }
 
     return {

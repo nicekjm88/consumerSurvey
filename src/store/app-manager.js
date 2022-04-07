@@ -22,10 +22,10 @@ export default function useAppManager(){
         }
     }
 
-    async function setHttpBusyForce(val){
-        if(val){
+    async function setHttpBusyForce(val) {
+        if (val) {
             return setIgnore(val).then(() => setHttpBusy(true))
-        }else{
+        } else {
             return setIgnore(val).then(() => resetHttpBusy(true))
         }
     }

@@ -58,12 +58,12 @@
               <ul>
                 <li>
                   가격 :
-                  <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong>원
+                  <strong>{{ formatter.toPrice(items.TotalAmount) }}</strong>원
                 </li>
                 <li>
                   PV :
                   <strong class="main-color">{{
-                    formatter.toPrice(items.PVPerYear)
+                    formatter.toPrice(items.TotalPV)
                   }}</strong>
                   PV
                 </li>
@@ -173,7 +173,7 @@ export default {
     vertical-align: middle;
     padding: 0.5rem 0.5rem;
     word-break: break-all;
-    // word-break: keep-all; iOS에서 오류 발생함 
+    // word-break: keep-all; iOS에서 오류 발생함
     font-size: 13px;
     table-layout: fixed;
   }

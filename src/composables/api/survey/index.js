@@ -69,6 +69,13 @@ export default function useSurvey() {
             });
     }
 
+    async function getResultsCount(Name = '') {
+        return http.get(url.getUrl(`${_ATOMY_URL}/consumersurvey/${_JISA_CODE}/v1/results/count`, {Name}),
+            {
+                [_ATOMY_USER_TOKEN_NAME]: userManager.identity.token
+            });
+    }
+
     async function getResult(ResultNo){
         return http.get(url.getUrl(`${_ATOMY_URL}/consumersurvey/${_JISA_CODE}/v1/result`, {ResultNo}),
             {
@@ -166,6 +173,7 @@ export default function useSurvey() {
         getResultProductsForShare,
 
         getResultsV2,
+        getResultsCount,
 
         saveForGuest,
         getResultForGuest,
