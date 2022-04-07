@@ -1628,6 +1628,7 @@ export default {
 <style lang="scss" scoped>
 .bg-gray {
   background: #f5f5f5;
+  min-height: 100vh;
 }
 .result2-area {
   padding: 0 20px 80px;

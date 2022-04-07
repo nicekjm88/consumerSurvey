@@ -239,9 +239,13 @@ export default {
     color: #666;
     font-size: 12px;
 
-    & button{
+    & button {
       background-color: transparent;
       color: #666;
+
+      &:first-child {
+        color: $mainColor;
+      }
     }
   }
 }

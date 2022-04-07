@@ -158,10 +158,10 @@ em {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  /* max-width: 768px; */
+  max-width: 768px;
   margin: 0 auto;
-  min-height: 100vh;
-  background-color: #fff;
+  /* min-height: 100vh;
+  background-color: #fff; */
 }
 
 button {
