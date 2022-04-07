@@ -35,8 +35,6 @@ export default function useQuestionsManager() {
                 return a;
             }, []);
 
-            console.log(questions);
-
             return store.dispatch(ACTION.QUESTIONS.makeDispatch(ACTION.QUESTIONS.SET), questions);
         } else {
             return clear();

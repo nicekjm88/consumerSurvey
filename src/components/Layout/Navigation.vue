@@ -125,7 +125,6 @@ export default {
 
     onBeforeMount(() => {
       SafeArea.getSafeAreaInsets().then(({ insets }) => {
-        console.log(insets);
         mgt.value = -(insets.top + 10) + "px";
         pgt.value = insets.top + 10 + "px";
       });

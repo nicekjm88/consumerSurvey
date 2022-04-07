@@ -198,7 +198,6 @@ export default {
     const checked = ref(false);
 
     onBeforeMount(() => {
-      console.log('save_data beforemount');
       //설문 수정
       if (isEdit.value) {
         const user_type = userManager.getUserType();
