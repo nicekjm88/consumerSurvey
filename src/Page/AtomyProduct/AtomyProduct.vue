@@ -58,8 +58,7 @@
               <ul>
                 <li>
                   가격 :
-                  <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong>
-                  원
+                  <strong>{{ formatter.toPrice(items.AmountPerYear) }}</strong>원
                 </li>
                 <li>
                   PV :

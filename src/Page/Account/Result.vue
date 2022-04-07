@@ -18,64 +18,62 @@
               {{ item.Name }} {{ item.Count }}개
             </li>
           </ul>
-          <div class="table-capsule-wrap">
-            <table class="table-capsule">
-              <caption>
-                구매금액 및 누적 PV
-              </caption>
-              <colgroup>
-                <col style="width: 40%" />
-                <col />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col" colspan="2">
-                    <img :src="require(`@/assets/image/i-question.svg`)" />
-                    애터미 쇼핑몰에서 구매한다면?
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">구매금액</th>
-                  <td>{{ formatter.toPrice(groupCount.AmountPerYear) }}원</td>
-                </tr>
-                <tr>
-                  <th scope="row">누적 PV</th>
-                  <td>{{ formatter.toPrice(groupCount.PVPerYear) }}PV</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="table-capsule-wrap">
-            <table class="table-capsule">
-              <caption>
-                구매금액 및 누적 PV
-              </caption>
-              <colgroup>
-                <col style="width: 40%" />
-                <col />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col" colspan="2">
-                    <img :src="require(`@/assets/image/i-question.svg`)" />
-                    내가 연간 받을 수 있는 혜택은?
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">캐쉬백 횟수</th>
-                  <td>약 {{ payback.count }}회(최소)</td>
-                </tr>
-                <tr>
-                  <th scope="row">총 캐쉬백 금액</th>
-                  <td>약 {{ formatter.toPrice(payback.amount) }}원</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          
+          <table class="table-capsule">
+            <caption>
+              구매금액 및 누적 PV
+            </caption>
+            <colgroup>
+              <col style="width: 40%" />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" colspan="2">
+                  <img :src="require(`@/assets/image/i-question.svg`)" />
+                  애터미 쇼핑몰에서 구매한다면?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">구매금액</th>
+                <td>{{ formatter.toPrice(groupCount.AmountPerYear) }}원</td>
+              </tr>
+              <tr>
+                <th scope="row">누적 PV</th>
+                <td><span class="main-color">{{ formatter.toPrice(groupCount.PVPerYear) }}</span> PV</td>
+              </tr>
+            </tbody>
+          </table>        
+        
+          <table class="table-capsule">
+            <caption>
+              구매금액 및 누적 PV
+            </caption>
+            <colgroup>
+              <col style="width: 40%" />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" colspan="2">
+                  <img :src="require(`@/assets/image/i-question.svg`)" />
+                  내가 연간 받을 수 있는 혜택은?
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">캐쉬백 횟수</th>
+                <td>약 {{ payback.count }}회(최소)</td>
+              </tr>
+              <tr>
+                <th scope="row">총 캐쉬백 금액</th>
+                <td>약 {{ formatter.toPrice(payback.amount) }}원</td>
+              </tr>
+            </tbody>
+          </table>         
 
           <div class="d-grid gap-3">
             <button class="btn btn-outline-primary block">
@@ -289,9 +287,7 @@ export default {
     background-color: #ccc;
   }
 }
-.table-capsule-wrap {
-  border-radius: 50px;
-}
+
 .table-capsule {
   width: 100%;
   border-collapse: collapse;
@@ -345,5 +341,9 @@ export default {
       position: relative;
     }
   }
+}
+
+.main-color {
+  color: $mainColor;
 }
 </style>

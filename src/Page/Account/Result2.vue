@@ -29,7 +29,7 @@
           </small>
           <br />
           연 누적 포인트(PV): 약 <em>{{ formatter.toPrice(pv) }}</em
-          >PV
+          > PV
         </p>
         <p>
           캐쉬백 횟수: 약 <em>{{ pbc }}</em

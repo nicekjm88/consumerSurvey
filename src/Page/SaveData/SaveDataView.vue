@@ -84,7 +84,7 @@
         </div>
         <div v-else>
           <FixedBtn
-            @click="snsShare('나의 소비생활 알아보기')"
+            @click="snsShare('애터미 큐레이팅')"
             type="button"
             msg="공유하기"
           />

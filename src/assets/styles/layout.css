@@ -160,6 +160,8 @@ em {
   overflow: hidden;
   /* max-width: 768px; */
   margin: 0 auto;
+  min-height: 100vh;
+  background-color: #fff;
 }
 
 button {
