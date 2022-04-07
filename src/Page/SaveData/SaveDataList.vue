@@ -47,7 +47,7 @@
             <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
           </li>
         </ul>
-        <button class="btn-more" type="button" @click="nextResults"> <i class="xi-angle-down"></i> 더보기</button>
+        <button v-show="!isFullResults" class="btn-more" type="button" @click="nextResults"> <i class="xi-angle-down"></i> 더보기 ({{items.length}}/{{reactResultsCount.Cnt}})</button>
       </section>
     </main>
   </div>
@@ -71,19 +71,32 @@ export default {
     const isEdit = ref(false)
     const reactResults = reactive({Results: []});
     const page = reactive({ PageSize: 10, ResultNo: 0, Name:''});
+    const reactResultsCount = reactive({Cnt: 0, ResultNo: 0});
     const selected = ref([]);
 
     onBeforeMount(() => {
-      console.log('SaveDataList onBeforeMount');
-      survey.getResultsV2(page.PageSize, page.ResultNo, page.Name).then((r) => {
-        if(r.data.Status === 1 && r.data.Data && r.data.Data.length > 0) {
-          reactResults.Results.push(...r.data.Data);
-          page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
-        }
-      });
+      appManager.setHttpBusyForce(true)
+          .then(() => searchResults())
+          .finally(() => appManager.setHttpBusyForce(false));
     });
 
-    const items = computed(() => reactResults.Results);
+    async function searchResults() {
+      return survey.getResultsCount(page.Name)
+          .then((r) => {
+            if (r.data.Status === 1 && r.data.Data) {
+              reactResultsCount.Cnt = Number(r.data.Data.Cnt);
+              page.ResultNo = reactResultsCount.ResultNo = Number(r.data.Data.ResultNo) + 1;
+              return survey.getResultsV2(page.PageSize, page.ResultNo, page.Name);
+            }
+          })
+          .then((r) => {
+            if (r.data.Status === 1 && r.data.Data && r.data.Data.length > 0) {
+              reactResults.Results.length = 0;
+              reactResults.Results.push(...r.data.Data);
+              page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
+            }
+          });
+    }
 
     function listEdit(value = undefined) {
       if(value === true || value === false){
@@ -108,7 +121,9 @@ export default {
       }).finally(() => appManager.setIgnore(false));
     }
 
+    const items = computed(() => reactResults.Results);
     const isUnselectAll = computed(() => selected.value.length === reactResults.Results.length);
+    const isFullResults = computed(() => reactResults.Results.length === reactResultsCount.Cnt);
 
     function selectAll(){
       if(isUnselectAll.value){
@@ -138,14 +153,7 @@ export default {
     }
 
     function handleSearch(){
-      survey.getResultsV2(page.PageSize, 0, page.Name).then((r) => {
-        if(r.data.Status === 1) {
-          listEdit(false);
-          reactResults.Results.length = 0;
-          reactResults.Results.push(...r.data.Data);
-          page.ResultNo = r.data.Data[r.data.Data.length - 1].ResultNo;
-        }
-      });
+      searchResults();
     }
 
     return {
@@ -159,6 +167,8 @@ export default {
       items,
       page,
       isUnselectAll,
+      isFullResults,
+      reactResultsCount,
     }
   }
 }

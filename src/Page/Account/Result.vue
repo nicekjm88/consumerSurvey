@@ -38,11 +38,11 @@
               <tbody>
                 <tr>
                   <th scope="row">구매금액</th>
-                  <td>{{ formatter.toPrice(groupCount.AmountPerYear) }}원</td>
+                  <td>{{ formatter.toPrice(groupCount.TotalAmount) }}원</td>
                 </tr>
                 <tr>
                   <th scope="row">누적 PV</th>
-                  <td>{{ formatter.toPrice(groupCount.PVPerYear) }}PV</td>
+                  <td>{{ formatter.toPrice(groupCount.TotalPV) }}PV</td>
                 </tr>
               </tbody>
             </table>
@@ -229,7 +229,7 @@ export default {
 
 .list {
   margin-bottom: 1rem;
-  
+
   &.list-dot {
     > li {
       padding-left: 15px;

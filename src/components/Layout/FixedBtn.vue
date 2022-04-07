@@ -1,6 +1,6 @@
 <template>
 <div class="fixed-btn-wrap">
-  <button class="fixed-btn">{{ msg }}</button>  
+  <button class="fixed-btn" :disabled="disabled">{{ msg }}</button>
 </div>
 </template>
 
@@ -10,6 +10,10 @@ export default {
   name: 'FixedBtn',
   props: {
     msg: String,
+    disabled: {
+      type: Boolean,
+      default: false,
+    }
   }
 }
 </script>
