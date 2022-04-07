@@ -175,7 +175,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .bg-sky {
   padding-top: 100px;
   background-color: #5ed8ff;
