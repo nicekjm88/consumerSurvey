@@ -11,7 +11,10 @@
           <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
             <strong class="answer-item__title">{{ item.Name }}</strong>
             <div class="btn-cancel">
-              <button @click="selectAll(pidx)">
+              <button 
+                @click="selectAll(pidx)"
+                :class="{ isActive }"
+              >
                 전체선택
               </button>
               <button @click="selectCancel(pidx)">
@@ -153,6 +156,8 @@ export default {
     const that = getCurrentInstance()
     const sumPV = ref(0);
 
+    const isActive = ref(false);
+
     onBeforeMount(() => {
       // productsManager.fetch();
       if (!productsManager.hasValue() || !settingsManager.isDone()) {
@@ -180,10 +185,12 @@ export default {
 
     function selectCancel(pidx) {
       productsManager.clearChecked(pidx).then(() => initProgress());
+      isActive.value = false;
     }
 
     function selectAll(pidx){
       productsManager.selectAll(pidx).then(() => initProgress());
+      isActive.value = true;
     }
 
     function updateProgress(){
@@ -208,6 +215,7 @@ export default {
       productToggle,
       onSubmit,
       selectAll,
+      isActive
     };
   },
 };
@@ -233,7 +241,7 @@ export default {
 
   .btn-cancel {
     position: absolute;
-    top: 5px;
+    top: 0;
     right: 0;
     background-color: transparent;
     color: #666;
@@ -242,9 +250,13 @@ export default {
     & button {
       background-color: transparent;
       color: #666;
+      border: 1px solid #aaa;
+      margin: 0 5px;
+      border-radius: 5px;
 
-      &:first-child {
+      &:first-child.isActive {
         color: $mainColor;
+        border-color: $mainColor;
       }
     }
   }
