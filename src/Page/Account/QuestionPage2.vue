@@ -3,21 +3,25 @@
     <Navigation />
     <main class="qestion-area">
       <section>
-        <ProgressBar :pv="pv" :progressStatus="progressStatus" :class="{ 'is-show': !hideProgressBar }" />
+        <ProgressBar
+          :pv="pv"
+          :progressStatus="progressStatus"
+          :class="{ 'is-show': !hideProgressBar }"
+        />
         <p class="notify" id="qestion">
-          <strong>현재 쇼핑몰(온/오프라인)에서<br>구입하는 제품들을 선택해주세요.</strong>
+          <strong
+            >현재 쇼핑몰(온/오프라인)에서<br />구입하는 제품들을
+            선택해주세요.</strong
+          >
         </p>
         <div id="answer">
           <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
             <strong class="answer-item__title">{{ item.Name }}</strong>
             <div class="btn-cancel">
-              <button 
-                @click="selectAll(pidx)"
-                :class="{ isActive }"
-              >
+              <button @click="selectAllActive($event), selectAll(pidx)">
                 전체선택
               </button>
-              <button @click="selectCancel(pidx)">
+              <button @click="selectAllUnActive($event), selectCancel(pidx)">
                 선택취소
               </button>
             </div>
@@ -27,11 +31,11 @@
                 <li v-for="(product, idx) in item.ch" :key="idx">
                   <div class="form-check">
                     <input
-                        class="form-check-input"
-                        type="checkbox"
-                        v-model="product.checked"
-                        @change="productToggle(product)"
-                        :id="`products_${pidx}_${idx}`"
+                      class="form-check-input"
+                      type="checkbox"
+                      v-model="product.checked"
+                      @change="productToggle(product)"
+                      :id="`products_${pidx}_${idx}`"
                     />
                     <label
                       @click.once="showProgress"
@@ -42,28 +46,10 @@
                   </div>
                 </li>
               </ul>
-
-
             </div>
           </div>
         </div>
       </section>
-
-
-      <div
-        ref="modal"
-        class="modal-dimmed page-step2"
-        :class="{ isActive: isAddClass }"
-        v-if="this.isModal == true"
-      >
-        <div class="icon">🎉</div>
-        <p>
-          축하합니다!!<br>
-          30만 PV를 달성하셨습니다.<br>
-        이제 수당을 받을 자격을<br>갖추게 되셨습니다.
-        </p>
-      </div>
-
     </main>
     <FixedBtn @click="onSubmit" msg="작성완료" />
   </div>
@@ -77,20 +63,16 @@ import ProgressBar from "@/components/Layout/ProgressBar.vue";
 import useProductsManager from "@/store/products-manager";
 import useSettingsManager from "@/store/settings-manager";
 import router from "@/router";
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance } from "vue";
 
 export default {
   name: "QuestionPage2",
   data() {
     return {
       lastScrollPosition: 0,
-      scrollValue: 0,
       progressStatus: 0,
       pv: 0,
       hideProgressBar: true,
-      isFinished: false,
-      isModal: false,
-      isAddClass: false,
     };
   },
   mounted() {
@@ -101,26 +83,20 @@ export default {
     window.removeEventListener("scroll", this.onScroll);
   },
   watch: {
-    progressStatus () {
-      const progressCount = document.querySelector('.progress-bar__count');
-      const progressBar = document.querySelector('.progress-bar');
+    progressStatus() {
+      const progressCount = document.querySelector(".progress-bar__count");
+      const progressBar = document.querySelector(".progress-bar");
 
       this.progressStatus >= 48
-        ? progressCount.style.color = '#fff'
-        : progressCount.style.color = '#333'
+        ? (progressCount.style.color = "#fff")
+        : (progressCount.style.color = "#333");
 
       this.progressStatus >= 100
-        ? progressBar.classList.add('progress-bar-animated')
-        : progressBar.classList.remove('progress-bar-animated')
-    }
+        ? progressBar.classList.add("progress-bar-animated")
+        : progressBar.classList.remove("progress-bar-animated");
+    },
   },
   methods: {
-    addClass() {
-      setTimeout(() => {
-        this.isAddClass = true;
-        this.hideModal();
-      }, 0.3);
-    },
     onScroll() {
       const OFFSET = 100;
 
@@ -133,16 +109,9 @@ export default {
       this.hideProgressBar = window.pageYOffset < this.lastScrollPosition;
       this.lastScrollPosition = window.pageYOffset;
     },
-    hideModal() {
-      const modal = this.$refs.modal;
-
-      window.addEventListener("click", (e) => {
-        e.target === modal ? modal.classList.remove("isActive") : false;
-      });
-    },
     showProgress() {
-      this.hideProgressBar = false
-    }
+      this.hideProgressBar = false;
+    },
   },
   components: {
     FixedBtn,
@@ -153,55 +122,61 @@ export default {
     const productsManager = useProductsManager();
     const settingsManager = useSettingsManager();
 
-    const that = getCurrentInstance()
+    const that = getCurrentInstance();
     const sumPV = ref(0);
-
-    const isActive = ref(false);
 
     onBeforeMount(() => {
       // productsManager.fetch();
       if (!productsManager.hasValue() || !settingsManager.isDone()) {
-        router.push('/intro');
+        router.push("/intro");
       }
     });
 
     onMounted(() => initProgress());
 
-    function onSubmit(){
-      if(productsManager.isDone()) {
-        router.push('/result');
-      }else{
-        alert('문항을 선택해 주세요.');
+    function onSubmit() {
+      if (productsManager.isDone()) {
+        router.push("/result");
+      } else {
+        alert("문항을 선택해 주세요.");
       }
     }
 
-    function initProgress(){
+    function initProgress() {
       const sp = productsManager.getSelected();
-      if(sp) {
+      if (sp) {
         sumPV.value = sp.TotalPV;
         updateProgress();
       }
     }
 
+    function selectAllActive(e) {
+      e.target.classList.add("isActive");
+    }
+
+    function selectAllUnActive(e) {
+      e.target.previousElementSibling.classList.remove("isActive");
+    }
+
     function selectCancel(pidx) {
       productsManager.clearChecked(pidx).then(() => initProgress());
-      isActive.value = false;
     }
 
-    function selectAll(pidx){
+    function selectAll(pidx) {
       productsManager.selectAll(pidx).then(() => initProgress());
-      isActive.value = true;
     }
 
-    function updateProgress(){
-      const val = Math.floor(sumPV.value / (settingsManager.getData().StdPV * 0.01));
+    function updateProgress() {
+      const val = Math.floor(
+        sumPV.value / (settingsManager.getData().StdPV * 0.01)
+      );
       that.data.progressStatus = val > 100 ? 100 : val;
       that.data.pv = sumPV.value;
     }
 
     function productToggle(product) {
-      const val = product.PV
-      if(val) {
+      const val = product.PV;
+      if (val) {
         sumPV.value += (product.checked ? 1 : -1) * val;
         updateProgress();
       }
@@ -215,7 +190,8 @@ export default {
       productToggle,
       onSubmit,
       selectAll,
-      isActive
+      selectAllActive,
+      selectAllUnActive,
     };
   },
 };
@@ -255,6 +231,7 @@ export default {
       border-radius: 5px;
 
       &:first-child.isActive {
+        font-weight: 700;
         color: $mainColor;
         border-color: $mainColor;
       }
@@ -267,7 +244,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   display: none;
   justify-content: center;
@@ -291,5 +268,4 @@ export default {
 #qestion {
   text-align: left;
 }
-
 </style>
