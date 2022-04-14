@@ -28,7 +28,7 @@
             >원)
           </small>
           <br />
-          연 누적 포인트(PV): 약 <em>{{ formatter.toPrice(pv) }}</em
+          연 누적 포인트(PV): 약 <em class="main-color">{{ formatter.toPrice(pv) }}</em
           > PV
         </p>
         <p>
@@ -417,5 +417,9 @@ export default {
   85% {
     opacity: 1;
   }
+}
+
+.main-color {
+  color: $mainColor;
 }
 </style>
