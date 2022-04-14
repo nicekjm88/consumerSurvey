@@ -229,6 +229,8 @@ export default {
       border: 1px solid #aaa;
       margin: 0 5px;
       border-radius: 5px;
+      line-height: 1;
+      height: 21px;
 
       &:first-child.isActive {
         font-weight: 700;
