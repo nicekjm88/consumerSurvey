@@ -14,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
     const { unauthorized, role } = to.meta;
     let next_path = undefined;
 
-    if (Capacitor.getPlatform() !== 'web') {
+    if (Capacitor.getPlatform() === 'web') {
         if (web_pass_filter.some(x => x === to.name)) {
             next();
         } else {

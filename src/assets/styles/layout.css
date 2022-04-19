@@ -2,7 +2,8 @@
   font-family: "Atomy";
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/_ATOMY-BOLD.woff");
+  src: url("../fonts/ATOMY-BOLD.woff2") format("woff2"),
+    url("../fonts/ATOMY-BOLD.woff") format("woff")
 }
 
 html,
