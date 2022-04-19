@@ -113,6 +113,11 @@ section {
   display: block;
 }
 
+html,
+body {
+  text-size-adjust: none !important
+}
+
 body {
   line-height: 1.4 !important;
 }
