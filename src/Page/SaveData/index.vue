@@ -200,6 +200,7 @@ export default {
     onBeforeMount(() => {
       //설문 수정
       if (isEdit.value) {
+        checked.value = true;
         const user_type = userManager.getUserType();
         if (user_type === 1) {
           const resultNo = router.currentRoute.value.query.ResultNo;
