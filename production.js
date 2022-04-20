@@ -14,7 +14,12 @@ program
         const rawdata = fs.readFileSync('./capacitor.config.json');
         const ccj = JSON.parse(rawdata.toString());
 
-        cp.execSync(`capgo upload -v ${options.pversion} -a aea6b1da-a3f3-4686-9dd0-f86a11c45b52 ${ccj.appId}`, {stdio: 'inherit'});
+        console.log('appId :', ccj.appId);
+        console.log('pv :',options.pversion);
+
+        if(options.pversion) {
+            cp.execSync(`capgo upload -v ${options.pversion} -a aea6b1da-a3f3-4686-9dd0-f86a11c45b52 ${ccj.appId}`, {stdio: 'inherit'});
+        }
     });
 
 program.parse(process.argv);
