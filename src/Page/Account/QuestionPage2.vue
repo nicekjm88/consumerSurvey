@@ -73,6 +73,7 @@ export default {
       progressStatus: 0,
       pv: 0,
       hideProgressBar: true,
+      allSelected: false
     };
   },
   mounted() {
@@ -175,6 +176,16 @@ export default {
     }
 
     function productToggle(product) {
+    
+    const selectedBtn = document.querySelectorAll('.btn-cancel button');
+
+    selectedBtn.forEach(function(item) {
+      if ( product.checked === false ) {
+        item.classList.remove('isActive');
+      }
+    })
+
+
       const val = product.PV;
       if (val) {
         sumPV.value += (product.checked ? 1 : -1) * val;

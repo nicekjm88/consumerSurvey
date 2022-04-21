@@ -114,12 +114,12 @@
                   v-model="checked"
                 />
                 <label class="form-check-label" for="flexCheckDefault">
-                  개인정보 수집에 동의하십니까?
+                  개인정보 수집 &middot; 이용에 동의합니다.
                 </label>
               </div>
             </div>
             <div class="pull-right">
-              <button type="button" class="btn btn-outline-dark" @click="clickTerms2">
+              <button type="button" class="btn btn-outline-dark btn-sm" @click="clickTerms2">
                   전문 보기
               </button>
             </div>
@@ -389,6 +389,7 @@ export default {
 }
 .agree-area {
   margin-top: 20px;
+  font-size: 13px;
 
   .form-check {
     margin-top: 8px;

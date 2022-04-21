@@ -5,47 +5,46 @@
       <section>
         <h1 class="title">개인정보<br />수집 동의서</h1>
         <article>
-          <ol class="list list-order">
+          <ul class="list">
             <li>
-              개인정보 처리방침은 회원의 개인정보보호를 위하여 애터미㈜가
-              실시하는 개인정보수집의 목적과 그 정보의 정책적, 시스템적 보안에
-              관한 규정이며, 애터미㈜ 회원의 기본적인 사생활 비밀과 자유 및
-              통신비밀을 보장하고 정보유출로 인한 인권피해가 발생하지 않도록
-              하고자 마련된 것입니다.
+              <strong>[필수] 개인정보 수집, 이용 동의</strong>
+              애터미 주식회사 (이하 “애터미”)는 애터미 큐레이팅 앱 서비스를 제공하기 위하여 다음과 같이 귀하의 개인정보를 수집 · 이용합니다.
             </li>
             <li>
-              애터미㈜는 개인정보 보호법 제30조에 따라 정보주체의 개인정보를
-              보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록
-              하기 위하여 아래와 같이 개인정보 처리방침을 수립하여 공개합니다.
+              <strong>수집하는 개인정보 항목</strong>
+              [필수항목]<br>
+              설문자료 저장 시: 이름, 휴대전화번호, 생년월일, 성별, 서비스 이용 시: 서비스 이용기록, 접속로그, 쿠키(Cookie), 접속IP, 국가정보, OS 버전 (모바일), 단말기 모델 (모바일), 해상도 (모바일)
             </li>
             <li>
-              애터미㈜는 개인정보 처리방침을 통하여 회원께서 제공하시는
-              개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를
-              위해 어떠한 조치가 취해지고 있는지 알려드립니다.
+              <strong>개인정보의 수집 및 이용 목적</strong>
+              애터미㈜는 수집한 개인정보를 다음의 목적을 위해 활용합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+              <ul>
+                <li>설문조사 대상자의 응답내용 수집 및 개인정보 관리</li>
+                <li>애터미 큐레이팅 앱 서비스 이용에 따른 본인 식별, 각종 서비스 관련 고지 사항 전달</li>
+                <li>기타 애터미 사업관리 및 서비스 지원</li>
+              </ul>
+              응답자의 소비형태 조사의 목적으로 진행되는 설문에 대한 응답자 정보 및 응답 데이터의 통계분석을 목적으로 개인정보를 처리합니다. 또한 소비자 맞춤 서비스 제공을 위한 기초 자료로 활용하고 문제점에 대한 개선방안을 마련하여 제품 및 서비스 구매환경 향상을 위하여 본 조사를 수행하고자 합니다.
             </li>
-          </ol>
+            <li>
+              <strong>개인정보의 처리 및 보유기간</strong>
+              애터미(주)는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의 받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.
+              각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.
+              <ul>
+                <li>조사자료 관련</li>
+                <li>정량조사 (앱 기반 설문조사)</li>
+                <li>응답자로부터 받은 개인정보가 포함된 설문지 응답자의 개인정보가 포함된 설문지상의 모든 새인정보는 설문지 파기와 함께 파기됩니다. 설문응답의 보관은 설문 이후 1년 내 파기하는 것을 원칙으로 하며 복원할 수 없는 방법으로 파기합니다.</li>
+              </ul>
+            </li>
+            <li>
+                <strong>개인정보 처리방침의 변경에 관한 사항</strong>
+                개인정보 처리방침: v0.1<br>
+                이 개인정보 처리방침은 2022년 04월 17일부터 적용됩니다.
+            </li>
+          </ul>
+          <p class="caution">※ 귀하는 위 동의를 거부할 권리가 있습니다. 이에 동의하지 않는 경우 입력 또는 선택하신 개인정보는 서버에 저장되지 않습니다.</p>
         </article>
-        <!-- <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="flexCheckDefault"
-            v-model="checked"
-          />
-          <label class="form-check-label" for="flexCheckDefault">
-            개인정보 수집에 동의하십니까?
-          </label>
-        </div> -->
       </section>
     </main>
-    <!-- <FixedBtn
-      type="submit"
-      @click="onMove"
-      msg="확인"
-      ref="btn"
-      :disabled="!checked"
-    /> -->
   </div>
 </template>
 
@@ -85,20 +84,47 @@ export default {
     // padding: 20px;
     // margin-bottom: 10px;
 
-    .list.list-order {
+    .list {
       & > li {
         position: relative;
-        padding-left: 15px;
-        margin-bottom: 15px;
-        counter-increment: index;
+        margin-bottom: 30px;      
+        
+        strong {
+          display: block;
+          margin-bottom: 5px;
+          font-size: 17px;
+        }
 
         &::before {
-          content: counter(index) ".";
           position: absolute;
           top: 0;
           left: 0;
         }
+
+        ul {
+          margin: 30px 0;
+          > li {
+            position: relative;
+            padding-left: 10px;
+            
+            &::before {
+              content: '';
+              width: 4px;
+              height: 4px;
+              background: #929292;
+              border-radius: 50%;
+              position: absolute;
+              top: 8px;
+              left: 0;
+            }
+          }
+        } 
       }
+    }
+
+    .caution {
+      color: #929292;
+      font-size: 14px;
     }
   }
 }
