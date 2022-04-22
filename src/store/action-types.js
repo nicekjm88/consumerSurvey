@@ -6,8 +6,8 @@ export const ACTION = {
     },
     PRODUCTS: {
         SET: 'SET_PRODUCTS',
-        TOGGLE: 'TOGGLE_PRODUCT',
         SELECT_OPERATION: 'SELECT_OPERATION_PRODUCT',
+        FETCH_CHECKALL: 'FEATCH_CHECKALL',
         makeDispatch: (action) => 'products/' + action
     },
     QUESTIONS: {

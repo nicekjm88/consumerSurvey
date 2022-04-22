@@ -41,8 +41,13 @@ export default function useValidator() {
         return age;
     }
 
+    function isName(name){
+        return !(/( +(?= ))|([^가-힣|a-z|A-Z|\s]+)/.test(name));
+    }
+
     return {
         isBirthday,
         isCheckAge,
+        isName,
     }
 }

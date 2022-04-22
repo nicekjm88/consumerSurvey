@@ -15,6 +15,7 @@ export default function useProductsManager() {
             const products = tmp_products.reduce((a, c) => {
                 c.checked = false;
                 if (!c.MCode) {
+                    c.isCheckAll = false;
                     c.ch = [];
                     a.push(c);
                 } else {
@@ -47,10 +48,6 @@ export default function useProductsManager() {
             idx: -1,
             checked: true
         });
-    }
-
-    async function toggle(pidx, idx) {
-        return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.TOGGLE), {pidx, idx});
     }
 
     function hasValue() {
@@ -140,11 +137,14 @@ export default function useProductsManager() {
         return {TotalAmount:0, TotalPV:0, TotalCount:0, SelectedCount:0, AmountPerYear: 0, PVPerYear: 0, Groups: []};
     }
 
+    async function fetchCheckAll(pidx){
+        return store.dispatch(ACTION.PRODUCTS.makeDispatch(ACTION.PRODUCTS.FETCH_CHECKALL), pidx);
+    }
+
     return {
         fetch,
         clear,
-        get: () => store.getters["products/data"],
-        toggle,
+        get : () => store.getters["products/data"],
         clearChecked,
         selectAll,
         getSelected,
@@ -153,5 +153,6 @@ export default function useProductsManager() {
         isDone,
         genSelected,
         genEmptySelected,
+        fetchCheckAll,
     }
 }

@@ -252,6 +252,14 @@ export default {
     }
 
     function isRequiredName(value) {
+      data.Name = value.trim();
+
+      if(value && value.length > 0){
+        if(!validator.isName(value)){
+          return "정확한 이름을 입력해주세요."
+        }
+      }
+
       return value ? true : "이름을 입력해주세요.";
     }
 

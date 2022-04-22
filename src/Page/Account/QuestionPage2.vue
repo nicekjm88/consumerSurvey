@@ -18,10 +18,10 @@
           <div class="answer-item" v-for="(item, pidx) in items" :key="pidx">
             <strong class="answer-item__title">{{ item.Name }}</strong>
             <div class="btn-cancel">
-              <button @click="selectAllActive($event), selectAll(pidx)">
+              <button :class="{isActive: item.isCheckAll }" @click="selectAll(pidx)">
                 전체선택
               </button>
-              <button @click="selectAllUnActive($event), selectCancel(pidx)">
+              <button @click="selectCancel(pidx)">
                 선택취소
               </button>
             </div>
@@ -34,7 +34,7 @@
                       class="form-check-input"
                       type="checkbox"
                       v-model="product.checked"
-                      @change="productToggle(product)"
+                      @change="productToggle(product, pidx)"
                       :id="`products_${pidx}_${idx}`"
                     />
                     <label
@@ -151,21 +151,16 @@ export default {
       }
     }
 
-    function selectAllActive(e) {
-      e.target.classList.add("isActive");
-    }
-
-    function selectAllUnActive(e) {
-      e.target.previousElementSibling.classList.remove("isActive");
-    }
-
     function selectCancel(pidx) {
       productsManager.clearChecked(pidx).then(() => initProgress());
     }
 
     function selectAll(pidx) {
-      productsManager.selectAll(pidx).then(() => initProgress());
+      productsManager.selectAll(pidx).then(() => {
+        initProgress()
+      });
     }
+
 
     function updateProgress() {
       const val = Math.floor(
@@ -175,21 +170,13 @@ export default {
       that.data.pv = sumPV.value;
     }
 
-    function productToggle(product) {
-    
-    const selectedBtn = document.querySelectorAll('.btn-cancel button');
-
-    selectedBtn.forEach(function(item) {
-      if ( product.checked === false ) {
-        item.classList.remove('isActive');
-      }
-    })
-
-
+    function productToggle(product, pidx) {
       const val = product.PV;
       if (val) {
-        sumPV.value += (product.checked ? 1 : -1) * val;
-        updateProgress();
+        productsManager.fetchCheckAll(pidx).then(() => {
+          sumPV.value += (product.checked ? 1 : -1) * val;
+          updateProgress();
+        });
       }
     }
 
@@ -201,8 +188,6 @@ export default {
       productToggle,
       onSubmit,
       selectAll,
-      selectAllActive,
-      selectAllUnActive,
     };
   },
 };
