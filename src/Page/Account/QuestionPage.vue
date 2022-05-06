@@ -1,8 +1,7 @@
 <template>
   <div class="wrap">
-  <Navigation />
+    <Navigation />
     <main class="qestion-area">
-
       <section v-for="(item, pidx) in items" :key="pidx">
         <div v-show="step === pidx">
           <div class="img-wrap">
@@ -10,68 +9,84 @@
           </div>
           <p class="notify">
             <strong>{{ item.Name }}</strong>
-            <span><em>{{ item.ch[0].Name }}</em></span>
+            <span
+              ><em>{{ item.ch[0].Name }}<br />(선택사항)</em></span
+            >
           </p>
         </div>
 
         <ul class="select-list" v-show="step === pidx">
           <li v-for="(question, idx) in item.ch[0].ch" :key="idx">
             <div class="form-check">
-              <input class="form-check-input" type="radio" :checked="question.checked" @change="selectChange(pidx, idx)" :id="`questions_${pidx}-${idx}`">
-              <label class="form-check-label" :for="`questions_${pidx}-${idx}`">{{ question.Name }}</label>
+              <input
+                class="form-check-input"
+                type="radio"
+                :checked="question.checked"
+                @change="selectChange(pidx, idx)"
+                :id="`questions_${pidx}-${idx}`"
+              />
+              <label
+                class="form-check-label"
+                :for="`questions_${pidx}-${idx}`"
+                >{{ question.Name }}</label
+              >
+            </div>
+          </li>
+          <li>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" />
+              <label class="form-check-label">선택안함</label>
             </div>
           </li>
         </ul>
 
         <FixedBtn @click="onSubmit" msg="다음" />
-
       </section>
     </main>
-
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Layout/Navigation.vue';
-import FixedBtn from '@/components/Layout/FixedBtn.vue';
+import Navigation from "@/components/Layout/Navigation.vue";
+import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import useQuestionsManager from "@/store/questions-manager";
-import {computed, onBeforeMount, ref} from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import router from "@/router";
 
 export default {
-  name: 'QuestionPage',
+  name: "QuestionPage",
   components: {
     FixedBtn,
     Navigation,
   },
-  setup(){
+  setup() {
     const questionsManager = useQuestionsManager();
     const step = ref(0);
 
     onBeforeMount(() => {
       //questionsManager.fetch();
-      if(!questionsManager.hasValue()){
-        router.push('/intro');
+      if (!questionsManager.hasValue()) {
+        router.push("/intro");
       }
     });
 
     function onSubmit() {
       const si = questionsManager.getSelectedAt(step.value);
-      if(si.length > 0) {
+      if (si.length > 0) {
         step.value++;
         if (step.value > 2) {
           if (questionsManager.isDone()) {
-            router.push('/qna2');
+            router.push("/qna2");
           } else {
             step.value = 0;
           }
         }
-      }else{
-        alert('문항을 선택해 주세요.');
+      } else {
+        alert("문항을 선택해 주세요.");
       }
     }
 
-    function selectChange(pidx, idx){
+    function selectChange(pidx, idx) {
       questionsManager.selectChanged(pidx, idx);
     }
 
@@ -82,9 +97,9 @@ export default {
       step,
       selectChange,
       onSubmit,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style lang="scss">
