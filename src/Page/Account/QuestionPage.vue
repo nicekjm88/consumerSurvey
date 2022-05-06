@@ -32,12 +32,6 @@
               >
             </div>
           </li>
-          <li>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" />
-              <label class="form-check-label">선택안함</label>
-            </div>
-          </li>
         </ul>
 
         <FixedBtn @click="onSubmit" msg="다음" />

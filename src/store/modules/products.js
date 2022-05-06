@@ -52,7 +52,6 @@ const mutations = {
         product.checked = checked;
 
         if(checked){
-            debugger;
             state.data[pidx].isCheckAll = state.data[pidx].ch.filter(x => !x.checked).length === 0
         }else{
             state.data[pidx].isCheckAll = false;

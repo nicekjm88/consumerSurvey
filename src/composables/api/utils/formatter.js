@@ -33,7 +33,21 @@ export default function useFormatter() {
 
     function toYn(value){
         const v = value.toString();
-        return  v === '1' ? '예' : '아니요'
+        if(v === '9'){
+            return '선택안함';
+        }
+
+        return  v === '1' ? '예' : '아니요';
+    }
+
+    function toAge(value){
+        if(value === 99) return '선택안함';
+        return value + '대';
+    }
+
+    function toFamilies(value){
+        if(value === 99) return '선택안함';
+        return value + '인';
     }
 
     return {
@@ -42,5 +56,7 @@ export default function useFormatter() {
         toPhone,
         toGender,
         toYn,
+        toAge,
+        toFamilies,
     }
 }
