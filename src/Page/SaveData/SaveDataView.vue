@@ -20,19 +20,19 @@
               <th scope="row">작성일</th>
               <td>{{ reactResultFormatted.CreateAt }}</td>
             </tr>
-            <tr>
+            <tr v-if="!isShared">
               <th scope="row">생년월일</th>
               <td>{{ reactResultFormatted.BirthDay }}</td>
             </tr>
-            <tr>
+            <tr v-if="!isShared">
               <th scope="row">성별</th>
               <td>{{ reactResultFormatted.Gender }}</td>
             </tr>
-            <tr>
+            <tr v-if="!isShared">
               <th scope="row">연령대</th>
               <td>{{ reactResultFormatted.Age }}</td>
             </tr>
-            <tr>
+            <tr v-if="!isShared">
               <th scope="row">가족 수</th>
               <td>{{ reactResultFormatted.Families }}</td>
             </tr>
@@ -40,7 +40,7 @@
               <th scope="row">애터미 제품 사용</th>
               <td>{{ reactResultFormatted.UseAtomyYn }}</td>
             </tr>
-            <tr>
+            <tr v-if="!isShared">
               <th scope="row">전화번호</th>
               <td>{{ reactResultFormatted.Phone }}</td>
             </tr>
@@ -101,8 +101,8 @@ import { computed, getCurrentInstance, onBeforeMount, reactive } from "vue";
 import useSurvey from "@/composables/api/survey";
 import router from "@/router";
 import useFormatter from "@/composables/api/utils/formatter";
-import { Share } from '@capacitor/share';
-import {Capacitor} from "@capacitor/core";
+import { Share } from "@capacitor/share";
+import { Capacitor } from "@capacitor/core";
 import useUserManager from "@/store/user-manager";
 
 export default {
@@ -194,12 +194,13 @@ export default {
         "일",
       ]);
       reactResultFormatted.Gender = formatter.toGender(v.Gender);
-      reactResultFormatted.Age = formatter.toAge(v.Age);
-      reactResultFormatted.Families = formatter.toFamilies(v.Families);
+      reactResultFormatted.Age = v.Age + "대";
+      reactResultFormatted.Families = v.Families + "인";
       reactResultFormatted.PayBackCount = v.PayBackCount + "회";
       reactResultFormatted.Phone = formatter.toPhone(v.Phone);
       reactResultFormatted.UseAtomyYn = formatter.toYn(v.UseAtomyYn);
-      reactResultFormatted.AmountPerYear = formatter.toPrice(v.AmountPerYear) + " 원";
+      reactResultFormatted.AmountPerYear =
+        formatter.toPrice(v.AmountPerYear) + " 원";
       reactResultFormatted.PVPerYear = formatter.toPrice(v.PVPerYear) + " PV";
     }
 
