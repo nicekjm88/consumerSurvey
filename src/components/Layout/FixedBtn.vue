@@ -3,27 +3,27 @@
 </template>
 
 <script>
-// import { onBeforeMount, ref } from "vue";
-// import { SafeArea } from "capacitor-plugin-safe-area";
+import { onBeforeMount, ref } from "vue";
+import { SafeArea } from "capacitor-plugin-safe-area";
 
 export default {
   name: 'FixedBtn',
   props: {
     msg: String,
   },
-  // setup() {
-  //   const mgt = ref("0px");
+  setup() {
+    const mgt = ref("0px");
 
-  //   onBeforeMount(() => {
-  //     SafeArea.getSafeAreaInsets().then(({ insets }) => {      
-  //       mgt.value = (insets.bottom) + "px";
-  //     });
-  //   });
+    onBeforeMount(() => {
+      SafeArea.getSafeAreaInsets().then(({ insets }) => {      
+        mgt.value = (insets.bottom) + "px";
+      });
+    });
 
-  //   return {
-  //     mgt,
-  //   };
-  // },
+    return {
+      mgt,
+    };
+  },
 }
 </script>
 
@@ -39,7 +39,7 @@ export default {
   background-color: $mainColor;
   color: #fff;
   font-weight: 700;
-  // margin-bottom: v-bind(mgt);
+  margin-bottom: v-bind(mgt);
 
   &::before {
     content: '';
