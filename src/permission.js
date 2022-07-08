@@ -20,7 +20,8 @@ router.beforeEach(async (to, from, next) => {
   const { unauthorized, role } = to.meta;
   let next_path = undefined;
 
-  if (Capacitor.getPlatform() !== "web") {
+  if (Capacitor.getPlatform() === "web") {   //모바일 배포 일때 사용
+  //if (Capacitor.getPlatform() !== "web") { //웹 테스트 할때 사용
     if (web_pass_filter.some((x) => x === to.name)) {
       next();
     } else {

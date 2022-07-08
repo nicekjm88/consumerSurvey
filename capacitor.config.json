@@ -6,7 +6,8 @@
   "windowsAndroidStudioPath": "C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe",
   "plugins": {
     "CapacitorUpdater": {
-      "autoUpdateUrl": "https://capgo.app/api/latest?appid=myconsumption.atomy.com&channel=dev"
+      "autoUpdate": true,
+      "resetWhenUpdate": false
     },
     "SplashScreen": {
       "launchShowDuration": 1000,

@@ -11,7 +11,7 @@ import './permission';
 const app = createApp(App);
 
 if(Capacitor.getPlatform() !== 'web') {
-    const updator = require('capacitor-updater');
+    const updator = require('@capgo/capacitor-updater');
     updator.CapacitorUpdater.notifyAppReady();
 }
 
