@@ -160,14 +160,19 @@ em {
   font-weight: 700;
 }
 
+body {
+  background-color: #efefef !important;  
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   max-width: 768px;
   margin: 0 auto;
-  /* min-height: 100vh;
-  background-color: #fff; */
+  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: 1px 10px 10px rgb(0 0 0 / 10%);
 }
 
 button {

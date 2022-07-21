@@ -1954,6 +1954,12 @@ export default {
     }
   }
 
+  @media (min-width: 767px) {
+    width: 768px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 }
 
 .particles {
