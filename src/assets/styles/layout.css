@@ -269,7 +269,8 @@ strong {
 }
 
 .select-list>li {
-  width: calc(50% - 15px);
+  /* width: calc(50% - 15px); */
+  width: 100%;
   position: relative;
   height: 48px;
   margin-left: 15px;

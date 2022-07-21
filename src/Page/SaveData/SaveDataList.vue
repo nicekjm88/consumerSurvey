@@ -44,7 +44,10 @@
               <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">{{item.Name}}</router-link>
             </strong>
 
-            <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
+            <div>
+              <span class="date">7월 19일</span>
+              <router-link class="more" :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
+            </div>
           </li>
         </ul>
         <button v-show="!isFullResults" class="btn-more" type="button" @click="nextResults"> <i class="xi-angle-down"></i> 더보기 ({{items.length}}/{{reactResultsCount.Cnt}})</button>
@@ -185,7 +188,12 @@ export default {
     display: flex;
     justify-content: space-between;
 
-    & > a {
+    .date {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .more {
       color: #d2d2d2;
       font-size: 14px;
     }

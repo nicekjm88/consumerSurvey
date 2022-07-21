@@ -83,6 +83,9 @@
           </div>
         </div>
         <div v-else>
+          <button type="button" class="btn btn-outline-primary block" @click="goShop">
+              쇼핑몰 보러가기
+          </button>
           <FixedBtn
             @click="snsShare('애터미 큐레이팅')"
             type="button"
@@ -282,7 +285,7 @@ export default {
     }
 
     function goShop() {
-      window.open("http://m.atomy.com/kr/m", "_blank");
+      window.open("http://m.atomy.com/kr/m/shop", "_blank");
     }
 
     return {
@@ -336,6 +339,24 @@ export default {
     background: $mainColor;
     border-color: $mainColor;
     height: 48px;
+  }
+}
+
+.btn-outline-primary {
+  color: #00b5ef;
+  background-color: #f8fdff;
+  border: 2px solid #00b5ef;
+  margin-bottom: 0;
+  height: 48px;
+
+  &:hover {
+    color: #00b5ef;
+    background-color: #f8fdff;
+    border: 2px solid #00b5ef;
+  }
+
+  &.block {
+    width: 100%;
   }
 }
 </style>

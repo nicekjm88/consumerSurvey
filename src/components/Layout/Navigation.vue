@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 인트로 화면 -->
     <nav v-if="$route.name === 'intro'" class="navigation intro">
       <button type="button" @click="logout">
         <img :src="require('@/assets/image/i-login.svg')" alt="" />
@@ -86,13 +87,11 @@
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
-
-      <router-link to="/intro">
-        <button v-if="$route.name !== 'SaveDataView'" type="button">
-          <i class="xi-close"></i>
-          <span class="a11y">닫기</span>
-        </button>
-      </router-link>
+      
+      <button v-if="$route.name !== 'SaveDataView'" type="button" @click="goHome">
+        <i class="xi-home"></i>
+        <span class="a11y">닫기</span>
+      </button>      
     </nav>
   </div>
 </template>
@@ -106,6 +105,11 @@ import { SafeArea } from "capacitor-plugin-safe-area";
 export default {
   name: "Navigation",
   methods: {
+    goHome() {
+      if(confirm('홈으로 이동하시겠습니까?')) {
+        router.push("/intro");
+      }
+    },
     historyBack() {
       return history.back();
     },
@@ -118,9 +122,14 @@ export default {
     const pgt = ref("0px");
 
     function logout() {
-      userManager.logout().then(() => {
-        router.push("/login");
-      });
+      
+      if (confirm('로그아웃 하시겠습니까?')) {
+        userManager.logout().then(() => {
+          router.push("/login");
+        });
+      } 
+
+      
     }
 
     onBeforeMount(() => {
