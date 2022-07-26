@@ -955,7 +955,7 @@
         </article>
       </section>
     </main>
-    <router-link to="/qna">
+    <router-link to="/qna/0">
       <FixedBtn msg="시작하기" />
     </router-link>
   </div>

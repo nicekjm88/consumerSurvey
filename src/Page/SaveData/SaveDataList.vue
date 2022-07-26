@@ -43,9 +43,8 @@
             <strong v-else>
               <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">{{item.Name}}</router-link>
             </strong>
-
             <div>
-              <span class="date">7월 19일</span>
+              <span class="date">{{ formatter.toDate(item.CreateAt, ['년 ','월 ','일']) }}</span>
               <router-link class="more" :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
             </div>
           </li>
@@ -61,6 +60,7 @@ import Navigation from '@/components/Layout/Navigation.vue';
 import {computed, onBeforeMount, reactive, ref} from "vue";
 import useSurvey from "@/composables/api/survey";
 import useAppManager from "@/store/app-manager";
+import useFormatter from "@/composables/api/utils/formatter";
 
 export default {
   name: 'SaveDataList',
@@ -70,6 +70,7 @@ export default {
   setup() {
     const survey = useSurvey();
     const appManager = useAppManager();
+    const formatter = useFormatter();
 
     const isEdit = ref(false)
     const reactResults = reactive({Results: []});
@@ -172,6 +173,7 @@ export default {
       isUnselectAll,
       isFullResults,
       reactResultsCount,
+      formatter,
     }
   }
 }

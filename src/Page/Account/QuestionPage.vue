@@ -33,8 +33,6 @@
             </div>
           </li>
         </ul>
-
-        <FixedBtn @click="onSubmit" msg="다음" />
       </section>
     </main>
   </div>
@@ -42,23 +40,30 @@
 
 <script>
 import Navigation from "@/components/Layout/Navigation.vue";
-import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import useQuestionsManager from "@/store/questions-manager";
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount, ref, watchEffect } from "vue";
 import router from "@/router";
 
 export default {
   name: "QuestionPage",
   components: {
-    FixedBtn,
     Navigation,
   },
-  setup() {
+  props: {
+    questionNo: {type: Number},
+  },
+  setup(props) {
     const questionsManager = useQuestionsManager();
     const step = ref(0);
 
+    watchEffect(() => {
+      step.value = Number(props.questionNo);
+      if(isNaN(step.value)){
+        router.replace('/error');
+      }
+    });
+
     onBeforeMount(() => {
-      //questionsManager.fetch();
       if (!questionsManager.hasValue()) {
         router.push("/intro");
       }
@@ -67,13 +72,14 @@ export default {
     function onSubmit() {
       const si = questionsManager.getSelectedAt(step.value);
       if (si.length > 0) {
-        step.value++;
-        if (step.value > 2) {
+        if (step.value + 1 >= items.value.length) {
           if (questionsManager.isDone()) {
             router.push("/qna2");
           } else {
-            step.value = 0;
+            router.push('/error');
           }
+        }else{
+          router.push("/qna/" + (step.value + 1));
         }
       } else {
         alert("문항을 선택해 주세요.");
@@ -82,6 +88,7 @@ export default {
 
     function selectChange(pidx, idx) {
       questionsManager.selectChanged(pidx, idx);
+      onSubmit();
     }
 
     const items = computed(() => questionsManager.get());

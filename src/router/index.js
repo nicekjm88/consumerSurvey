@@ -39,9 +39,10 @@ export const defaultRoutes = [
     component: () => import("@/Page/Terms/Terms2"),
   },
   {
-    path: "/qna",
+    path: "/qna/:questionNo",
     name: "Qna",
     component: () => import("@/Page/Account/QuestionPage"),
+    props: true
   },
   {
     path: "/qna2",
