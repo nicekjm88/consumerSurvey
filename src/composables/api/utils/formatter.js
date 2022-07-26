@@ -5,18 +5,29 @@ export default function useFormatter() {
         return v.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     }
 
-    function toDate(value, separator = '.') {
+    //yyyymmdd
+    function toDate(value, separator = '.', options = {}) {
         let v = value;
         if(v instanceof Date){
             v = `${v.getFullYear()}${String(v.getMonth() + 1).padStart(2, '0')}${String(v.getDate()).padStart(2, '0')}`;
         }
 
         v = v.toString();
+
         if (v.length === 8) {
-            if (Array.isArray(separator) && separator.length >= 3) {
-                return v.replace(/(\d{4})(\d{2})(\d{2})/, `$1${separator[0]}$2${separator[1]}$3${separator[2]}`);
+            const is_sep_array = Array.isArray(separator);
+            if(options.removeYear === true){
+                if (is_sep_array && separator.length >= 2) {
+                    return v.replace(/(\d{4})(\d{2})(\d{2})/, `$2${separator[0]}$3${separator[1]}`);
+                } else {
+                    return v.replace(/(\d{4})(\d{2})(\d{2})/,  is_sep_array ? `$2${separator[0]}$3` : `$2${separator}$3`);
+                }
             } else {
-                return v.replace(/(\d{4})(\d{2})(\d{2})/, `$1${separator}$2${separator}$3`);
+                if (is_sep_array && separator.length >= 3) {
+                    return v.replace(/(\d{4})(\d{2})(\d{2})/, `$1${separator[0]}$2${separator[1]}$3${separator[2]}`);
+                } else {
+                    return v.replace(/(\d{4})(\d{2})(\d{2})/, is_sep_array ? `$1${separator[0]}$2${separator[0]}$3` : `$1${separator}$2${separator}$3`);
+                }
             }
         }
     }

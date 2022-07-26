@@ -44,7 +44,7 @@
               <router-link :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">{{item.Name}}</router-link>
             </strong>
             <div>
-              <span class="date">{{ formatter.toDate(item.CreateAt, ['년 ','월 ','일']) }}</span>
+              <span class="date">{{ formatDate(item.CreateAt) }}</span>
               <router-link class="more" :to="{ name:'SaveDataView', params: { resultNo: item.ResultNo }}">더보기</router-link>
             </div>
           </li>
@@ -160,6 +160,18 @@ export default {
       searchResults();
     }
 
+    function formatDate(date){
+      if( date.length === 8) {
+        const yyyy = date.substr(0, 4);
+
+        if(new Date().getFullYear() === Number(yyyy)){
+          return formatter.toDate(date, ['월 ','일'], {removeYear:true});
+        } else {
+          return formatter.toDate(date, ['년 ','월 ','일']);
+        }
+      }
+    }
+
     return {
       isEdit,
       listEdit,
@@ -173,7 +185,7 @@ export default {
       isUnselectAll,
       isFullResults,
       reactResultsCount,
-      formatter,
+      formatDate,
     }
   }
 }
