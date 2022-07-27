@@ -49,21 +49,25 @@ export default {
   components: {
     Navigation,
   },
-  props: {
-    questionNo: {type: Number},
-  },
+  props: ['questionNo'],
   setup(props) {
     const questionsManager = useQuestionsManager();
     const step = ref(0);
 
     watchEffect(() => {
+      const old_step = step.value;
       step.value = Number(props.questionNo);
       if(isNaN(step.value)){
         router.replace('/error');
       }
+
+      if(old_step !== step.value || old_step - 1 !== step.value){
+        questionsManager.selectChanged(step.value, -1);
+      }
     });
 
     onBeforeMount(() => {
+      console.log('onBeforeMount');
       if (!questionsManager.hasValue()) {
         router.push("/intro");
       }

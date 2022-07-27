@@ -23,8 +23,8 @@ module.exports = {
     devServer: {
         proxy: {
             '/atomy': {
-                //target: 'https://test-dev.atomy.com/apiglobal/',
-                target: 'https://api.atomy.com/apiglobal/',
+                target: 'https://test-dev.atomy.com/apiglobal/',
+                //target: 'https://api.atomy.com/apiglobal/',
                 pathRewrite: {'^/atomy' : ''}
             },
         }

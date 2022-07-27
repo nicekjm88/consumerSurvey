@@ -197,8 +197,8 @@ export default {
         "일",
       ]);
       reactResultFormatted.Gender = formatter.toGender(v.Gender);
-      reactResultFormatted.Age = v.Age + "대";
-      reactResultFormatted.Families = v.Families + "인";
+      reactResultFormatted.Age = formatter.toAge(v.Age);
+      reactResultFormatted.Families = formatter.toFamilies(v.Families);
       reactResultFormatted.PayBackCount = v.PayBackCount + "회";
       reactResultFormatted.Phone = formatter.toPhone(v.Phone);
       reactResultFormatted.UseAtomyYn = formatter.toYn(v.UseAtomyYn);
