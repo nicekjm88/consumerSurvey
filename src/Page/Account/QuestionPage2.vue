@@ -41,7 +41,7 @@
                       @click.once="showProgress"
                       class="form-check-label"
                       :for="`products_${pidx}_${idx}`"
-                      >{{ product.Name }}</label
+                      >{{ getProductNameOriginal(product.Name) }}&nbsp;<span class="more">{{ getProductNameSub(product.Name) }}</span></label
                     >
                   </div>
                 </li>
@@ -182,12 +182,28 @@ export default {
 
     const items = computed(() => productsManager.get());
 
+    function getProductNameOriginal(name){
+      return name.replace(/(\(.+?\))/g, '');
+    }
+
+    function getProductNameSub(name){
+      const m = name.match(/((?<=\().+?(?=\)))/g);
+      if(m !== null && m.length > 0){
+        if(m.length === 1) return m.toString();
+        else return m[0];
+      }
+
+      return '';
+    }
+
     return {
       items,
       selectCancel,
       productToggle,
       onSubmit,
       selectAll,
+      getProductNameOriginal,
+      getProductNameSub
     };
   },
 };
@@ -196,6 +212,11 @@ export default {
 <style lang="scss" scoped>
 .bg-gray {
   background: #f5f5f5;
+}
+
+.more {
+  color: #d2d2d2;
+  font-size: 12px;
 }
 
 .form-check + .form-check {
