@@ -87,11 +87,11 @@
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
-      
+
       <button v-if="$route.name !== 'SaveDataView'" type="button" @click="goHome">
         <i class="xi-home"></i>
         <span class="a11y">닫기</span>
-      </button>      
+      </button>
     </nav>
   </div>
 </template>
@@ -122,17 +122,19 @@ export default {
     const pgt = ref("0px");
 
     function logout() {
-      
+
       if (confirm('로그아웃 하시겠습니까?')) {
         userManager.logout().then(() => {
           router.push("/login");
         });
-      } 
+      }
 
-      
+
     }
 
     onBeforeMount(() => {
+      //네이티브 Safe area 영역의 크기 가져오기
+      //https://www.npmjs.com/package/capacitor-plugin-safe-area
       SafeArea.getSafeAreaInsets().then(({ insets }) => {
         mgt.value = -(insets.top + 10) + "px";
         pgt.value = insets.top + 10 + "px";

@@ -223,6 +223,8 @@ export default {
               alert("지원하지 않는 브라우저입니다.");
             }
           } else {
+            //네이티브 + 모바일 웹 공유
+            //https://capacitorjs.com/docs/v3/apis/share
             const is_share = await Share.canShare();
             if (is_share.value) {
               await Share.share({

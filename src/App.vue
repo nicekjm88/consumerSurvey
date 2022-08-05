@@ -8,8 +8,6 @@
 </template>
 
 <script>
-// import SplashComponent from '@/components/SplashComponent';
-// import {computed, onMounted, ref} from 'vue';
 import {computed, onBeforeMount, ref} from 'vue';
 import useAppManager from "@/store/app-manager";
 import Loading from '@/Page/Loading'
@@ -20,7 +18,6 @@ import {Capacitor} from "@capacitor/core";
 export default {
   name: 'App',
   components: {
-    // SplashComponent,
     Loading
   },
   metaInfo: {
@@ -37,13 +34,16 @@ export default {
 
     const wrapPaddingTop = ref('70px');
 
-    //android only
     onBeforeMount(async () => {
+      //네이티브 Safe area 영역의 크기 가져오기
+      //https://www.npmjs.com/package/capacitor-plugin-safe-area
       SafeArea.getSafeAreaInsets().then(({insets}) => {
         wrapPaddingTop.value = 70 + Math.ceil(insets.top) + 5 + 'px';
       })
 
+      //네이티브 상태바 처리
       if(Capacitor.getPlatform() !== 'web') {
+        //https://capacitorjs.com/docs/v3/apis/status-bar#setstyle
         await StatusBar.setOverlaysWebView({overlay: true});
         await StatusBar.setStyle({style: Style.Light});
         await StatusBar.setBackgroundColor({color: '#FFFFFFFF'});

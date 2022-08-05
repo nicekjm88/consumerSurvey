@@ -47,6 +47,8 @@ export default {
     const pgt = ref('0px');
 
     onBeforeMount(() => {
+      //네이티브 Safe area 영역의 크기 가져오기
+      //https://www.npmjs.com/package/capacitor-plugin-safe-area
       SafeArea.getSafeAreaInsets().then(({insets}) => {
         mgt.value = -( Math.ceil(insets.top) + 5) + 'px';
         pgt.value = Math.ceil(insets.top) + 10 + 'px';
@@ -99,7 +101,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
 }
 .goal-label {
   margin-top: 5px;

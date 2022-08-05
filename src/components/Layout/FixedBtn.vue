@@ -1,5 +1,5 @@
 <template>
-  <button class="fixed-btn">{{ msg }}</button>  
+  <button class="fixed-btn">{{ msg }}</button>
 </template>
 
 <script>
@@ -15,7 +15,9 @@ export default {
     const mgt = ref("0px");
 
     onBeforeMount(() => {
-      SafeArea.getSafeAreaInsets().then(({ insets }) => {      
+      //네이티브 Safe area 영역의 크기 가져오기
+      //https://www.npmjs.com/package/capacitor-plugin-safe-area
+      SafeArea.getSafeAreaInsets().then(({ insets }) => {
         mgt.value = (insets.bottom) + "px";
       });
     });
