@@ -187,12 +187,11 @@ export default {
     }
 
     function getProductNameSub(name){
-      const m = name.match(/((?<=\().+?(?=\)))/g);
-      if(m !== null && m.length > 0){
-        if(m.length === 1) return m.toString();
-        else return m[0];
+      let start = name.indexOf('(');
+      if (start > 0) {
+        let end = name.lastIndexOf(')');
+        return name.slice(start+1, end);
       }
-
       return '';
     }
 
