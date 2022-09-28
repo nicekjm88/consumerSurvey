@@ -1,16 +1,16 @@
 <template>
   <div class="wrap bg-gray">
-    <Navigation />
+    <Navigation/>
     <main class="qestion-area">
       <section>
         <ProgressBar
-          :pv="pv"
-          :progressStatus="progressStatus"
-          :class="{ 'is-show': !hideProgressBar }"
+            :pv="pv"
+            :progressStatus="progressStatus"
+            :class="{ 'is-show': !hideProgressBar }"
         />
         <p class="notify" id="qestion">
           <strong
-            >현재 쇼핑몰(온/오프라인)에서<br />구입하는 제품들을
+          >현재 쇼핑몰(온/오프라인)에서<br/>구입하는 제품들을
             선택해주세요.</strong
           >
         </p>
@@ -31,17 +31,18 @@
                 <li v-for="(product, idx) in item.ch" :key="idx">
                   <div class="form-check">
                     <input
-                      class="form-check-input"
-                      type="checkbox"
-                      v-model="product.checked"
-                      @change="productToggle(product, pidx)"
-                      :id="`products_${pidx}_${idx}`"
+                        class="form-check-input"
+                        type="checkbox"
+                        v-model="product.checked"
+                        @change="productToggle(product, pidx)"
+                        :id="`products_${pidx}_${idx}`"
                     />
                     <label
-                      @click.once="showProgress"
-                      class="form-check-label"
-                      :for="`products_${pidx}_${idx}`"
-                      >{{ getProductNameOriginal(product.Name) }}&nbsp;<span class="more">{{ getProductNameSub(product.Name) }}</span></label
+                        @click.once="showProgress"
+                        class="form-check-label"
+                        :for="`products_${pidx}_${idx}`"
+                    >{{ getProductNameOriginal(product.Name) }}&nbsp;<span
+                        class="more">{{ getProductNameSub(product.Name) }}</span></label
                     >
                   </div>
                 </li>
@@ -51,19 +52,19 @@
         </div>
       </section>
     </main>
-    <FixedBtn @click="onSubmit" msg="작성완료" />
+    <FixedBtn @click="onSubmit" msg="작성완료"/>
   </div>
 </template>
 
 <script>
-import { computed, onBeforeMount, onMounted, ref } from "vue";
+import {computed, onBeforeMount, onMounted, ref} from "vue";
 import Navigation from "@/components/Layout/Navigation.vue";
 import FixedBtn from "@/components/Layout/FixedBtn.vue";
 import ProgressBar from "@/components/Layout/ProgressBar.vue";
 import useProductsManager from "@/store/products-manager";
 import useSettingsManager from "@/store/settings-manager";
 import router from "@/router";
-import { getCurrentInstance } from "vue";
+import {getCurrentInstance} from "vue";
 
 export default {
   name: "QuestionPage2",
@@ -89,12 +90,12 @@ export default {
       const progressBar = document.querySelector(".progress-bar");
 
       this.progressStatus >= 48
-        ? (progressCount.style.color = "#fff")
-        : (progressCount.style.color = "#333");
+          ? (progressCount.style.color = "#fff")
+          : (progressCount.style.color = "#333");
 
       this.progressStatus >= 100
-        ? progressBar.classList.add("progress-bar-animated")
-        : progressBar.classList.remove("progress-bar-animated");
+          ? progressBar.classList.add("progress-bar-animated")
+          : progressBar.classList.remove("progress-bar-animated");
     },
   },
   methods: {
@@ -164,7 +165,7 @@ export default {
 
     function updateProgress() {
       const val = Math.floor(
-        sumPV.value / (settingsManager.getData().StdPV * 0.01)
+          sumPV.value / (settingsManager.getData().StdPV * 0.01)
       );
       that.data.progressStatus = val > 100 ? 100 : val;
       that.data.pv = sumPV.value;
@@ -182,15 +183,15 @@ export default {
 
     const items = computed(() => productsManager.get());
 
-    function getProductNameOriginal(name){
+    function getProductNameOriginal(name) {
       return name.replace(/(\(.+?\))/g, '');
     }
 
-    function getProductNameSub(name){
+    function getProductNameSub(name) {
       let start = name.indexOf('(');
-      if (start > 0) {
-        let end = name.lastIndexOf(')');
-        return name.slice(start+1, end);
+      let end = name.lastIndexOf(')');
+      if (start > -1 && end > -1) {
+        return name.slice(start + 1, end);
       }
       return '';
     }
@@ -256,6 +257,7 @@ export default {
     }
   }
 }
+
 .modal-dimmed {
   position: fixed;
   bottom: 0;
