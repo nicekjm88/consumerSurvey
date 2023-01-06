@@ -87,8 +87,8 @@
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
-      <button type="button" style="width: 10em; display: inherit; margin-left: -30px;">
-        <i>{{preQuestionName}}</i>
+      <button type="button" style="width: 10em; display: inherit; margin-left: -20px; font-size: 18px">
+        <i><strong>{{preQuestionName}}</strong></i>
       </button>
       <button v-if="$route.name !== 'SaveDataView'" type="button" @click="goHome">
         <i class="xi-home"></i>
