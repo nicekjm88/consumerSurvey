@@ -287,7 +287,8 @@ export default {
     }
 
     function goShop() {
-      window.open("http://m.atomy.com/kr/m/shop", "_blank");
+      // window.open("http://m.atomy.com/kr/m/shop", "_blank");
+      window.open("https://shop.atomy.com", "_blank");
     }
 
     return {
