@@ -25,6 +25,7 @@ const mutations = {
     },
 
     [MUTATION.QUESTIONS.SELECT] (state, {pidx, idx}){
+       if(state.data.length === 0) return void 0;
        const questions = state.data[pidx].ch[0].ch;
        questions.forEach((question, i) => {
            if(idx > -1 && idx === i){

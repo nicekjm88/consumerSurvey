@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <Navigation />
+    <Navigation :pre-question-name="preQuestionName()" />
     <main class="qestion-area">
       <section v-for="(item, pidx) in items" :key="pidx">
         <div v-show="step === pidx">
@@ -97,11 +97,30 @@ export default {
 
     const items = computed(() => questionsManager.get());
 
+    /**
+     * 2023.01.06 global api 로컬 구성이 없어 하드코딩으로 대체한다.
+     * => api 구성 이후 ch[0].Value 값으로 리턴하면 된다.
+     * @type {ComputedRef<unknown>}
+     */
+    const preQuestionName = function () {
+      if (step.value === 0 || items.value.length === 0) return '';
+      console.log(items.value[step.value - 1].ch[0].Code);
+      switch (items.value[step.value - 1].ch[0].Code) {
+        case "010100":
+          return "연령대";
+        case "020100":
+          return "가족 수";
+        default:
+          return "";
+      }
+    };
+
     return {
       items,
       step,
       selectChange,
       onSubmit,
+      preQuestionName,
     };
   },
 };

@@ -87,7 +87,9 @@
         <i class="xi-angle-left"></i>
         <span class="a11y">뒤로</span>
       </button>
-
+      <button type="button" style="width: 10em; display: inherit; margin-left: -30px;">
+        <i>{{preQuestionName}}</i>
+      </button>
       <button v-if="$route.name !== 'SaveDataView'" type="button" @click="goHome">
         <i class="xi-home"></i>
         <span class="a11y">닫기</span>
@@ -104,6 +106,12 @@ import { SafeArea } from "capacitor-plugin-safe-area";
 
 export default {
   name: "Navigation",
+  props: {
+    preQuestionName: {
+      type:String,
+      default: ""
+    }
+  },
   methods: {
     goHome() {
       if(confirm('홈으로 이동하시겠습니까?')) {
@@ -140,7 +148,6 @@ export default {
         pgt.value = insets.top + 10 + "px";
       });
     });
-
     return {
       userType,
       logout,
